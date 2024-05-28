@@ -67,7 +67,7 @@ export default defineComponent({
 }
 
 .fixed-card {
-  height: 200px;
+  height: 290px;
   /* Defina a altura fixa desejada */
   max-width: 344px;
   display: flex;
