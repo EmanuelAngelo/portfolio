@@ -24,7 +24,7 @@
 
     <v-app-bar>
       <v-spacer></v-spacer>
-      <v-list-item @click="drawer = !drawer" prepend-icon="mdi-menu" :title="currentViewTitle"></v-list-item>
+      <v-list-item @click="drawer = !drawer" prepend-icon="mdi-menu-open" :title="currentViewTitle"></v-list-item>
     </v-app-bar>
 
     <v-main>
