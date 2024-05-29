@@ -60,9 +60,9 @@ export default defineComponent({
 
     const viewTitles = {
       sobre: 'Sobre',
-      skills: 'Minhas Skill',
-      projetos: 'Meus Projetos',
-      contate: 'Contate-Me'
+      skills: 'Skill',
+      projetos: 'Projetos',
+      contate: 'Contato'
     };
 
     const currentViewTitle = computed(() => {
