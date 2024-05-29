@@ -114,6 +114,11 @@ export default defineComponent({
   justify-content: space-between;
 }
 
+.v-progress-circular .mdi {
+  font-size: 32px;
+  /* Defina o tamanho desejado */
+}
+
 @media (max-width: 600px) {
   .fixed-card {
     height: 400px;
