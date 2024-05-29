@@ -1,10 +1,12 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app :width="310">
+    <v-navigation-drawer v-model="drawer" app :width="270">
       <v-list>
-        <v-list-item prepend-avatar="https://avatars.githubusercontent.com/u/23459929?v=4s"
-          subtitle="emanuelangelo@outlook.com.br" title="Emanuel Angelo"></v-list-item>
+        <v-list-item prepend-avatar="https://avatars.githubusercontent.com/u/23459929?v=4s" title="Emanuel Angelo">
+          <v-list-item-subtitle style="font-size: 10px;">emanuelangelo@outlook.com.br</v-list-item-subtitle>
+        </v-list-item>
       </v-list>
+
 
       <v-divider></v-divider>
 
