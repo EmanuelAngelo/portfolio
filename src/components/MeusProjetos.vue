@@ -26,8 +26,16 @@
             {{ project.description }}
           </v-card-text>
           <v-card-actions>
-            <v-btn :href="project.html_url" target="_blank" color="teal-accent-4" variant="text"
-              @click="reveal = true">Projeto</v-btn>
+            <v-row>
+              <v-col>
+                <v-btn :href="project.html_url" target="_blank" color="teal-accent-4" variant="text"
+                  @click="reveal = true">Projeto Git</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn v-if="project.homepage" :href="project.homepage" target="_blank" color="teal-accent-4"
+                  variant="text" @click="reveal = true">Producao</v-btn>
+              </v-col>
+            </v-row>
           </v-card-actions>
         </v-card>
       </v-col>
