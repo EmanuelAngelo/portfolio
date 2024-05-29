@@ -8,16 +8,16 @@
     </v-row>
     <v-row v-else>
       <v-col cols="12" md="4" v-for="project in sortedProjects" :key="project.id">
-        <v-card class="mx-auto fixed-card" max-width="344" hover>
+        <v-card v-if="shouldRenderCard(project)" class="mx-auto fixed-card" max-width="344" hover>
           <v-card-item>
             <v-card-title>
               {{ project.name }}
             </v-card-title>
 
-            <v-card-subtitle>
+            <v-card-subtitle v-if="project.topics && project.topics.length > 0">
               Tópicos: {{ project.topics.join(', ') }}
             </v-card-subtitle>
-            <v-card-subtitle>
+            <v-card-subtitle v-if="project.language">
               Linguagem: {{ project.language }}
             </v-card-subtitle>
           </v-card-item>
@@ -99,10 +99,15 @@ export default defineComponent({
       });
     });
 
+    const shouldRenderCard = (project: Project) => {
+      return project.topics && project.topics.length > 0 && project.language;
+    }
+
     return {
       projects,
       sortedProjects,
       loading,
+      shouldRenderCard,
     };
   },
 });
