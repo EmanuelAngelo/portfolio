@@ -70,7 +70,16 @@ export default defineComponent({
         address: 'Joinville, Santa Catarina, Brasil · Remota',
         stacks: ['PgSQL', 'TypeScript / Go Lang', 'Reactjs'],
         showDescription: false
-      }
+      },
+      {
+        jobTitle: 'Desenvolvedor full stack',
+        company: 'UNDB',
+        location: 'Presencial',
+        date: 'Dez de 2020 - ago de 2021',
+        address: 'São Luís, Maranhão, Brasil · Híbrida',
+        stacks: ['SQL', 'JavaScript / Python', 'Django', 'Vuejs'],
+        showDescription: false
+      },
 
     ]);
 
