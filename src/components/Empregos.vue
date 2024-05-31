@@ -75,9 +75,27 @@ export default defineComponent({
         jobTitle: 'Desenvolvedor full stack',
         company: 'UNDB',
         location: 'Presencial',
-        date: 'Dez de 2020 - ago de 2021',
+        date: 'Dez de 2020 - Ago de 2021',
         address: 'São Luís, Maranhão, Brasil · Híbrida',
         stacks: ['SQL', 'JavaScript / Python', 'Django', 'Vuejs'],
+        showDescription: false
+      },
+      {
+        jobTitle: 'Tecnico de Informatica',
+        company: 'HOSPITAL UNIVERSITARIO DUTRA',
+        location: 'Presencial',
+        date: 'Jan de 2017 - Out de 2019',
+        address: 'São Luís, Maranhão, Brasil · Presencial',
+        stacks: ['HelpDesk', 'Suporte ao usuario', 'Linux', 'Ad'],
+        showDescription: false
+      },
+      {
+        jobTitle: 'Soldado de infantaria',
+        company: 'Exército Brasileiro',
+        location: 'Presencial',
+        date: 'Mar de 2011 - Mar de 2014 ',
+        address: 'São Luís, Maranhão, Brasil · Híbrida',
+        stacks: ['Atirador de MAG72', 'Caçador', 'SGT'],
         showDescription: false
       },
 
