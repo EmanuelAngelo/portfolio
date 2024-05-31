@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row>
+    <v-row class="my-4">
       <v-col v-for="(experience, index) in experiences" :key="index" cols="12" sm="6" md="4">
         <v-card class="mx-auto" max-width="344">
           <v-card-text>
@@ -114,7 +114,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.fill-height {
-  min-height: 100vh;
+.fixed-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .fixed-card {
+    height: auto;
+  }
 }
 </style>
