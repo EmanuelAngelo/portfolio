@@ -6,7 +6,7 @@
         <v-carousel-item v-for="(item, index) in items" :key="index">
           <v-sheet height="100%">
             <v-img :src="item.src" class="fill-height fundo-back-mmain" cover></v-img>
-            <v-card v-if="item.name !== 'Contato'" class="overlay-card" @click="redirectTo(item.link)">
+            <v-card v-if="item.name !== 'E-mail'" class="overlay-card" @click="redirectTo(item.link)">
               <v-card-text>{{ item.name }}</v-card-text>
             </v-card>
             <v-card v-else class="overlay-card" @click="openContactModal">
@@ -18,7 +18,7 @@
 
       <v-dialog v-model="dialog" max-width="600px">
         <v-card>
-          <v-card-title class="headline">Entre em Contato</v-card-title>
+          <v-card-title class="headline">Mande um E-mail</v-card-title>
           <v-card-text>
             <v-form ref="form">
               <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
@@ -64,7 +64,7 @@ export default defineComponent({
         link: 'https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg',
       },
       {
-        name: 'Contato',
+        name: 'E-mail',
         link: '',
       },
     ];
