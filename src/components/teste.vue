@@ -1,9 +1,9 @@
 <template>
   <v-container class="fill-height d-flex align-center justify-center">
-    <v-sheet class="mx-auto" elevation="8" max-width="800">
-      <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
+    <v-sheet class="mx-auto" elevation="8" max-width="800" max-height="80vh">
+      <v-slide-group v-model="model" class="pa-4" center-active show-arrows @update:model="updateModel">
         <v-slide-group-item v-for="item in items" :key="item.name">
-          <v-card class="ma-4" height="200" width="150" @click="item.action">
+          <v-card class="ma-4" :class="{ 'full-width-card': isMobile }" height="100%" @click="item.action">
             <v-img :src="item.image" class="white--text d-flex fill-height align-center justify-center" contain>
               <div class="overlay">
                 <span>{{ item.name }}</span>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
 
 export default defineComponent({
   setup() {
@@ -45,6 +45,8 @@ export default defineComponent({
       email: '',
       message: '',
     });
+
+    const isMobile = ref(window.innerWidth < 600);
 
     const items = [
       {
@@ -88,6 +90,18 @@ export default defineComponent({
       dialog.value = false; // Fecha o modal após o envio
     };
 
+    const updateModel = () => {
+      isMobile.value = window.innerWidth < 600;
+    };
+
+    onMounted(() => {
+      window.addEventListener('resize', updateModel);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', updateModel);
+    });
+
     return {
       model,
       dialog,
@@ -95,6 +109,7 @@ export default defineComponent({
       items,
       redirectTo,
       submitForm,
+      isMobile,
     };
   },
 });
@@ -120,5 +135,10 @@ export default defineComponent({
   color: white;
   text-align: center;
   padding: 10px;
+}
+
+.full-width-card {
+  width: 100% !important;
+  height: 100%;
 }
 </style>
