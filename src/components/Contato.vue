@@ -7,13 +7,13 @@
           <v-card-text class="card-content">
             <!-- Botões de rede social -->
             <v-row justify="center" class="mb-4">
-              <v-btn icon class="mx-1" @click="openLink('https://www.linkedin.com/in/seu-perfil/')">
+              <v-btn icon class="mx-1" @click="openLink('https://www.linkedin.com/in/emanuelangelo/')">
                 <v-icon>mdi-linkedin</v-icon>
               </v-btn>
-              <v-btn icon class="mx-1" @click="openLink('https://wa.me/seunumerodetelefone')">
+              <v-btn icon class="mx-1" @click="openLink('https://wa.me/+5598985573745')">
                 <v-icon>mdi-whatsapp</v-icon>
               </v-btn>
-              <v-btn icon class="mx-1" @click="openLink('https://www.youtube.com/c/seucanal')">
+              <v-btn icon class="mx-1" @click="openLink('https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg')">
                 <v-icon>mdi-youtube</v-icon>
               </v-btn>
               <!-- Adicione outros botões conforme necessário -->
