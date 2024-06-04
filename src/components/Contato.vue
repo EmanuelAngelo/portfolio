@@ -1,44 +1,43 @@
 <template>
   <v-container class="fill-height d-flex align-center justify-center">
-    <v-sheet class="mx-auto" elevation="8" max-width="800">
-      <v-slide-group v-model="model" class="pa-4" center-active show-arrows>
-        <v-slide-group-item v-for="item in items" :key="item.name">
-          <v-card class="ma-4" height="200" width="150" @click="item.action">
-            <v-img :src="item.image" class="white--text d-flex fill-height align-center justify-center" contain>
-              <div class="overlay">
-                <span>{{ item.name }}</span>
-              </div>
-            </v-img>
+    <v-carousel height="400" progress="primary" hide-delimiters>
+      <v-carousel-item v-for="(item, index) in items" :key="index">
+        <v-sheet height="100%">
+          <v-img :src="item.src" class="fill-height" cover></v-img>
+          <v-card v-if="item.name !== 'Contato'" class="overlay-card" @click="redirectTo(item.link)">
+            <v-card-text>{{ item.name }}</v-card-text>
           </v-card>
-        </v-slide-group-item>
-      </v-slide-group>
+          <v-card v-else class="overlay-card" @click="openContactModal">
+            <v-card-text>{{ item.name }}</v-card-text>
+          </v-card>
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
 
-      <v-dialog v-model="dialog" max-width="600px">
-        <v-card>
-          <v-card-title class="headline">Entre em Contato</v-card-title>
-          <v-card-text>
-            <v-form ref="form">
-              <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
-              <v-text-field label="Email" v-model="formData.email" required type="email"></v-text-field>
-              <v-textarea label="Mensagem" v-model="formData.message" required></v-textarea>
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submitForm">Enviar</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-sheet>
+    <v-dialog v-model="dialog" max-width="600px">
+      <v-card>
+        <v-card-title class="headline">Entre em Contato</v-card-title>
+        <v-card-text>
+          <v-form ref="form">
+            <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
+            <v-text-field label="Email" v-model="formData.email" required type="email"></v-text-field>
+            <v-textarea label="Mensagem" v-model="formData.message" required></v-textarea>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="submitForm">Enviar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const model = ref<number | null>(null);
     const dialog = ref(false);
     const formData = ref({
       name: '',
@@ -50,32 +49,29 @@ export default defineComponent({
       {
         name: 'LinkedIn',
         link: 'https://www.linkedin.com/in/emanuelangelo/',
-        image: 'https://i0.wp.com/softwareengineeringdaily.com/wp-content/uploads/2020/02/LinkedIn.jpg?fit=2048%2C1024&ssl=1',
-        action: () => redirectTo('https://www.linkedin.com/in/emanuelangelo/'),
+        src: 'https://www.techjunkie.com/wp-content/uploads/2019/02/logolinkedin.jpg',
       },
       {
         name: 'WhatsApp',
         link: 'https://wa.me/+5598985573745',
-        image: 'link_to_whatsapp_image',
-        action: () => redirectTo('https://wa.me/+5598985573745'),
+        src: 'https://cdn.wccftech.com/wp-content/uploads/2020/04/WhatsApp-1.png',
       },
       {
         name: 'YouTube',
         link: 'https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg',
-        image: 'link_to_youtube_image',
-        action: () => redirectTo('https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg'),
       },
       {
         name: 'Contato',
         link: '',
-        image: 'link_to_contact_image',
-        action: () => (dialog.value = true),
       },
-      // Adicione mais itens conforme necessário
     ];
 
-    const redirectTo = (url: string) => {
+    const redirectTo = (url) => {
       window.open(url, '_blank');
+    };
+
+    const openContactModal = () => {
+      dialog.value = true;
     };
 
     const submitForm = () => {
@@ -89,11 +85,11 @@ export default defineComponent({
     };
 
     return {
-      model,
       dialog,
       formData,
       items,
       redirectTo,
+      openContactModal,
       submitForm,
     };
   },
@@ -101,24 +97,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.v-card {
-  cursor: pointer;
-}
-
-.v-img {
-  position: relative;
-  overflow: hidden;
-}
-
-.overlay {
+.overlay-card {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  /* Fundo escuro */
-  color: white;
-  text-align: center;
-  padding: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+}
+
+.overlay-card:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.fill-height {
+  width: 100%;
+  height: 100%;
 }
 </style>
