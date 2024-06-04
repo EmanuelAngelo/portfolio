@@ -1,36 +1,39 @@
 <template>
-  <v-container class="fill-height d-flex align-center justify-center">
-    <v-carousel height="400" progress="primary" hide-delimiters>
-      <v-carousel-item v-for="(item, index) in items" :key="index">
-        <v-sheet height="100%">
-          <v-img :src="item.src" class="fill-height" cover></v-img>
-          <v-card v-if="item.name !== 'Contato'" class="overlay-card" @click="redirectTo(item.link)">
-            <v-card-text>{{ item.name }}</v-card-text>
-          </v-card>
-          <v-card v-else class="overlay-card" @click="openContactModal">
-            <v-card-text>{{ item.name }}</v-card-text>
-          </v-card>
-        </v-sheet>
-      </v-carousel-item>
-    </v-carousel>
+  <div style="background-image: url(''); background-size: cover; height: 100vh">
+    <!-- https://images6.alphacoders.com/134/thumb-1920-1346530.jpeg -->
+    <v-container class="fill-height d-flex align-center justify-center">
+      <v-carousel height="400" progress="primary" hide-delimiters>
+        <v-carousel-item v-for="(item, index) in items" :key="index">
+          <v-sheet height="100%">
+            <v-img :src="item.src" class="fill-height fundo-back-mmain" cover></v-img>
+            <v-card v-if="item.name !== 'Contato'" class="overlay-card" @click="redirectTo(item.link)">
+              <v-card-text>{{ item.name }}</v-card-text>
+            </v-card>
+            <v-card v-else class="overlay-card" @click="openContactModal">
+              <v-card-text>{{ item.name }}</v-card-text>
+            </v-card>
+          </v-sheet>
+        </v-carousel-item>
+      </v-carousel>
 
-    <v-dialog v-model="dialog" max-width="600px">
-      <v-card>
-        <v-card-title class="headline">Entre em Contato</v-card-title>
-        <v-card-text>
-          <v-form ref="form">
-            <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
-            <v-text-field label="Email" v-model="formData.email" required type="email"></v-text-field>
-            <v-textarea label="Mensagem" v-model="formData.message" required></v-textarea>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" @click="submitForm">Enviar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-container>
+      <v-dialog v-model="dialog" max-width="600px">
+        <v-card>
+          <v-card-title class="headline">Entre em Contato</v-card-title>
+          <v-card-text>
+            <v-form ref="form">
+              <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
+              <v-text-field label="Email" v-model="formData.email" required type="email"></v-text-field>
+              <v-textarea label="Mensagem" v-model="formData.message" required></v-textarea>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="submitForm">Enviar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -49,12 +52,12 @@ export default defineComponent({
       {
         name: 'LinkedIn',
         link: 'https://www.linkedin.com/in/emanuelangelo/',
-        src: 'https://www.techjunkie.com/wp-content/uploads/2019/02/logolinkedin.jpg',
+        src: '',
       },
       {
         name: 'WhatsApp',
         link: 'https://wa.me/+5598985573745',
-        src: 'https://cdn.wccftech.com/wp-content/uploads/2020/04/WhatsApp-1.png',
+        src: '',
       },
       {
         name: 'YouTube',
@@ -97,6 +100,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.fundo-back-mmain {
+  background-color: #1b3e4e;
+  background-size: cover;
+}
+
 .overlay-card {
   position: absolute;
   top: 50%;

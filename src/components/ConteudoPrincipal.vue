@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app :width="270">
+    <v-navigation-drawer v-model="drawer" app :width="270" class="pt-2 image-bg">
       <v-list>
         <v-list-item prepend-avatar="https://avatars.githubusercontent.com/u/23459929?v=4s" title="Emanuel Angelo">
           <v-list-item-subtitle style="font-size: 10px;">emanuelangelo@outlook.com.br</v-list-item-subtitle>
@@ -22,12 +22,12 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar>
+    <v-app-bar app dark class="custom-app-bar">
       <v-spacer></v-spacer>
       <v-list-item @click="drawer = !drawer" prepend-icon="mdi-menu-open" :title="currentViewTitle"></v-list-item>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="fundo-back-mmain">
       <SobreMim v-if="currentView === 'sobre'" />
       <MinhasSkill v-if="currentView === 'skills'" />
       <MeusProjetos v-if="currentView === 'projetos'" />
@@ -80,5 +80,23 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Adicione estilos aqui se necessário */
+.image-bg {
+  background-color: #364349;
+  background-size: cover;
+}
+
+.custom-app-bar {
+  background-color: #364349 !important;
+  background-size: cover;
+}
+
+.fundo-back-mmain {
+  background-color: #1b3e4e;
+  background-size: cover;
+}
+
+.custom-background {
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCPoI32DR8hfuCZ5jw8lEmZWTUPVInMuWpWw&usqp=CAU);
+  background-size: cover;
+}
 </style>
