@@ -11,9 +11,9 @@
           prepend-avatar="https://avatars.githubusercontent.com/u/23459929?v=4s"
           title="Emanuel Angelo"
         >
-          <v-list-item-subtitle style="font-size: 10px"
-            >emanuelangelo@outlook.com.br</v-list-item-subtitle
-          >
+          <v-list-item-subtitle style="font-size: 10px">
+            emanuelangelo@outlook.com.br
+          </v-list-item-subtitle>
         </v-list-item>
       </v-list>
 
@@ -23,22 +23,22 @@
         <v-list-item
           prepend-icon="mdi-account-arrow-right"
           title="Sobre"
-          value="sobre"
-          @click="setView('sobre')"
+          @click="$router.push('/sobre')"
         ></v-list-item>
-        <!-- <v-list-item prepend-icon="mdi-fingerprint" title="Minhas Skill" value="skills"
-          @click="setView('skills')"></v-list-item> -->
+        <!-- <v-list-item
+          prepend-icon="mdi-fingerprint"
+          title="Minhas Skill"
+          @click="$router.push('/skills')"
+        ></v-list-item> -->
         <v-list-item
           prepend-icon="mdi-github"
           title="Meus Projetos"
-          value="projetos"
-          @click="setView('projetos')"
+          @click="$router.push('/projetos')"
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-email-multiple"
           title="Contate-Me"
-          value="contate"
-          @click="setView('contate')"
+          @click="$router.push('/contato')"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -53,51 +53,31 @@
     </v-app-bar>
 
     <v-main class="fundo-back-mmain">
-      <SobreMim v-if="currentView === 'sobre'" />
-      <MinhasSkill v-if="currentView === 'skills'" />
-      <MeusProjetos v-if="currentView === 'projetos'" />
-      <Contato v-if="currentView === 'contate'" />
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
-import Contato from "./Contato.vue";
-import SobreMim from "./SobreMim.vue";
-import MinhasSkill from "./MinhasSkill.vue";
-import MeusProjetos from "./MeusProjetos.vue";
 
 export default defineComponent({
-  components: {
-    SobreMim,
-    Contato,
-    MeusProjetos,
-    MinhasSkill,
-  },
   setup() {
     const drawer = ref(false);
-    const currentView = ref("sobre"); // estado inicial
-
-    const setView = (view) => {
-      currentView.value = view;
-    };
 
     const viewTitles = {
-      sobre: "Sobre",
-      skills: "Skill",
-      projetos: "Projetos",
-      contate: "Contato",
+      "/sobre": "Sobre",
+      "/skills": "Skill",
+      "/projetos": "Projetos",
+      "/contato": "Contato",
     };
 
     const currentViewTitle = computed(() => {
-      return viewTitles[currentView.value] || "Menu";
+      return viewTitles[window.location.pathname] || "Menu";
     });
 
     return {
       drawer,
-      currentView,
-      setView,
       currentViewTitle,
     };
   },

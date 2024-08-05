@@ -3,13 +3,13 @@
 </template>
 
 <script lang="ts">
-import ConteudoPrincipal from './components/ConteudoPrincipal.vue'
+import ConteudoPrincipal from "./components/ConteudoPrincipal.vue";
 
 export default {
   components: {
-    ConteudoPrincipal
-  }
-}
+    ConteudoPrincipal,
+  },
+};
 </script>
 
 <style scoped></style>

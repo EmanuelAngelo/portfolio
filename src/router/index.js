@@ -1,17 +1,41 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import Sobre from '@/components/Sobre.vue';
-import MinhasSkills from '@/components/MinhasSkills.vue';
-import MeusProjetos from '@/components/MeusProjetos.vue';
-import ContateMe from '@/components/ContateMe.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import ConteudoPrincipal from '../components/ConteudoPrincipal.vue';
+import MeusProjetos from '../components/MeusProjetos.vue';
+import MinhasSkill from '../components/MinhasSkill.vue';
+import SobreMim from '../components/SobreMim.vue';
+import Contato from '../components/Contato.vue';
 
-Vue.use(Router);
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: SobreMim,
+  },
+  {
+    path: '/projetos',
+    name: 'projetos',
+    component: MeusProjetos,
+  },
+  {
+    path: '/skills',
+    name: 'skills',
+    component: MinhasSkill,
+  },
+  {
+    path: '/sobre',
+    name: 'sobre',
+    component: SobreMim,
+  },
+  {
+    path: '/contato',
+    name: 'contato',
+    component: Contato,
+  },
+];
 
-export default new Router({
-  routes: [
-    { path: '/sobre', component: Sobre },
-    { path: '/skills', component: MinhasSkills },
-    { path: '/projetos', component: MeusProjetos },
-    { path: '/contate', component: ContateMe },
-  ],
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
 });
+
+export default router;
