@@ -4,6 +4,7 @@ import MeusProjetos from '../components/MeusProjetos.vue';
 import MinhasSkill from '../components/MinhasSkill.vue';
 import SobreMim from '../components/SobreMim.vue';
 import Contato from '../components/Contato.vue';
+import Blog from '../components/Blog.vue';
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     path: '/skills',
     name: 'skills',
     component: MinhasSkill,
+  },
+  {
+    path: '/blog',
+    name: 'blog',
+    component: Blog,
   },
   {
     path: '/sobre',

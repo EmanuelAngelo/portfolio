@@ -40,6 +40,11 @@
           title="Contate-Me"
           @click="$router.push('/contato')"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-post-outline"
+          title="Blog"
+          @click="$router.push('/blog')"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -70,6 +75,7 @@ export default defineComponent({
       "/skills": "Skill",
       "/projetos": "Projetos",
       "/contato": "Contato",
+      "/blog": "Blog",
     };
 
     const currentViewTitle = computed(() => {

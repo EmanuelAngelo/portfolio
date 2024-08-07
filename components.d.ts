@@ -7,11 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Blog: typeof import('./src/components/Blog.vue')['default']
     Contato: typeof import('./src/components/Contato.vue')['default']
     ConteudoPrincipal: typeof import('./src/components/ConteudoPrincipal.vue')['default']
     Empregos: typeof import('./src/components/Empregos.vue')['default']
     MeusProjetos: typeof import('./src/components/MeusProjetos.vue')['default']
     MinhasSkill: typeof import('./src/components/MinhasSkill.vue')['default']
+    Post: typeof import('./src/components/Post.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SobreMim: typeof import('./src/components/SobreMim.vue')['default']
