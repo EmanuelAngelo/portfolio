@@ -5,8 +5,16 @@
       <v-carousel height="400" progress="primary" hide-delimiters>
         <v-carousel-item v-for="(item, index) in items" :key="index">
           <v-sheet height="100%">
-            <v-img :src="item.src" class="fill-height fundo-back-mmain" cover></v-img>
-            <v-card v-if="item.name !== 'E-mail'" class="overlay-card" @click="redirectTo(item.link)">
+            <v-img
+              :src="item.src"
+              class="fill-height fundo-back-mmain"
+              cover
+            ></v-img>
+            <v-card
+              v-if="item.name !== 'E-mail'"
+              class="overlay-card"
+              @click="redirectTo(item.link)"
+            >
               <v-card-text>{{ item.name }}</v-card-text>
             </v-card>
             <v-card v-else class="overlay-card" @click="openContactModal">
@@ -20,15 +28,31 @@
         <v-card>
           <v-card-title class="headline">Mande um E-mail</v-card-title>
           <v-card-text>
-            <v-form ref="form">
-              <v-text-field label="Nome" v-model="formData.name" required></v-text-field>
-              <v-text-field label="Email" v-model="formData.email" required type="email"></v-text-field>
-              <v-textarea label="Mensagem" v-model="formData.message" required></v-textarea>
+            <v-form ref="form" v-model="formValid">
+              <v-text-field
+                label="Nome"
+                v-model="formData.name"
+                :rules="[rules.required]"
+                required
+              ></v-text-field>
+              <v-text-field
+                label="Email"
+                v-model="formData.email"
+                :rules="[rules.required, rules.email]"
+                required
+              ></v-text-field>
+              <v-textarea
+                label="Mensagem"
+                v-model="formData.message"
+                required
+              ></v-textarea>
             </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submitForm">Enviar</v-btn>
+            <v-btn color="primary" :disabled="!formValid" @click="submitForm"
+              >Enviar</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -37,40 +61,49 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
     const dialog = ref(false);
     const formData = ref({
-      name: '',
-      email: '',
-      message: '',
+      name: "",
+      email: "",
+      message: "",
     });
+    const formValid = ref(false);
+
+    const rules = {
+      required: (value) => !!value || "Campo obrigatório.",
+      email: (value) => {
+        const pattern = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+        return pattern.test(value) || "Email inválido.";
+      },
+    };
 
     const items = [
       {
-        name: 'LinkedIn',
-        link: 'https://www.linkedin.com/in/emanuelangelo/',
-        src: '',
+        name: "LinkedIn",
+        link: "https://www.linkedin.com/in/emanuelangelo/",
+        src: "",
       },
       {
-        name: 'WhatsApp',
-        link: 'https://wa.me/+5598985573745',
-        src: '',
+        name: "WhatsApp",
+        link: "https://wa.me/+5598985573745",
+        src: "",
       },
       {
-        name: 'YouTube',
-        link: 'https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg',
+        name: "YouTube",
+        link: "https://www.youtube.com/channel/UCZEtenbeanBKY9QyUEM6vEg",
       },
       {
-        name: 'E-mail',
-        link: '',
+        name: "E-mail",
+        link: "",
       },
     ];
 
     const redirectTo = (url) => {
-      window.open(url, '_blank');
+      window.open(url, "_blank");
     };
 
     const openContactModal = () => {
@@ -78,18 +111,22 @@ export default defineComponent({
     };
 
     const submitForm = () => {
-      console.log({
-        name: formData.value.name,
-        email: formData.value.email,
-        message: formData.value.message,
-      });
-      // Aqui você pode adicionar a lógica para enviar o formulário
-      dialog.value = false; // Fecha o modal após o envio
+      if (formValid.value) {
+        console.log({
+          name: formData.value.name,
+          email: formData.value.email,
+          message: formData.value.message,
+        });
+        // Aqui você pode adicionar a lógica para enviar o formulário
+        dialog.value = false; // Fecha o modal após o envio
+      }
     };
 
     return {
       dialog,
       formData,
+      formValid,
+      rules,
       items,
       redirectTo,
       openContactModal,
