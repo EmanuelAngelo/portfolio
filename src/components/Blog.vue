@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import Post from "./Post.vue";
 
 export default defineComponent({
@@ -27,6 +27,7 @@ export default defineComponent({
   setup() {
     const posts = ref([
       {
+        id: 1,
         title: "Estudar sempre",
         content:
           "Estudar é manter a constância no aprendizado, tornando-o claro e promissor.",
@@ -36,13 +37,35 @@ export default defineComponent({
       // Adicione mais posts conforme necessário
     ]);
 
+    const loadComments = () => {
+      posts.value.forEach((post) => {
+        const storedComments = localStorage.getItem(`comments_${post.id}`);
+        if (storedComments) {
+          post.comments = JSON.parse(storedComments);
+        }
+      });
+    };
+
+    const saveComments = (index: number) => {
+      const post = posts.value[index];
+      localStorage.setItem(
+        `comments_${post.id}`,
+        JSON.stringify(post.comments)
+      );
+    };
+
     const likePost = (index: number) => {
       posts.value[index].likes++;
     };
 
     const addComment = (index: number, comment: string) => {
       posts.value[index].comments.push(comment);
+      saveComments(index);
     };
+
+    onMounted(() => {
+      loadComments();
+    });
 
     return { posts, likePost, addComment };
   },
