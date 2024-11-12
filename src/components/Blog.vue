@@ -34,6 +34,13 @@ export default defineComponent({
         likes: 0,
         comments: [],
       },
+      {
+        id: 2,
+        title: "Kotlin",
+        content: "Estudar Kotlin é manter a pratica sempre em POO",
+        likes: 0,
+        comments: [],
+      },
       // Adicione mais posts conforme necessário
     ]);
 

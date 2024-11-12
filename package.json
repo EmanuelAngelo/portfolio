@@ -12,7 +12,9 @@
     "@mdi/font": "6.2.95",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
+    "pwa": "^1.9.7",
     "roboto-fontface": "*",
+    "vite-plugin-pwa": "^0.20.5",
     "vue": "^3.4.21",
     "vue-router": "^4.0.13",
     "vuetify": "^3.5.8"
