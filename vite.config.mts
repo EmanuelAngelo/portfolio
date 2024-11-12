@@ -15,8 +15,19 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    VitePWA({
+    Vuetify(),
+    Components(),
+    ViteFonts({
+      google: {
+        families: [{
+          name: 'Roboto',
+          styles: 'wght@100;300;400;500;700;900',
+        }],
+      },
+    }),
+    VitePWA({  // <- Mover para o final da lista
       registerType: 'autoUpdate',
+      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
       manifest: {
         name: 'Meu Portfólio',
         short_name: 'Portfólio',
@@ -39,22 +50,14 @@ export default defineConfig({
           }
         ]
       },
+      devOptions: {
+        enabled: true,
+      },
       workbox: {
         skipWaiting: true,
         clientsClaim: true
       }
-    }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
-    Vuetify(),
-    Components(),
-    ViteFonts({
-      google: {
-        families: [{
-          name: 'Roboto',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
-      },
-    }),
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
