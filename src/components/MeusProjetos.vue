@@ -1,21 +1,31 @@
+
 <template>
   <v-container>
     <v-row v-if="loading" class="fill-height">
       <v-col cols="12" class="d-flex justify-center align-center">
-        <v-progress-circular :size="50" color="primary" indeterminate><span
-            class="mdi mdi-git"></span></v-progress-circular>
+        <v-progress-circular :size="50" color="primary" indeterminate>
+          <span class="mdi mdi-git"></span>
+        </v-progress-circular>
       </v-col>
     </v-row>
     <v-row v-else>
-      <v-col cols="12" md="4" v-for="project in sortedProjects" :key="project.id">
-        <v-card v-if="shouldRenderCard(project)" class="mx-auto fixed-card" max-width="344" hover>
+      <v-col
+        v-for="project in sortedProjects"
+        :key="project.id"
+        cols="12"
+        md="4"
+      >
+        <v-card
+          v-if="shouldRenderCard(project)"
+          class="mx-auto fixed-card"
+          max-width="344"
+          hover
+        >
           <v-card-item>
-            <v-card-title>
-              {{ project.name }}
-            </v-card-title>
+            <v-card-title>{{ project.name }}</v-card-title>
 
             <v-card-subtitle v-if="project.topics && project.topics.length > 0">
-              Tópicos: {{ project.topics.join(', ') }}
+              Tópicos: {{ project.topics.join(", ") }}
             </v-card-subtitle>
             <v-card-subtitle v-if="project.language">
               Linguagem: {{ project.language }}
@@ -28,12 +38,25 @@
           <v-card-actions>
             <v-row>
               <v-col>
-                <v-btn :href="project.html_url" target="_blank" color="teal-accent-4" variant="text"
-                  @click="reveal = true">Projeto Git</v-btn>
+                <v-btn
+                  :href="project.html_url"
+                  target="_blank"
+                  color="teal-accent-4"
+                  variant="text"
+                >
+                  Projeto Git
+                </v-btn>
               </v-col>
               <v-col>
-                <v-btn v-if="project.homepage" :href="project.homepage" target="_blank" color="teal-accent-4"
-                  variant="text" @click="reveal = true">Producao</v-btn>
+                <v-btn
+                  v-if="project.homepage"
+                  :href="project.homepage"
+                  target="_blank"
+                  color="teal-accent-4"
+                  variant="text"
+                >
+                  Produção
+                </v-btn>
               </v-col>
             </v-row>
           </v-card-actions>
@@ -43,34 +66,28 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted, watch } from 'vue';
+<script>
+import { ref, onMounted, watch } from "vue";
 
-interface Project {
-  id: number;
-  name: string;
-  topics: string[];
-  language: string;
-  description: string;
-  html_url: string;
-  created_at: string;
-}
-
-export default defineComponent({
-  name: 'MeusProjetos',
+export default {
+  name: "MeusProjetos",
   setup() {
-    const projects = ref<Project[]>([]);
+    // Lista de projetos
+    const projects = ref([]);
     const loading = ref(true);
 
+    // Função para buscar projetos do GitHub
     const fetchGitHubProjects = async () => {
       const startTime = Date.now();
 
       try {
-        const response = await fetch('https://api.github.com/users/EmanuelAngelo/repos');
+        const response = await fetch(
+          "https://api.github.com/users/EmanuelAngelo/repos"
+        );
         const data = await response.json();
         projects.value = data;
       } catch (error) {
-        console.error('Erro ao buscar projetos do GitHub:', error);
+        console.error("Erro ao buscar projetos do GitHub:", error);
       } finally {
         const elapsedTime = Date.now() - startTime;
         const remainingTime = 3000 - elapsedTime;
@@ -89,19 +106,21 @@ export default defineComponent({
       fetchGitHubProjects();
     });
 
-    const sortedProjects = ref<Project[]>([]);
+    // Ordena projetos por data de criação
+    const sortedProjects = ref([]);
 
     watch(projects, () => {
       sortedProjects.value = [...projects.value].sort((a, b) => {
         const dateA = new Date(a.created_at);
         const dateB = new Date(b.created_at);
-        return dateB.getTime() - dateA.getTime(); // Ordena em ordem decrescente (mais recente primeiro)
+        return dateB.getTime() - dateA.getTime(); // Ordena em ordem decrescente
       });
     });
 
-    const shouldRenderCard = (project: Project) => {
+    // Define se o card deve ser renderizado
+    const shouldRenderCard = (project) => {
       return project.topics && project.topics.length > 0 && project.language;
-    }
+    };
 
     return {
       projects,
@@ -110,7 +129,7 @@ export default defineComponent({
       shouldRenderCard,
     };
   },
-});
+};
 </script>
 
 <style scoped>
@@ -120,7 +139,6 @@ export default defineComponent({
 
 .fixed-card {
   height: 290px;
-  /* Defina a altura fixa desejada */
   max-width: 344px;
   display: flex;
   flex-direction: column;
@@ -129,13 +147,11 @@ export default defineComponent({
 
 .v-progress-circular .mdi {
   font-size: 32px;
-  /* Defina o tamanho desejado */
 }
 
 @media (max-width: 600px) {
   .fixed-card {
     height: 400px;
-    /* Altura maior para telas menores, se necessário */
   }
 }
 </style>

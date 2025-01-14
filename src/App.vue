@@ -1,15 +1,11 @@
 <template>
-  <ConteudoPrincipal />
+  <v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<script lang="ts">
-import ConteudoPrincipal from "./components/ConteudoPrincipal.vue";
-
-export default {
-  components: {
-    ConteudoPrincipal,
-  },
-};
+<script setup>
+  //
 </script>
-
-<style scoped></style>
