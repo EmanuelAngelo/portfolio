@@ -26,3 +26,59 @@ Seja bem-vindo(a) ao meu portfólio! Sou **Emanuel Angelo**, desenvolvedor apaix
 ```javascript
 ["TOTVS RM", "Service Now", "Gesplan", "Hyperion", "Elaw", "AccessOne"];
 ```
+
+### Frameworks
+
+```javascript
+["Django", "Vue.js", "Spring"];
+```
+
+### Bancos de Dados
+
+```javascript
+["SQL Server", "PgSQL"];
+```
+
+### Metodologias Ágeis
+
+```javascript
+["Kanban", "Scrum"];
+```
+
+### Data Science
+
+```javascript
+["Python", "SQL", "B.I", "ETL", "KNIME"];
+```
+
+## 📂 Projetos Recentes
+
+Aqui estão alguns dos projetos mais interessantes que desenvolvi. Eles refletem meu comprometimento com boas práticas de desenvolvimento, tecnologias modernas e criatividade.
+
+### 🌟 **[Condominio](https://github.com/EmanuelAngelo/Projeto1)**
+
+- **Tecnologias:** JavaScript, Vue.js, Django, Python
+- **Descrição:** Um projeto focado em controle de moradores de um Condominio.
+- **Destaques:**
+  - Implementação de [funcionalidade específica].
+  - Integração com [API ou ferramenta].
+- **🔗 Links:** [Código Fonte](https://github.com/EmanuelAngelo/Projeto1) | [Produção](https://producao.com/projeto1)
+
+---
+
+## 🎯 Objetivo
+
+Meu principal objetivo é me destacar como desenvolvedor, contribuindo para projetos inovadores e desafiadores que envolvam tecnologias modernas. Estou constantemente aprimorando minhas habilidades e explorando novas ferramentas para entregar soluções eficientes e criativas.
+
+Busco oportunidades que me permitam crescer pessoal e profissionalmente, além de colaborar com equipes que compartilhem os valores de aprendizado contínuo e excelência.
+
+---
+
+## 🌐 Onde me Encontrar
+
+Conecte-se comigo em diferentes plataformas:
+
+- **Portfólio:** [Meu Portfólio](https://seulinkdoportfolio.com)
+- **GitHub:** [github.com/EmanuelAngelo](https://github.com/EmanuelAngelo)
+- **LinkedIn:** [linkedin.com/in/EmanuelAngelo](https://linkedin.com/in/EmanuelAngelo)
+- **E-mail:** [emanuelangelo@gmail.com](mailto:emanuelangelo@gmail.com)
