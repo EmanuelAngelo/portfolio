@@ -2,8 +2,9 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
+        expand-on-hover
         v-model="drawer"
-        :rail="rail"
+        rail
         permanent
         @click="rail = false"
         class="image-bg"
