@@ -3,18 +3,22 @@
     <v-layout>
       <v-navigation-drawer
         expand-on-hover
-        v-model="drawer"
         rail
         permanent
-        @click="rail = false"
         class="image-bg"
         :style="{ zIndex: 1000 }"
       >
         <v-list-item
           prepend-avatar="https://avatars.githubusercontent.com/u/23459929?v=4"
           title="Emanuel Angelo"
-          nav
         >
+          <template #append>
+            <v-btn
+              icon="mdi-chevron-left"
+              variant="text"
+              @click.stop="rail = !rail"
+            ></v-btn>
+          </template>
         </v-list-item>
 
         <v-divider></v-divider>
@@ -41,7 +45,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <!-- Área principal onde os componentes são renderizados -->
+      <!-- Meus componentes aqui -->
       <v-main
         class="fundo-back-mmain"
         style="min-height: 100vh; flex-grow: 1; z-index: 500"
