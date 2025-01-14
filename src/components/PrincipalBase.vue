@@ -15,13 +15,6 @@
           title="Emanuel Angelo"
           nav
         >
-          <template #append>
-            <v-btn
-              icon="mdi-chevron-left"
-              variant="text"
-              @click.stop="rail = !rail"
-            ></v-btn>
-          </template>
         </v-list-item>
 
         <v-divider></v-divider>
