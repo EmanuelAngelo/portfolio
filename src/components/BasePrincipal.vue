@@ -9,6 +9,7 @@
     >
       <v-tab value="SobreMim">Sobre Mim</v-tab>
       <v-tab value="MeusProjetos">Meus Projetos</v-tab>
+      <!-- <v-tab value="MinhasFormacoes">Minhas Formações</v-tab> -->
     </v-tabs>
 
     <!-- Conteúdo com efeito de paralax -->
@@ -20,6 +21,9 @@
         <v-tabs-window-item value="MeusProjetos">
           <MeusProjetos />
         </v-tabs-window-item>
+        <!-- <v-tabs-window-item value="MinhasFormacoes">
+          <MinhasFormacoes />
+        </v-tabs-window-item> -->
       </v-tabs-window>
     </div>
   </v-card>
@@ -28,11 +32,13 @@
 <script>
 import SobreMim from "@/components/SobreMim.vue";
 import MeusProjetos from "@/components/MeusProjetos.vue";
+import MinhasFormacoes from "./MinhasFormacoes.vue";
 
 export default {
   components: {
     SobreMim,
     MeusProjetos,
+    MinhasFormacoes,
   },
   data() {
     return {
@@ -69,7 +75,7 @@ export default {
 @media (max-width: 600px) {
   .tabs-dynamic {
     font-size: 0.9rem;
-    padding: 4px 8px; /* Menor espaçamento em telas pequenas */
+    padding: 14px 4px; /* Menor espaçamento em telas pequenas */
   }
 
   .v-tab {
