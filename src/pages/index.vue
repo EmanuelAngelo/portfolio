@@ -1,9 +1,9 @@
 <template>
-  <PrincipalBase />
+  <BasePrincipal />
 </template>
 
 <script setup>
-import PrincipalBase from "@/components/PrincipalBase.vue";
+import BasePrincipal from "@/components/BasePrincipal.vue";
 
 //
 </script>
