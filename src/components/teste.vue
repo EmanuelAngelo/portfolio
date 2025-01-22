@@ -1,8 +1,9 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="q-pa-md">
     <q-layout view="lHh Lpr lff" style="min-height: 100vh" class="shadow-2 rounded-borders">
       <!-- Barra fixa -->
-      <q-header elevated class="barra">
+      <q-header elevated class="bg-cyan-8">
         <q-toolbar>
           <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -10,22 +11,23 @@
       </q-header>
 
       <!-- Gaveta lateral -->
-      <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400" behavior="mobile">
+      <q-drawer v-model="drawer" show-if-above :width="225" :breakpoint="400">
         <q-scroll-area
           style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
         >
           <q-list padding>
             <q-item clickable v-ripple @click="goToPage('/')">
               <q-item-section avatar>
-                <span class="material-icons md-50"> face </span>
+                <q-icon name="inbox" />
               </q-item-section>
-              <q-item-section>Sobre</q-item-section>
+              <q-item-section> Sobre </q-item-section>
             </q-item>
+
             <q-item clickable v-ripple @click="goToPage('/projetos')">
               <q-item-section avatar>
-                <span class="material-icons md-50"> list </span>
+                <q-icon name="star" />
               </q-item-section>
-              <q-item-section>Projetos</q-item-section>
+              <q-item-section> Projetos </q-item-section>
             </q-item>
           </q-list>
         </q-scroll-area>
@@ -39,16 +41,14 @@
               <img src="https://avatars.githubusercontent.com/u/23459929?v=4" />
             </q-avatar>
             <div class="text-weight-bold">Emanuel Angelo</div>
-            <div>@devemanuelangelo</div>
+            <div>emanuelangelo@outlook.com.br</div>
           </div>
         </q-img>
       </q-drawer>
 
       <!-- Conteúdo principal -->
       <q-page-container>
-        <q-page padding>
-          <router-view />
-        </q-page>
+        <router-view />
       </q-page-container>
     </q-layout>
   </div>
@@ -81,8 +81,3 @@ export default {
   },
 }
 </script>
-<style>
-.barra {
-  background-color: #68789e;
-}
-</style>
