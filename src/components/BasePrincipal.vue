@@ -1,88 +1,107 @@
 <template>
-  <div class="q-pa-md">
-    <q-layout view="lHh Lpr lff" style="min-height: 100vh" class="shadow-2 rounded-borders">
-      <!-- Barra fixa -->
-      <q-header elevated class="barra">
-        <q-toolbar>
-          <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        </q-toolbar>
-      </q-header>
+  <v-card>
+    <!-- Abas fixas no topo -->
+    <v-tabs
+      v-model="tab"
+      align-tabs="center"
+      color="deep-purple-accent-4"
+      class="tabs-dynamic"
+    >
+      <v-tab value="SobreMim">Sobre Mim</v-tab>
+      <v-tab value="MeusProjetos">Meus Projetos</v-tab>
+      <v-tab value="MinhasFormacoes">Minhas Formações</v-tab>
+    </v-tabs>
 
-      <!-- Gaveta lateral -->
-      <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="400" behavior="mobile">
-        <q-scroll-area
-          style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd"
-        >
-          <q-list padding>
-            <q-item clickable v-ripple @click="goToPage('/')">
-              <q-item-section avatar>
-                <span class="material-icons md-50"> face </span>
-              </q-item-section>
-              <q-item-section>Sobre</q-item-section>
-            </q-item>
-            <q-item clickable v-ripple @click="goToPage('/projetos')">
-              <q-item-section avatar>
-                <span class="material-icons md-50"> list </span>
-              </q-item-section>
-              <q-item-section>Projetos</q-item-section>
-            </q-item>
-          </q-list>
-        </q-scroll-area>
-        <q-img
-          class="absolute-top"
-          src="https://images8.alphacoders.com/137/thumb-1920-1377841.png"
-          style="height: 150px"
-        >
-          <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img src="https://avatars.githubusercontent.com/u/23459929?v=4" />
-            </q-avatar>
-            <div class="text-weight-bold">Emanuel Angelo</div>
-            <div>@devemanuelangelo</div>
-          </div>
-        </q-img>
-      </q-drawer>
-
-      <!-- Conteúdo principal -->
-      <q-page-container>
-        <q-page padding>
-          <router-view />
-        </q-page>
-      </q-page-container>
-    </q-layout>
-  </div>
+    <!-- Conteúdo com efeito de paralax -->
+    <div class="content-container">
+      <v-tabs-window v-model="tab">
+        <v-tabs-window-item value="SobreMim">
+          <SobreMim />
+        </v-tabs-window-item>
+        <v-tabs-window-item value="MeusProjetos">
+          <MeusProjetos />
+        </v-tabs-window-item>
+        <v-tabs-window-item value="MinhasFormacoes">
+          <MinhasFormacoes />
+        </v-tabs-window-item>
+      </v-tabs-window>
+    </div>
+  </v-card>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import SobreMim from "@/components/SobreMim.vue";
+import MeusProjetos from "@/components/MeusProjetos.vue";
+import MinhasFormacoes from "./MinhasFormacoes.vue";
 
 export default {
-  setup() {
-    const drawer = ref(false)
-    const route = useRoute()
-    const router = useRouter()
-
-    // Obtém o título da página atual a partir das metas das rotas
-    const pageTitle = computed(() => route.meta.title || 'Menu')
-
-    // Navegação entre páginas
-    const goToPage = (path) => {
-      router.push(path)
-      drawer.value = false // Fecha o drawer ao navegar
-    }
-
-    return {
-      drawer,
-      pageTitle,
-      goToPage,
-    }
+  components: {
+    SobreMim,
+    MeusProjetos,
+    MinhasFormacoes,
   },
-}
+  data() {
+    return {
+      tab: "SobreMim", // Aba inicial
+    };
+  },
+};
 </script>
-<style>
-.barra {
-  background-color: #68789e;
+
+<style scoped>
+/* Estilização principal */
+.v-card {
+  background-color: #1b3e4e;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Abas fixas no topo (tamanho ajustado pelo texto) */
+.tabs-dynamic {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #1b3e4e;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px; /* Espaçamento interno para deixar mais confortável */
+  display: flex;
+  align-items: center;
+}
+
+/* Ajuste responsivo para mobile */
+@media (max-width: 600px) {
+  .tabs-dynamic {
+    font-size: 0.9rem;
+    padding: 14px 4px; /* Menor espaçamento em telas pequenas */
+  }
+
+  .v-tab {
+    font-size: 0.8rem; /* Texto menor para abas no mobile */
+  }
+}
+
+/* Container do conteúdo com rolagem */
+.content-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: linear-gradient(to bottom, #1b3e4e, #243b4a);
+}
+
+/* Personalização para suavizar o efeito de scroll */
+.content-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+  background: #5d7a8a;
+  border-radius: 3px;
+}
+
+.content-container::-webkit-scrollbar-thumb:hover {
+  background: #48606f;
 }
 </style>

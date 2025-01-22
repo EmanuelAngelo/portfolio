@@ -1,126 +1,143 @@
+
 <template>
-  <q-page class="q-pa-md">
-    <!-- Indicador de Carregamento Centralizado -->
-    <div v-if="loading" class="loading-container">
-      <q-circular-progress indeterminate rounded size="50px" color="lime" class="q-ma-md" />
-    </div>
-
-    <!-- Grid de Projetos (somente após o carregamento) -->
-    <div v-else class="row items-start q-gutter-md justify-center">
-      <div
-        v-for="(project, index) in filteredProjects"
-        :key="index"
-        class="col-12 col-sm-6 col-md-3"
+  <v-container>
+    <v-row v-if="loading" class="fill-height">
+      <v-col cols="12" class="d-flex justify-center align-center">
+        <v-progress-circular :size="50" color="primary" indeterminate>
+          <span class="mdi mdi-git"></span>
+        </v-progress-circular>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col
+        v-for="project in sortedProjects"
+        :key="project.id"
+        cols="12"
+        md="4"
       >
-        <!-- Card de Projeto -->
-        <q-card class="my-card bg-secondary text-white">
-          <q-card-section>
-            <div class="text-h6">{{ project.name }}</div>
-            <div class="text-subtitle2">
-              Linguagem: {{ project.language || 'Sem linguagem definida' }}<br />
-              Tópicos: {{ project.topics.join(', ') }}
-            </div>
-          </q-card-section>
+        <v-card
+          v-if="shouldRenderCard(project)"
+          class="mx-auto fixed-card"
+          max-width="344"
+          hover
+        >
+          <v-card-item>
+            <v-card-title>{{ project.name }}</v-card-title>
 
-          <q-card-section>
-            {{ project.description || 'Descrição não disponível.' }}
-          </q-card-section>
+            <v-card-subtitle v-if="project.topics && project.topics.length > 0">
+              Tópicos: {{ project.topics.join(", ") }}
+            </v-card-subtitle>
+            <v-card-subtitle v-if="project.language">
+              Linguagem: {{ project.language }}
+            </v-card-subtitle>
+          </v-card-item>
 
-          <q-separator dark />
-
-          <q-card-actions>
-            <q-btn flat color="primary" :href="project.html_url" target="_blank">
-              Ver no GitHub
-            </q-btn>
-            <q-btn
-              flat
-              color="primary"
-              v-if="project.homepage"
-              :href="project.homepage"
-              target="_blank"
-            >
-              Produção
-            </q-btn>
-          </q-card-actions>
-        </q-card>
-      </div>
-    </div>
-  </q-page>
+          <v-card-text>
+            {{ project.description }}
+          </v-card-text>
+          <v-card-actions>
+            <v-row>
+              <v-col>
+                <v-btn
+                  :href="project.html_url"
+                  target="_blank"
+                  color="teal-accent-4"
+                  variant="text"
+                >
+                  Projeto Git
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn
+                  v-if="project.homepage"
+                  :href="project.homepage"
+                  target="_blank"
+                  color="teal-accent-4"
+                  variant="text"
+                >
+                  Produção
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
----
-
-### Script Atualizado:
-
-```vue
 <script>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, watch } from "vue";
 
 export default {
-  name: 'MeusProjetos',
+  name: "MeusProjetos",
   setup() {
-    const projects = ref([])
-    const loading = ref(true)
+    // Lista de projetos
+    const projects = ref([]);
+    const loading = ref(true);
 
     // Função para buscar projetos do GitHub
     const fetchGitHubProjects = async () => {
-      const startTime = Date.now()
+      const startTime = Date.now();
 
       try {
-        const response = await fetch('https://api.github.com/users/EmanuelAngelo/repos')
-        const data = await response.json()
-        projects.value = data
+        const response = await fetch(
+          "https://api.github.com/users/EmanuelAngelo/repos"
+        );
+        const data = await response.json();
+        projects.value = data;
       } catch (error) {
-        console.error('Erro ao buscar projetos do GitHub:', error)
+        console.error("Erro ao buscar projetos do GitHub:", error);
       } finally {
-        const elapsedTime = Date.now() - startTime
-        const remainingTime = 3000 - elapsedTime // Garante 3 segundos de carregamento
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = 3000 - elapsedTime;
 
         if (remainingTime > 0) {
           setTimeout(() => {
-            loading.value = false
-          }, remainingTime)
+            loading.value = false;
+          }, remainingTime);
         } else {
-          loading.value = false
+          loading.value = false;
         }
       }
-    }
-
-    const sortedProjects = computed(() => {
-      return [...projects.value].sort((a, b) => {
-        const dateA = new Date(a.created_at)
-        const dateB = new Date(b.created_at)
-        return dateB.getTime() - dateA.getTime()
-      })
-    })
-
-    const filteredProjects = computed(() =>
-      sortedProjects.value.filter(
-        (project) => project.topics && project.topics.length > 0 && project.language
-      )
-    )
+    };
 
     onMounted(() => {
-      fetchGitHubProjects()
-    })
+      fetchGitHubProjects();
+    });
+
+    // Ordena projetos por data de criação
+    const sortedProjects = ref([]);
+
+    watch(projects, () => {
+      sortedProjects.value = [...projects.value].sort((a, b) => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateB.getTime() - dateA.getTime(); // Ordena em ordem decrescente
+      });
+    });
+
+    // Define se o card deve ser renderizado
+    const shouldRenderCard = (project) => {
+      return project.topics && project.topics.length > 0 && project.language;
+    };
 
     return {
       projects,
-      filteredProjects,
+      sortedProjects,
       loading,
-    }
+      shouldRenderCard,
+    };
   },
-}
+};
 </script>
+
 <style scoped>
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.fill-height {
   min-height: 100vh;
 }
 
-.my-card {
+.fixed-card {
   height: 290px;
   max-width: 344px;
   display: flex;
@@ -128,8 +145,12 @@ export default {
   justify-content: space-between;
 }
 
+.v-progress-circular .mdi {
+  font-size: 32px;
+}
+
 @media (max-width: 600px) {
-  .my-card {
+  .fixed-card {
     height: 400px;
   }
 }
