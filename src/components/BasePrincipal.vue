@@ -21,9 +21,9 @@
         <v-tabs-window-item value="MeusProjetos">
           <MeusProjetos />
         </v-tabs-window-item>
-        <v-tabs-window-item value="MinhasFormacoes">
+        <!-- <v-tabs-window-item value="MinhasFormacoes">
           <MinhasFormacoes />
-        </v-tabs-window-item>
+        </v-tabs-window-item> -->
       </v-tabs-window>
     </div>
   </v-card>
@@ -32,13 +32,12 @@
 <script>
 import SobreMim from "@/components/SobreMim.vue";
 import MeusProjetos from "@/components/MeusProjetos.vue";
-import MinhasFormacoes from "./MinhasFormacoes.vue";
+// import MinhasFormacoes from "./MinhasFormacoes.vue";
 
 export default {
   components: {
     SobreMim,
     MeusProjetos,
-    MinhasFormacoes,
   },
   data() {
     return {
