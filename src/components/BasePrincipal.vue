@@ -9,7 +9,7 @@
     >
       <v-tab value="SobreMim">Sobre Mim</v-tab>
       <v-tab value="MeusProjetos">Meus Projetos</v-tab>
-      <v-tab value="MinhasFormacoes">Minhas Formações</v-tab>
+      <!-- <v-tab value="MinhasFormacoes">Minhas Formações</v-tab> -->
     </v-tabs>
 
     <!-- Conteúdo com efeito de paralax -->
