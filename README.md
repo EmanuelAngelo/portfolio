@@ -18,7 +18,7 @@ Seja bem-vindo(a) ao meu portfólio! Sou **Emanuel Angelo**, desenvolvedor apaix
 ### Linguagens de Programação
 
 ```javascript
-["Java", "Kotlin", "JavaScript", "Python", "Go Lang", "TypeScript"];
+["JavaScript", "Python"];
 ```
 
 ### ERP e Sistemas
@@ -30,7 +30,7 @@ Seja bem-vindo(a) ao meu portfólio! Sou **Emanuel Angelo**, desenvolvedor apaix
 ### Frameworks
 
 ```javascript
-["Django", "Vue.js", "Spring"];
+["Django", "Vue.js"];
 ```
 
 ### Bancos de Dados
@@ -48,7 +48,7 @@ Seja bem-vindo(a) ao meu portfólio! Sou **Emanuel Angelo**, desenvolvedor apaix
 ### Data Science
 
 ```javascript
-["Python", "SQL", "B.I", "ETL", "KNIME"];
+["Python", "SQL", "B.I", "ETL"];
 ```
 
 ## 📂 Projetos Recentes
