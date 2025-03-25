@@ -14,14 +14,12 @@
           minhas competências em programação e análise de dados.
           <br /><br />
           <code>
-            Linguagens de Programação: ['Java', 'Kotlin', 'JavaScript',
-            'Python', 'Go Lang', 'TypeScript'] <br />
+            Linguagens de Programação: ['JavaScript', 'Python'] <br />
             ERP e Sistemas: ['TOTVS RM','Service Now', 'Gesplan', 'Hyperion',
             Elaw', 'AccessOne']<br />
-            Frameworks: ['Django', 'Vue.js', 'Spring'] <br />Bancos de Dados:
+            Frameworks: ['Django', 'Vue.js'] <br />Bancos de Dados:
             ['SQL Server', 'PgSQL'] <br />Metodologias Ágeis: ['Kanban',
-            'Scrum'] <br />Data Science: ['Python', 'SQL', 'B.I', 'ETL',
-            'KNIME']
+            'Scrum'] <br />Data Science: ['Python', 'SQL', 'B.I', 'ETL']
           </code>
           <br /><br />
         </p>
