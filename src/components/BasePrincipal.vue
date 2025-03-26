@@ -1,55 +1,52 @@
 <template>
-  <v-card>
-    <!-- Abas fixas no topo -->
-    <v-tabs
-      v-model="tab"
-      align-tabs="center"
-      color="deep-purple-accent-4"
-      class="tabs-dynamic"
-    >
-      <v-tab value="SobreMim">Sobre Mim</v-tab>
-      <v-tab value="MeusProjetos">Meus Projetos</v-tab>
-      <!-- <v-tab value="MinhasFormacoes">Minhas Formações</v-tab> -->
-    </v-tabs>
+  <v-card class="main-card">
+    <!-- Barra de ferramentas -->
+    <v-toolbar color="primary" title="Emanuel Angelo"></v-toolbar>
 
-    <!-- Conteúdo com efeito de paralax -->
-    <div class="content-container">
-      <v-tabs-window v-model="tab">
+    <!-- Estrutura com abas laterais -->
+    <div class="d-flex flex-row">
+      <!-- Abas laterais -->
+      <v-tabs v-model="tab" color="primary" direction="vertical" class="side-tabs">
+        <v-tab prepend-icon="mdi-account" text="Sobre Mim" value="SobreMim"></v-tab>
+        <v-tab prepend-icon="mdi-folder" text="Meus Projetos" value="MeusProjetos"></v-tab>
+      </v-tabs>
+
+      <!-- Conteúdo das abas -->
+      <v-tabs-window v-model="tab" class="content-container">
         <v-tabs-window-item value="SobreMim">
           <SobreMim />
         </v-tabs-window-item>
         <v-tabs-window-item value="MeusProjetos">
           <MeusProjetos />
         </v-tabs-window-item>
-        <!-- <v-tabs-window-item value="MinhasFormacoes">
-          <MinhasFormacoes />
-        </v-tabs-window-item> -->
       </v-tabs-window>
     </div>
   </v-card>
 </template>
 
 <script>
+import { ref } from "vue";
 import SobreMim from "@/components/SobreMim.vue";
 import MeusProjetos from "@/components/MeusProjetos.vue";
-// import MinhasFormacoes from "./MinhasFormacoes.vue";
 
 export default {
   components: {
     SobreMim,
     MeusProjetos,
   },
-  data() {
+  setup() {
+    const tab = ref("SobreMim"); // Aba inicial
+
     return {
-      tab: "SobreMim", // Aba inicial
+      tab,
     };
   },
 };
 </script>
 
 <style scoped>
-/* Estilização principal */
-.v-card {
+/* Estilo principal */
+.main-card {
   background-color: #1b3e4e;
   color: white;
   height: 100vh;
@@ -58,31 +55,13 @@ export default {
   overflow: hidden;
 }
 
-/* Abas fixas no topo (tamanho ajustado pelo texto) */
-.tabs-dynamic {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: #1b3e4e;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 8px 16px; /* Espaçamento interno para deixar mais confortável */
-  display: flex;
-  align-items: center;
+/* Abas laterais */
+.side-tabs {
+  min-width: 200px;
+  background-color: #243b4a;
 }
 
-/* Ajuste responsivo para mobile */
-@media (max-width: 600px) {
-  .tabs-dynamic {
-    font-size: 0.9rem;
-    padding: 14px 4px; /* Menor espaçamento em telas pequenas */
-  }
-
-  .v-tab {
-    font-size: 0.8rem; /* Texto menor para abas no mobile */
-  }
-}
-
-/* Container do conteúdo com rolagem */
+/* Estilização do conteúdo */
 .content-container {
   flex-grow: 1;
   overflow-y: auto;
@@ -90,7 +69,7 @@ export default {
   background: linear-gradient(to bottom, #1b3e4e, #243b4a);
 }
 
-/* Personalização para suavizar o efeito de scroll */
+/* Personalização do scrollbar */
 .content-container::-webkit-scrollbar {
   width: 6px;
 }
