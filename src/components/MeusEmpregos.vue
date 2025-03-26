@@ -14,7 +14,7 @@
             <p class="text-h7 font-weight-black">{{ experience.company }}</p>
             <p>{{ experience.location }}</p>
             <div class="text-medium-emphasis">
-              {{ experience.date }}<br />
+              {{ experience.date }} ({{ calcularTempo(experience.date) }})<br />
               {{ experience.address }}
             </div>
           </v-card-text>
@@ -24,9 +24,7 @@
               variant="text"
               @click="toggleDescription(index)"
             >
-              {{
-                experience.showDescription ? "Fechar Descrição" : "Descrição"
-              }}
+              {{ experience.showDescription ? "Fechar Descrição" : "Descrição" }}
             </v-btn>
           </v-card-actions>
           <v-expand-transition>
@@ -66,7 +64,7 @@ import { ref } from "vue";
 export default {
   setup() {
     const experiences = ref([
-      {
+    {
         jobTitle: "Analista de implantação",
         company: "PVT SOFTWARE E SERVIÇOS",
         location: "Home Office",
@@ -84,7 +82,7 @@ export default {
         jobTitle: "Desenvolvedor full stack",
         company: "UNDB",
         location: "Presencial",
-        date: "Nov de 2022 - set de 2023",
+        date: "Nov de 2022 - Set de 2023",
         address: "São Luís, Maranhão, Brasil · Presencial",
         stacks: ["Totvs Rm", "SQL", "JavaScript / Python", "Vuejs / Django"],
         showDescription: false,
@@ -93,7 +91,7 @@ export default {
         jobTitle: "Desenvolvedor full stack",
         company: "Controller Education",
         location: "Home Office",
-        date: "Nout de 2021 - ago de 2022",
+        date: "Out de 2021 - Ago de 2022",
         address: "Joinville, Santa Catarina, Brasil · Remota",
         stacks: ["PgSQL", "TypeScript / Go Lang", "Reactjs"],
         showDescription: false,
@@ -125,16 +123,45 @@ export default {
         stacks: ["Atirador de MAG72", "Caçador", "SGT"],
         showDescription: false,
       },
+      
     ]);
 
     const toggleDescription = (index) => {
-      experiences.value[index].showDescription =
-        !experiences.value[index].showDescription;
+      experiences.value[index].showDescription = !experiences.value[index].showDescription;
+    };
+
+    const calcularTempo = (data) => {
+      const meses = {
+        Jan: 0, Fev: 1, Mar: 2, Abr: 3, Mai: 4, Jun: 5,
+        Jul: 6, Ago: 7, Set: 8, Out: 9, Nov: 10, Dez: 11
+      };
+
+      const partes = data.split(" - ");
+      if (partes.length < 2) return "Data inválida";
+
+      const inicio = partes[0].split(" de ");
+      const fim = partes[1] === "atual" ? new Date() : partes[1].split(" de ");
+
+      const dataInicio = new Date(parseInt(inicio[1]), meses[inicio[0]]);
+      const dataFim = partes[1] === "atual" ? new Date() : new Date(parseInt(fim[1]), meses[fim[0]]);
+
+      let anos = dataFim.getFullYear() - dataInicio.getFullYear();
+      let mesesTrabalhados = dataFim.getMonth() - dataInicio.getMonth();
+
+      if (mesesTrabalhados < 0) {
+        anos--;
+        mesesTrabalhados += 12;
+      }
+
+      return anos > 0
+        ? `${anos} ano${anos > 1 ? 's' : ''} e ${mesesTrabalhados} mês${mesesTrabalhados > 1 ? 'es' : ''}`
+        : `${mesesTrabalhados} mês${mesesTrabalhados > 1 ? 'es' : ''}`;
     };
 
     return {
       experiences,
       toggleDescription,
+      calcularTempo,
     };
   },
 };
