@@ -60,56 +60,90 @@
 import { ref, onMounted } from "vue";
 
 const projects = ref([]);
+const loading = ref(true);
 
-// Função para buscar repositórios do GitHub
 async function fetchGitHubRepos() {
   try {
-    const response = await fetch('https://api.github.com/users/emanuelangelo/repos');
+    const response = await fetch('https://api.github.com/users/EmanuelAngelo/repos?sort=updated&direction=desc');
+    
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+    
     const repos = await response.json();
     
-    // Filtra e mapeia os repositórios para o formato que você precisa
+    // Lista de repositórios para excluir (em minúsculas)
+    const excludedRepos = ['portfolio', 'emanuelangelo'];
+    
     projects.value = repos
-      .filter(repo => !repo.fork) // Remove forks se quiser
+      .filter(repo => {
+        const repoName = repo.name.toLowerCase();
+        return (
+          !repo.fork &&
+          !repo.archived &&
+          !excludedRepos.includes(repoName)
+        );
+      })
+      .slice(0, 4) // Pega apenas os 4 mais recentes após a filtragem
       .map(repo => ({
         id: repo.id,
-        title: repo.name,
+        title: formatRepoName(repo.name),
         category: repo.language || 'Code',
-        description: repo.description || 'Projeto sem descrição',
+        description: repo.description || 'Projeto sem descrição disponível',
         gitURL: repo.html_url,
         webURL: repo.homepage || '#',
-        image: getProjectImage(repo.name) // Função para imagens padrão ou personalizadas
+        image: getProjectImage(repo.name),
+        updated_at: new Date(repo.updated_at)
       }));
   } catch (error) {
     console.error('Erro ao buscar repositórios:', error);
-    // Pode manter alguns projetos padrão em caso de erro
-    projects.value = [
-      {
-        id: 1,
-        image: "/default-project.png",
-        title: "Exemplo",
-        category: "Web",
-        description: "Projeto exemplo carregado localmente",
-        gitURL: "#",
-        webURL: "#",
-      }
-    ];
+    projects.value = [];
+  } finally {
+    loading.value = false;
   }
 }
 
-// Função auxiliar para obter imagens dos projetos
+function formatRepoName(name) {
+  return name
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, l => l.toUpperCase())
+    .replace(/^\w/, l => l.toUpperCase());
+}
+
 function getProjectImage(repoName) {
   const imageMap = {
     'cobranerd': '/cobranerd.png',
     'menu-icons-interativos': '/menuicons.png',
-    // Adicione outros mapeamentos conforme necessário
+    // Adicione outros mapeamentos específicos aqui
   };
   
-  // Retorna a imagem mapeada ou o GIF padrão
-  return imageMap[repoName] || 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDFpZHhmcWFjZ3RidmprdDVteGE4ZWRlbnJmM3Z1cmowYWQ4MnJ3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J3t49Ncr918aboQ/giphy.gif';
+  // Retorna imagem específica ou o GIF padrão
+  return imageMap[repoName.toLowerCase()] || 
+         'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDFpZHhmcWFjZ3RidmprdDVteGE4ZWRlbnJmM3Z1cmowYWQ4MnJ3NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J3t49Ncr918aboQ/giphy.gif';
 }
 
-// Chama a função quando o componente é montado
 onMounted(() => {
-  fetchGitHubRepos();
+  // Adicionando cache simples para evitar muitas requisições
+  const cacheKey = 'github_projects_cache';
+  const cacheExpiry = 2 * 60 * 60 * 1000; // 2 horas em milissegundos
+  
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    const { data, timestamp } = JSON.parse(cachedData);
+    if (Date.now() - timestamp < cacheExpiry) {
+      projects.value = data;
+      loading.value = false;
+      return;
+    }
+  }
+  
+  fetchGitHubRepos().then(() => {
+    if (projects.value.length > 0) {
+      localStorage.setItem(cacheKey, JSON.stringify({
+        data: projects.value,
+        timestamp: Date.now()
+      }));
+    }
+  });
 });
 </script>
