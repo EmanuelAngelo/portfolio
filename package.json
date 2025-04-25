@@ -1,39 +1,22 @@
 {
-  "name": "portfolio",
-  "version": "0.0.0",
+  "name": "my-vue-portfolio",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "vite build",
-    "lint": "eslint . --fix",
     "dev": "vite",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mdi/font": "7.4.47",
-    "register-service-worker": "^1.7.2",
-    "roboto-fontface": "*",
-    "vue": "^3.4.31",
-    "vuetify": "^3.6.14"
+    "aos": "^2.3.4",
+    "vue": "^3.4.37"
   },
   "devDependencies": {
-    "@eslint/js": "^9.14.0",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vue/cli-plugin-pwa": "~5.0.0",
-    "eslint": "^9.14.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.4.0",
-    "eslint-plugin-vue": "^9.30.0",
-    "sass": "1.77.8",
-    "sass-embedded": "^1.77.8",
-    "unplugin-fonts": "^1.1.1",
-    "unplugin-vue-components": "^0.27.2",
-    "unplugin-vue-router": "^0.10.0",
-    "vite": "^5.4.0",
-    "vite-plugin-pwa": "^0.21.1",
-    "vite-plugin-vuetify": "^2.0.3",
-    "vue-router": "^4.4.0"
-  },
-  "type": "module"
+    "@vitejs/plugin-vue": "^5.1.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vite": "^5.4.1"
+  }
 }
