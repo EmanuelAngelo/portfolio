@@ -27,7 +27,7 @@ const Experience = ref([
         title: 'Analista de Implatação',
         company: 'PVT Software',
         duration: 'Out 2023 - Atual',
-        icon: '/public/pvt.jpg'
+        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/controller.jpg'
     },
     {
         id: 2,
