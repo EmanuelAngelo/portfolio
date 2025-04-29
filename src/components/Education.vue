@@ -7,7 +7,7 @@
             bg-white/75
             ">
             <div class="w-1/4">
-                <img src="https://img.icons8.com/ios-glyphs/60/graduation-cap--v1.png" alt="graduation">
+                <img :src="element.icon" :alt="element.title">
             </div>
             <div class="w-3/4 pl-4">
                 <h3 class="uppercase font-semibold text-primary text-base">{{ element.degree }}</h3>
@@ -26,13 +26,15 @@ const Education = ref([
         id:1,
         degree:'Sistemas de Informação',
         school:'UNDB - Universidade Dom Bosco',
-        duration:'2016-2020'
+        duration:'2016-2020',
+        icon:'/public/undb.jpg'
     },
     {
         id:2,
         degree:'CURSO DE APERFEIÇOAMENTO EM ANÁLISE DE DADOS',
         school:'UFMA - Universidade Federal do Maranhão',
-        duration:'2024-2025'
+        duration:'2024-2025',
+        icon:'/public/ufma.jpg'
     },
 
 ])
