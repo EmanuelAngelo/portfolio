@@ -27,28 +27,28 @@ const Experience = ref([
         title: 'Analista de Implatação',
         company: 'PVT Software',
         duration: 'Out 2023 - Atual',
-        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/controller.jpg'
+        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/pvt.jpg'
     },
     {
         id: 2,
         title: 'FullStack Developer',
         company: 'UNDB - Universidade Dom Bosco',
         duration: 'Nov 2022 - Set 2023',
-        icon: '/public/undb.jpg'
+        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/undb.jpg'
     },
     {
         id: 3,
         title: 'FullStack Developer',
         company: 'Controller Education',
         duration: 'Out 2021 - Ago 2022',
-        icon: '/public/controller.jpg'
+        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/controller.jpg'
     },
     {
         id: 4,  // Corrigi o ID que estava repetido (era 2)
         title: 'FullStack Developer',
         company: 'UNDB - Universidade Dom Bosco',
         duration: 'Dez 2020 - Ago 2021',
-        icon: '/public/undb.jpg'
+        icon: 'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/undb.jpg'
     }
 ])
 </script>

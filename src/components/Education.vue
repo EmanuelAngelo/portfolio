@@ -27,14 +27,14 @@ const Education = ref([
         degree:'Sistemas de Informação',
         school:'UNDB - Universidade Dom Bosco',
         duration:'2016-2020',
-        icon:'/public/undb.jpg'
+        icon:'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/undb.jpg'
     },
     {
         id:2,
         degree:'CURSO DE APERFEIÇOAMENTO EM ANÁLISE DE DADOS',
         school:'UFMA - Universidade Federal do Maranhão',
         duration:'2024-2025',
-        icon:'/public/ufma.jpg'
+        icon:'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/ufma.jpg'
     },
 
 ])
