@@ -33,6 +33,11 @@ const socialLinks = [
         name: 'Youtube',
         url: 'https://www.youtube.com/@devemanuel?sub_confirmation=1',
         icon: 'https://img.icons8.com/ios-filled/50/youtube-play.png' // ou URL do CDN
+    },
+    {
+        name: 'Outras Redes',
+        url: 'https://beacons.ai/emanuel_.angelo',
+        icon: 'https://img.icons8.com/ios-filled/50/valorant.png' // ou URL do CDN
     }
 ]
 </script>
