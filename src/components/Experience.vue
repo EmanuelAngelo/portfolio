@@ -6,7 +6,7 @@
             bg-white/75
             ">
             <div class="w-1/4">
-                <img src="https://img.icons8.com/ios-filled/100/lawyer.png" alt="lawyer">
+                <img :src="element.icon" :alt="element.title">
             </div>
             <div class="w-3/4 pl-4">
                 <h3 class="uppercase font-semibold text-primary text-base">{{ element.title }}</h3>
@@ -17,32 +17,38 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { ref } from 'vue';
+
 const Experience = ref([
     {
-        id:1,
-        title:'Analista de Implatação',
-        company:'PVT Software',
-        duration:'Out 2023 - Atual'
+        id: 1,
+        title: 'Analista de Implatação',
+        company: 'PVT Software',
+        duration: 'Out 2023 - Atual',
+        icon: '/public/pvt.jpg'
     },
     {
-        id:2,
-        title:'FullStack Developer',
-        company:'UNDB - Universidade Dom Bosco',
-        duration:'Nov 2022 - Set 2023'
+        id: 2,
+        title: 'FullStack Developer',
+        company: 'UNDB - Universidade Dom Bosco',
+        duration: 'Nov 2022 - Set 2023',
+        icon: '/public/undb.jpg'
     },
     {
-        id:3,
-        title:'FullStack Developer',
-        company:'Controller Education',
-        duration:'Out 2021 - Ago 2022'
+        id: 3,
+        title: 'FullStack Developer',
+        company: 'Controller Education',
+        duration: 'Out 2021 - Ago 2022',
+        icon: '/public/controller.jpg'
     },
     {
-        id:2,
-        title:'FullStack Developer',
-        company:'UNDB - Universidade Dom Bosco',
-        duration:'Dez 2020 - Ago 2021'
+        id: 4,  // Corrigi o ID que estava repetido (era 2)
+        title: 'FullStack Developer',
+        company: 'UNDB - Universidade Dom Bosco',
+        duration: 'Dez 2020 - Ago 2021',
+        icon: '/public/undb.jpg'
     }
 ])
 </script>
