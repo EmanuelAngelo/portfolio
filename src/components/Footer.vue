@@ -28,6 +28,11 @@ const socialLinks = [
         name: 'LinkedIn',
         url: 'https://linkedin.com/in/emanuelangelo',
         icon: 'https://img.icons8.com/ios-filled/50/linkedin.png' // ou URL do CDN
+    },
+    {
+        name: 'Youtube',
+        url: 'https://www.youtube.com/@devemanuel?sub_confirmation=1',
+        icon: 'https://img.icons8.com/ios-filled/50/youtube-play.png' // ou URL do CDN
     }
 ]
 </script>
