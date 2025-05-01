@@ -75,7 +75,7 @@ const data = ref([
     id: 2,
     icon: "https://img.icons8.com/ios/50/0ca7ff/ringer-volume.png",
     title: "Fale comigo",
-    info: "+55 98 9 98557-3745",
+    info: "+55 98 9 88123003",
   },
   {
     id: 3,
@@ -87,7 +87,7 @@ const data = ref([
     id: 4,
     icon: "https://img.icons8.com/ios/50/0ca7ff/whatsapp.png",
     title: "Whatsapp",
-    info: "+55 98 9 98557-3745",
+    info: "+55 98 9 88123003",
   },
 ]);
 </script>
