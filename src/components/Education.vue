@@ -24,10 +24,10 @@ import { ref } from 'vue';
 const Education = ref([
     {
         id:1,
-        degree:'Sistemas de Informação',
-        school:'UNDB - Universidade Dom Bosco',
-        duration:'2016-2020',
-        icon:'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/undb.jpg'
+        degree:'Especialização em Ciencias de Dados e Estatística',
+        school:'UEMA - Universidade Estadual do Maranhão',
+        duration:'2025-2027',
+        icon:'https://www.uema.br/wp-content/uploads/2023/02/logo-uema-site.png'
     },
     {
         id:2,
@@ -35,6 +35,13 @@ const Education = ref([
         school:'UFMA - Universidade Federal do Maranhão',
         duration:'2024-2025',
         icon:'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/ufma.jpg'
+    },
+    {
+        id:3,
+        degree:'Sistemas de Informação',
+        school:'UNDB - Universidade Dom Bosco',
+        duration:'2016-2020',
+        icon:'https://raw.githubusercontent.com/EmanuelAngelo/portfolio/refs/heads/master/public/undb.jpg'
     },
 
 ])
