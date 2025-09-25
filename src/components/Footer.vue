@@ -31,7 +31,7 @@ const socialLinks = [
     },
     {
         name: 'Youtube',
-        url: 'https://www.youtube.com/@devemanuel?sub_confirmation=1',
+        url: 'https://www.youtube.com/@devemanuelangelo?sub_confirmation=1',
         icon: 'https://img.icons8.com/ios-filled/50/youtube-play.png' // ou URL do CDN
     },
     {

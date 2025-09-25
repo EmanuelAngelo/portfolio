@@ -57,7 +57,7 @@
                 </div>
                 <div class="lg:h-full md:flex">
                     <figure class="relative overflow-hidden rounded-lg">
-                        <img src="/23459929.jpeg" alt="Hero Picture" class="w-full h-auto object-cover"/>
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQG0i7DXQBhNRw/profile-displayphoto-crop_800_800/B4DZk6I_18JgAI-/0/1757617061711?e=1761782400&v=beta&t=1bseNFHT6fehL5XJg7gxzkvSOutjYYRP06tj1BrEzhw" alt="Hero Picture" class="w-full h-auto object-cover"/>
                         <div class="absolute top-0 left-0 w-14 h-14 bg-white clip-top-left rounded-br-[20px]"></div>
                         <div class="absolute bottom-0 right-0 w-14 h-14 bg-white clip-bottom-right rounded-tl-[20px]"></div>
                         <figcaption class="absolute bottom-16 left-2/4 flex w-[clac(100%-4rem)] -translate-x-2/4 justify-between
