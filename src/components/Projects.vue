@@ -123,6 +123,7 @@ function getProjectImage(repoName) {
   const imageMap = {
     "cobranerd": "/cobranerd.png",
     "menu-icons-interativos": "/menuicons.png",
+    "agenda_tarefas": "/agenda.png",
     "gastos_a_dois": "/gastos_a_dois.png",    // Adicione outros mapeamentos específicos aqui
   };
 
