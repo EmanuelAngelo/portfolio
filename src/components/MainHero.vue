@@ -6,19 +6,19 @@
                 <div class="lg:py-6">
                     <div class="text-center lg:text-left">
                         <h1 class="pt-4 font-bold text-4xl md:text-5xl lg:text-6xl">
-                            Oi, Eu sou<br>
+                            {{ $t('mainHero.greeting') }}<br>
                             <span class="text-primary">Emanuel</span>
                         </h1>
                     </div>
                     <p class="text-gray-500 pt-8 text-center lg:text-left mx-auto max-w-xl">
-                        Desenvolvedor Full Stack com experiência em projetos para os setores financeiro, educacional e saúde. Atuante em Python, Django, Vue.js e análise de dados, desenvolvendo soluções escaláveis e integradas a sistemas ERP. Atuo com metodologias ágeis, criando dashboards interativos e otimizando processos empresariais por meio de BI e ETL.
+                        {{ $t('mainHero.description') }}
                     </p>
                     <div class="flex items-center gap-3 pt-9 flex-col sm:flex-row sm:w-max sm:mx-auto lg:mx-0">
                         <button class="px-6 md:px-7 py-3 rounded-full relative group w-full sm:w-max flex justify-center">
                             <span class='absolute inset-0 rounded-3xl group-hover:scale-105 origin-center transition-all ease-in-out
                             bg-primary border-2 border-transparent
                             '></span> 
-                            <span class="relative flex items-center justify-center ">Contrate-me</span>
+                            <span class="relative flex items-center justify-center ">{{$t('mainHero.hireMe')}}</span>
                         </button>
                         <button class="border border-primary px-6 md:px-7 py-3 rounded-full relative group w-full sm:w-max flex justify-center">
                             <div class="hover:scale-105 transition-all ease-in-out flex justify-center items-center relative">
@@ -50,14 +50,14 @@
                                     </svg>
                                     <div class="download-loader hidden"></div>
                                 </div>
-                                <a href="/resume.pdf" download="resume.pdf" class="pl-2 text-primary">Download curriculo.</a>
+                                <a href="/resume.pdf" download="resume.pdf" class="pl-2 text-primary">{{$t('mainHero.downloadCV')}}</a>
                             </div>
                         </button>
                     </div>
                 </div>
                 <div class="lg:h-full md:flex">
                     <figure class="relative overflow-hidden rounded-lg">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQG0i7DXQBhNRw/profile-displayphoto-crop_800_800/B4DZk6I_18JgAI-/0/1757617061711?e=1761782400&v=beta&t=1bseNFHT6fehL5XJg7gxzkvSOutjYYRP06tj1BrEzhw" alt="Hero Picture" class="w-full h-auto object-cover"/>
+                        <!-- <img src="https://media.licdn.com/dms/image/v2/D4D03AQG0i7DXQBhNRw/profile-displayphoto-crop_800_800/B4DZk6I_18JgAI-/0/1757617061711?e=1761782400&v=beta&t=1bseNFHT6fehL5XJg7gxzkvSOutjYYRP06tj1BrEzhw" alt="Hero Picture" class="w-full h-auto object-cover"/> -->
                         <div class="absolute top-0 left-0 w-14 h-14 bg-white clip-top-left rounded-br-[20px]"></div>
                         <div class="absolute bottom-0 right-0 w-14 h-14 bg-white clip-bottom-right rounded-tl-[20px]"></div>
                         <figcaption class="absolute bottom-16 left-2/4 flex w-[clac(100%-4rem)] -translate-x-2/4 justify-between
@@ -76,6 +76,8 @@
 </template>
 <script setup>
 import { defineAsyncComponent } from 'vue';
+import { useI18n } from 'vue-i18n';
+useI18n();
 const NavBar=defineAsyncComponent(()=>import('./NavBar.vue'));
 </script>
 <style scoped>
