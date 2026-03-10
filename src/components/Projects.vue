@@ -4,7 +4,7 @@
       class="text-4xl font-bold text-black mb-4 text-center"
       data-aos="fade-up"
     >
-      Meus projetos Git
+      {{ $t('projects.title') }}
     </h2>
 
     <div class="py-8 xl:px-16 px-4 sm:py-16">
@@ -34,7 +34,7 @@
             <p
               class="text-[14px] leading-[20px] text-gray-500 tracking-[0.03rem]"
             >
-              {{ element.description }}
+              {{ element.description || $t('projects.noDescription') }}
             </p>
             <div class="flex items-center gap-3 pt-6 flex-col sm:flex-row">
               <button
@@ -44,7 +44,7 @@
                   class="absolute inset-0 rounded-3xl group-hover:scale-105 origin-center transition-all ease-in-out bg-primary border-2 border-transparent"
                 ></span>
                 <span class="relative flex items-center justify-center">
-                  <a :href="element.webURL">Live Preview</a>
+                  <a :href="element.webURL">{{ $t('projects.livePreview') }}</a>
                 </span>
               </button>
               <button
@@ -54,7 +54,7 @@
                   class="hover:scale-105 transition-all ease-in-out flex justify-center items-center relative"
                 >
                   <a :href="element.gitURL" class="pl-2 text-primary"
-                    >Code Source</a
+                    >{{ $t('projects.codeSource') }}</a
                   >
                 </div>
               </button>
@@ -98,7 +98,7 @@ async function fetchGitHubRepos() {
         id: repo.id,
         title: formatRepoName(repo.name),
         category: repo.language || "Code",
-        description: repo.description || "Projeto sem descrição disponível",
+        description: repo.description || null,
         gitURL: repo.html_url,
         webURL: repo.homepage || "#",
         image: getProjectImage(repo.name),

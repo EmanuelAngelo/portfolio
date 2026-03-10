@@ -43,7 +43,7 @@
             <a
               :href="item.href"
               class="block transition hover:text-primary ease-linear text-2xl md:text-sm lg:text-lg text-white md:text-black"
-              @click="scrollToSection(item.href)"
+              @click.prevent="scrollToSection(item.href)"
             >
               {{ item.name }}
             </a>
@@ -54,20 +54,23 @@
   </header>
 </template>
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useI18n } from 'vue-i18n';
 const isMenuOpen = ref(false);
-const Menu =ref([
-    {name:'Serviços',href:'#services'},
-    {name:'Projetos',href:'#projects'},
-    {name:'Contato',href:'#contact'}
+const { t } = useI18n();
+
+const Menu = computed(() => [
+  { name: t('nav.services'), href: '#services' },
+  { name: t('nav.projects'), href: '#projects' },
+  { name: t('nav.contact'), href: '#contact' }
 ]);
 
-const scrollToSection =(href) =>{
-    isMenuOpen.value=false;//Close menu on mobile after clicking a link
-    const section = document.querySelector(herf);
-    if(section){
-        section.scrollIntoView({ behavior : 'smooth'})
-    }
+const scrollToSection = (href) => {
+  isMenuOpen.value = false; // Close menu on mobile after clicking a link
+  const section = document.querySelector(href);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 </script>
 <style scoped> 

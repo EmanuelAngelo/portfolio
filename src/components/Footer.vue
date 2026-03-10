@@ -1,7 +1,7 @@
 <template>
   <footer class="z-10 text-primary border-t-1 border-t-primary bg-white">
       <div class="container p-8 flex justify-between items-center">
-          <p>Todos direitos reservados</p>
+          <p>{{ $t('footer.rights') }}</p>
           <div class="flex space-x-4">
               <a 
                   v-for="social in socialLinks" 

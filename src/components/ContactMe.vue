@@ -4,7 +4,7 @@
       class="text-4xl font-bold text-black mb-4 text-center"
       data-aos="fade-up"
     >
-      Contate-me
+      {{ $t('contact.title') }}
     </h2>
     <div class="mx-auto relative rounded-lg py-6">
       <div class="grid lg:grid-cols-3 items-center">
@@ -12,7 +12,7 @@
           class="grid sm:grid-cols-2 gap-4 z-20 relative lg:left-16 max-lg:px-4"
         >
           <div
-            v-for="element in data"
+            v-for="element in displayedData"
             :key="element.id"
             data-aos="fade-up"
             class="flex flex-col items-center justify-center rounded-lg w-full h-44 p-4 text-center bg-white"
@@ -32,16 +32,16 @@
             <div class="max-w-md mx-auto space-y-3">
               <input
                 type="text"
-                placeholder="Name"
+                :placeholder="$t('contact.namePlaceholder')"
                 class="w-full bg-gray-100 rounded-lg py-3 px-6 text-sm outline-none"
               />
               <input
                 type="email"
-                placeholder="Email"
+                :placeholder="$t('contact.emailPlaceholder')"
                 class="w-full bg-gray-100 rounded-lg py-3 px-6 text-sm outline-none"
               />
               <textarea
-                placeholder="Messagem"
+                :placeholder="$t('contact.messagePlaceholder')"
                 rows="6"
                 class="w-full bg-gray-100 rounded-lg py-3 px-6 text-sm outline-none"
               ></textarea>
@@ -52,7 +52,7 @@
                   class="absolute inset-0 rounded-3xl group-hover:scale-105 origin-center transition-all ease-in-out bg-white border-2 border-transparent"
                 ></span>
                 <span class="relative flex items-center justify-center">
-                  Enviar mensagem</span
+                  {{ $t('contact.sendMessage') }}</span
                 >
               </button>
             </div>
@@ -63,31 +63,44 @@
   </section>
 </template>
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useI18n } from 'vue-i18n';
+
+const { locale, t } = useI18n();
+
 const data = ref([
   {
     id: 1,
     icon: "https://img.icons8.com/ios/50/0ca7ff/place-marker--v1.png",
-    title: "Localização",
-    info: "São Luís, MA, Brasil",
+    titleKey: "contact.location",
+    info: { en: "São Luís, MA, Brazil", pt: "São Luís, MA, Brasil" },
   },
   {
     id: 2,
     icon: "https://img.icons8.com/ios/50/0ca7ff/ringer-volume.png",
-    title: "Fale comigo",
+    titleKey: "contact.callMe",
     info: "+55 98 9 88123003",
   },
   {
     id: 3,
     icon: "https://img.icons8.com/ios/50/0ca7ff/envelope-dots.png",
-    title: "Converse comigo",
+    titleKey: "contact.emailMe",
     info: "emanuelangelo@outlook.com.br",
   },
   {
     id: 4,
     icon: "https://img.icons8.com/ios/50/0ca7ff/whatsapp.png",
-    title: "Whatsapp",
+    titleKey: "contact.whatsapp",
     info: "+55 98 9 88123003",
   },
 ]);
+
+const displayedData = computed(() => {
+  const current = String(locale.value || 'en');
+  return data.value.map((item) => ({
+    ...item,
+    title: item.titleKey ? t(item.titleKey) : '',
+    info: typeof item.info === 'string' ? item.info : (item.info?.[current] ?? item.info?.en ?? ''),
+  }));
+});
 </script>

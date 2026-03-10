@@ -4,7 +4,7 @@
       class="text-4xl font-bold text-black mb-4 text-center"
       data-aos="fade-up"
     >
-      Meu Serviços
+      {{ $t('services.title') }}
     </h2>
     <div
       class="py-8 xl:px-16 px-4 sm:py-16 grid grid-cols-1 gap-6 pt-10 sm:grid-cols-2 md:gap-10 md:pt-12 lg:grid-cols-3"
@@ -12,7 +12,7 @@
       <div
         class="px-[12px] mb-[24px]"
         data-aos="fade-up"
-        v-for="element in services"
+        v-for="element in displayedServices"
         :key="element.id"
       >
         <div class="mt-[30px] relative flex flex-col justify-center text-center rounded-[30px] bg-white">
@@ -33,28 +33,46 @@
   </section>
 </template>
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useI18n } from 'vue-i18n';
+
+const { locale } = useI18n();
+
 const services = ref([
   {
     id: 1,
     icon: "https://img.icons8.com/ios-filled/100/google-code.png",
     name: "Web Development",
-    description:
-      "Desenvolvo aplicações web responsivas e escaláveis, utilizando as melhores práticas de desenvolvimento.",
+    description: {
+      en: "I develop responsive and scalable web applications using best development practices.",
+      pt: "Desenvolvo aplicações web responsivas e escaláveis, utilizando as melhores práticas de desenvolvimento.",
+    },
   },
   {
     id: 2,
     icon: "https://img.icons8.com/external-vectorslab-glyph-vectorslab/100/external-Technical-Writing-mobile-app-development-vectorslab-glyph-vectorslab.png",
     name: "Technical Support",
-    description:
-      "Ofereço suporte técnico especializado, ajudando a resolver problemas e otimizar o desempenho de sistemas.",
+    description: {
+      en: "I provide specialized technical support, helping to solve problems and optimize system performance.",
+      pt: "Ofereço suporte técnico especializado, ajudando a resolver problemas e otimizar o desempenho de sistemas.",
+    },
   },
   {
     id: 3,
     icon: "https://s3.amazonaws.com//beta-img.b2bstack.net/uploads/production/product/product_image/21301/thumb_totvs-rm.png",
     name: "Totvs RM",
-    description:
-      "Implanto e configuro o sistema Totvs RM, garantindo uma integração perfeita com os processos de negócios.",
+    description: {
+      en: "I implement and configure the Totvs RM system, ensuring seamless integration with business processes.",
+      pt: "Implanto e configuro o sistema Totvs RM, garantindo uma integração perfeita com os processos de negócios.",
+    },
   },
 ]);
+
+const displayedServices = computed(() => {
+  const current = String(locale.value || 'en');
+  return services.value.map((service) => ({
+    ...service,
+    description: service.description?.[current] ?? service.description?.en ?? '',
+  }));
+});
 </script>
