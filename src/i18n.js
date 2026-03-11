@@ -45,6 +45,48 @@ const messages = {
       rights: 'All rights reserved'
     }
   },
+  es: {
+    mainHero: {
+      greeting: 'Hola, soy',
+      description: 'Desarrollador Full Stack con experiencia en proyectos para los sectores financiero, educativo y de salud. Trabajo con Python, Django, Vue.js y análisis de datos, creando soluciones escalables e integradas con sistemas ERP. Utilizo metodologías ágiles, desarrollo dashboards interactivos y optimizo procesos empresariales con BI y ETL.',
+      hireMe: 'Contrátame',
+      downloadCV: 'Descargar CV.'
+    },
+    nav: {
+      services: 'Servicios',
+      projects: 'Proyectos',
+      contact: 'Contacto'
+    },
+    services: {
+      title: 'Mis Servicios'
+    },
+    projects: {
+      title: 'Mis Proyectos Git',
+      livePreview: 'Ver',
+      codeSource: 'Código fuente',
+      noDescription: 'No hay descripción disponible'
+    },
+    contact: {
+      title: 'Contáctame',
+      namePlaceholder: 'Nombre',
+      emailPlaceholder: 'Correo',
+      messagePlaceholder: 'Mensaje',
+      sendMessage: 'Enviar mensaje',
+      location: 'Ubicación',
+      callMe: 'Llámame',
+      emailMe: 'Envíame un correo',
+      whatsapp: 'WhatsApp'
+    },
+    education: {
+      title: 'Educación'
+    },
+    experience: {
+      title: 'Experiencia'
+    },
+    footer: {
+      rights: 'Todos los derechos reservados'
+    }
+  },
   pt: {
     mainHero: {
       greeting: 'Oi, Eu sou',
@@ -109,6 +151,7 @@ function normalizeLocale(value) {
   const raw = String(value || '').toLowerCase();
   if (raw.startsWith('pt')) return 'pt';
   if (raw.startsWith('en')) return 'en';
+  if (raw.startsWith('es')) return 'es';
   return undefined;
 }
 

@@ -45,6 +45,7 @@ const services = ref([
     name: "Web Development",
     description: {
       en: "I develop responsive and scalable web applications using best development practices.",
+      es: "Desarrollo aplicaciones web responsivas y escalables utilizando las mejores prácticas de desarrollo.",
       pt: "Desenvolvo aplicações web responsivas e escaláveis, utilizando as melhores práticas de desenvolvimento.",
     },
   },
@@ -54,6 +55,7 @@ const services = ref([
     name: "Technical Support",
     description: {
       en: "I provide specialized technical support, helping to solve problems and optimize system performance.",
+      es: "Ofrezco soporte técnico especializado, ayudando a resolver problemas y optimizar el rendimiento de los sistemas.",
       pt: "Ofereço suporte técnico especializado, ajudando a resolver problemas e otimizar o desempenho de sistemas.",
     },
   },
@@ -63,6 +65,7 @@ const services = ref([
     name: "Totvs RM",
     description: {
       en: "I implement and configure the Totvs RM system, ensuring seamless integration with business processes.",
+      es: "Implemento y configuro el sistema Totvs RM, garantizando una integración fluida con los procesos de negocio.",
       pt: "Implanto e configuro o sistema Totvs RM, garantindo uma integração perfeita com os processos de negócios.",
     },
   },

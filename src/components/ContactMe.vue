@@ -73,7 +73,7 @@ const data = ref([
     id: 1,
     icon: "https://img.icons8.com/ios/50/0ca7ff/place-marker--v1.png",
     titleKey: "contact.location",
-    info: { en: "São Luís, MA, Brazil", pt: "São Luís, MA, Brasil" },
+    info: { en: "São Luís, MA, Brazil", es: "São Luís, MA, Brasil", pt: "São Luís, MA, Brasil" },
   },
   {
     id: 2,

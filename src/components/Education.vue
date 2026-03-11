@@ -30,10 +30,12 @@ const EducationSource = ref([
         id:1,
                 degree: {
                     en: 'Specialization in Data Science and Statistics',
+                    es: 'Especialización en Ciencia de Datos y Estadística',
                     pt: 'Especialização em Ciencias de Dados e Estatística'
                 },
                 school: {
                     en: 'UEMA - State University of Maranhão',
+                    es: 'UEMA - Universidad Estatal de Maranhão',
                     pt: 'UEMA - Universidade Estadual do Maranhão'
                 },
         duration:'2025-2027',
@@ -43,10 +45,12 @@ const EducationSource = ref([
         id:2,
                 degree: {
                     en: 'Advanced Course in Data Analysis',
+                    es: 'Curso Avanzado en Análisis de Datos',
                     pt: 'CURSO DE APERFEIÇOAMENTO EM ANÁLISE DE DADOS'
                 },
                 school: {
                     en: 'UFMA - Federal University of Maranhão',
+                    es: 'UFMA - Universidad Federal de Maranhão',
                     pt: 'UFMA - Universidade Federal do Maranhão'
                 },
         duration:'2024-2025',
@@ -56,10 +60,12 @@ const EducationSource = ref([
         id:3,
                 degree: {
                     en: 'Information Systems',
+                    es: 'Sistemas de Información',
                     pt: 'Sistemas de Informação'
                 },
                 school: {
                     en: 'UNDB - Dom Bosco University',
+                    es: 'UNDB - Universidad Dom Bosco',
                     pt: 'UNDB - Universidade Dom Bosco'
                 },
         duration:'2016-2020',
