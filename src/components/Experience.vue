@@ -37,7 +37,7 @@ const ExperienceSource = ref([
     title: { en: "Distribution Analyst", es: "Analista de Distribución", pt: "Analista de Distribuição Pleno" },
     company: { en: "Equatorial Group", es: "Grupo Equatorial", pt: "Grupo Equatorial" },
     duration: { en: "Jun 2025 - Present", es: "Jun 2025 - Actualidad", pt: "Jun 2025 - Atual" },
-    icon: "https://yt3.googleusercontent.com/_H1fJ2hgKNB8KUTArMq_Ua4P3K8nNwYYn3UowA4GIdY-dTmpBvoO3IXJy1aR69Zhk1azf8CBIw=s900-c-k-c0x00ffffff-no-rj",
+    icon: "https://github.com/EmanuelAngelo/portfolio/blob/master/public/equatorial_grupo.jpg?raw=true",
   },
   {
     id: 2,
