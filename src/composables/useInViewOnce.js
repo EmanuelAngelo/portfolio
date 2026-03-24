@@ -10,18 +10,33 @@ export function useInViewOnce(options = {}) {
   let observer;
 
   onMounted(() => {
-    observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return;
-        if (entry.isIntersecting) {
-          inView.value = true;
-          observer?.disconnect();
-        }
-      },
-      { root: null, rootMargin, threshold }
-    );
+    if (typeof window === 'undefined') {
+      inView.value = true;
+      return;
+    }
 
-    if (target.value) observer.observe(target.value);
+    if (!('IntersectionObserver' in window)) {
+      inView.value = true;
+      return;
+    }
+
+    try {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          if (entry.isIntersecting) {
+            inView.value = true;
+            observer?.disconnect();
+          }
+        },
+        { root: null, rootMargin, threshold }
+      );
+
+      if (target.value) observer.observe(target.value);
+      else inView.value = true;
+    } catch {
+      inView.value = true;
+    }
   });
 
   onBeforeUnmount(() => {
