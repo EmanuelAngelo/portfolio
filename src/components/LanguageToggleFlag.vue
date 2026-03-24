@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="fixed bottom-6 left-6 z-50">
+  <div ref="root" class="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 sm:bottom-6 sm:left-6 z-50">
     <button
       type="button"
       class="group inline-flex items-center gap-2 rounded-full border border-gold/20 bg-obsidian/80 backdrop-blur-xl px-3 py-2 text-foreground/70 hover:text-gold hover:border-gold/40 transition-colors"

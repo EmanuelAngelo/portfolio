@@ -126,7 +126,8 @@ const navItems = [
   { id: 'experience', label: '02_EXPERIENCE' },
   { id: 'skills', label: '03_SKILLS' },
   { id: 'impact', label: '04_IMPACT' },
-  { id: 'contact', label: '05_CONTACT' },
+  { id: 'projects', label: '05_PROJECTS' },
+  { id: 'contact', label: '06_CONTACT' },
 ];
 
 const scrolled = ref(false);

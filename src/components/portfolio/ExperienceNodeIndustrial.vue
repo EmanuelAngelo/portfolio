@@ -52,7 +52,7 @@
 
       <div
         class="overflow-hidden transition-[max-height,opacity] duration-300"
-        :class="expanded ? 'max-h-[520px] opacity-100' : 'max-h-0 opacity-0'"
+        :class="expanded ? 'max-h-[900px] opacity-100' : 'max-h-0 opacity-0'"
       >
         <div class="p-5 border border-t-0 border-border/10 bg-card/30">
           <p class="text-sm text-foreground/60 leading-relaxed mb-4">{{ exp.description }}</p>

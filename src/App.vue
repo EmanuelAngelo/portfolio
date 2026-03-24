@@ -7,6 +7,7 @@
     <ExperienceSectionIndustrial />
     <SkillsSectionIndustrial />
     <ImpactSectionIndustrial />
+    <ProjectsSectionIndustrial />
     <ContactSectionIndustrial />
     <FooterIndustrial />
   </div>
@@ -20,6 +21,7 @@ import AboutSectionIndustrial from './components/portfolio/AboutSectionIndustria
 import ExperienceSectionIndustrial from './components/portfolio/ExperienceSectionIndustrial.vue';
 import SkillsSectionIndustrial from './components/portfolio/SkillsSectionIndustrial.vue';
 import ImpactSectionIndustrial from './components/portfolio/ImpactSectionIndustrial.vue';
+import ProjectsSectionIndustrial from './components/portfolio/ProjectsSectionIndustrial.vue';
 import ContactSectionIndustrial from './components/portfolio/ContactSectionIndustrial.vue';
 import FooterIndustrial from './components/portfolio/FooterIndustrial.vue';
 </script>
