@@ -1,39 +1,25 @@
 <template>
-  <div class="min-h-screen">
-    <!-- Wrap components in Suspense to handle loading -->
-     <Suspense>
-        <template #default>
-          <div class="bg-primary2">
-            <LanguageToggleFlag />
-            <HeroSection />
-            <Skills />
-            <Services />
-            <Projects />
-            <ContactMe />
-            <Footer />
-            <BackToTop />
-          </div>
-        </template>
-        <template #fallback>
-          <div class="flex justify-center items-center min-h-screen">
-            <LoadingSpinner />
-          </div>
-        </template>
-     </Suspense>
+  <div class="min-h-screen bg-obsidian text-foreground overflow-x-hidden">
+    <HUDNav />
+    <LanguageToggleFlag />
+    <HeroSectionIndustrial />
+    <AboutSectionIndustrial />
+    <ExperienceSectionIndustrial />
+    <SkillsSectionIndustrial />
+    <ImpactSectionIndustrial />
+    <ContactSectionIndustrial />
+    <FooterIndustrial />
   </div>
 </template>
 <script setup>
-import { defineAsyncComponent } from 'vue';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-AOS.init({duration:2000 , delay:200 });
-import LoadingSpinner from './components/LoadingSpinner.vue';
 import LanguageToggleFlag from './components/LanguageToggleFlag.vue';
-const HeroSection = defineAsyncComponent(()=>import('./components/HeroSection.vue'))
-const Skills = defineAsyncComponent(()=>import('./components/Skills.vue'))
-const Services = defineAsyncComponent(()=>import('./components/Services.vue'))
-const Projects = defineAsyncComponent(()=>import('./components/Projects.vue'))
-const ContactMe = defineAsyncComponent(()=>import('./components/ContactMe.vue'))
-const Footer = defineAsyncComponent(()=>import('./components/Footer.vue'))
-const BackToTop = defineAsyncComponent(()=>import('./components/BackToTop.vue'))
+
+import HUDNav from './components/portfolio/HUDNav.vue';
+import HeroSectionIndustrial from './components/portfolio/HeroSectionIndustrial.vue';
+import AboutSectionIndustrial from './components/portfolio/AboutSectionIndustrial.vue';
+import ExperienceSectionIndustrial from './components/portfolio/ExperienceSectionIndustrial.vue';
+import SkillsSectionIndustrial from './components/portfolio/SkillsSectionIndustrial.vue';
+import ImpactSectionIndustrial from './components/portfolio/ImpactSectionIndustrial.vue';
+import ContactSectionIndustrial from './components/portfolio/ContactSectionIndustrial.vue';
+import FooterIndustrial from './components/portfolio/FooterIndustrial.vue';
 </script>

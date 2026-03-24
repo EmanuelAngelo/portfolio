@@ -1,18 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{vue,js,jsx,ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'], // Isso substituirá a fonte sans-serif padrão
+        inter: ['var(--font-inter)'],
+        mono: ['var(--font-mono)'],
       },
-      colors:{
-        primary:'#0CA7FF',
-        primary2:"#696969",
-        secondary:'ebf7ff'
-      }
+      colors: {
+        obsidian: 'rgb(var(--obsidian) / <alpha-value>)',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        gold: 'rgb(var(--gold) / <alpha-value>)',
+        lime: 'rgb(var(--lime) / <alpha-value>)',
+        card: 'rgb(var(--card) / <alpha-value>)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+      },
     },
   },
   plugins: [],
-}
+};
 
