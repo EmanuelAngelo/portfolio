@@ -8,8 +8,15 @@ export function useInViewOnce(options = {}) {
   const threshold = options.threshold ?? 0.15;
 
   let observer;
+  let safetyTimer;
 
   onMounted(() => {
+    safetyTimer = window.setTimeout(() => {
+      if (!inView.value) inView.value = true;
+      observer?.disconnect();
+      observer = undefined;
+    }, options.timeoutMs ?? 1500);
+
     if (typeof window === 'undefined') {
       inView.value = true;
       return;
@@ -40,6 +47,7 @@ export function useInViewOnce(options = {}) {
   });
 
   onBeforeUnmount(() => {
+    if (safetyTimer) window.clearTimeout(safetyTimer);
     observer?.disconnect();
     observer = undefined;
   });
