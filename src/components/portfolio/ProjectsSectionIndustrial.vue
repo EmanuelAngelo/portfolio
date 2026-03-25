@@ -124,7 +124,10 @@ async function loadRepos() {
     // 1) Prefer pinned repos (server-side via Netlify Function to avoid CORS)
     let pinnedData = null;
     try {
-      const pinnedRes = await fetch(`/.netlify/functions/pinned-repos?username=${encodeURIComponent(username)}`);
+      const pinnedRes = await fetch(
+        `/.netlify/functions/pinned-repos?username=${encodeURIComponent(username)}&t=${Date.now()}`,
+        { cache: 'no-store' }
+      );
       if (pinnedRes.ok) pinnedData = await pinnedRes.json();
     } catch {
       pinnedData = null;

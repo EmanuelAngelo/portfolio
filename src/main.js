@@ -61,7 +61,9 @@ function installFatalErrorOverlay() {
 	});
 }
 
-installFatalErrorOverlay();
+if (import.meta.env.DEV || new URLSearchParams(window.location.search).has('debug')) {
+	installFatalErrorOverlay();
+}
 
 const app = createApp(App);
 app.use(i18n);

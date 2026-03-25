@@ -2,11 +2,12 @@ export const handler = async (event) => {
   const username = event?.queryStringParameters?.username || 'EmanuelAngelo';
 
   try {
-    const profileRes = await fetch(`https://github.com/${encodeURIComponent(username)}`, {
+    const profileRes = await fetch(`https://github.com/${encodeURIComponent(username)}?t=${Date.now()}`, {
       headers: {
         'User-Agent': 'portfolio-netlify-function',
         Accept: 'text/html,application/xhtml+xml',
       },
+      cache: 'no-store',
     });
 
     if (!profileRes.ok) {
@@ -44,12 +45,13 @@ export const handler = async (event) => {
     const repos = (await Promise.all(
       pinned.map(async (r) => {
         const apiRes = await fetch(
-          `https://api.github.com/repos/${encodeURIComponent(r.owner)}/${encodeURIComponent(r.name)}`,
+          `https://api.github.com/repos/${encodeURIComponent(r.owner)}/${encodeURIComponent(r.name)}?t=${Date.now()}`,
           {
             headers: {
               Accept: 'application/vnd.github+json',
               'User-Agent': 'portfolio-netlify-function',
             },
+            cache: 'no-store',
           }
         );
         if (!apiRes.ok) return null;
@@ -62,7 +64,7 @@ export const handler = async (event) => {
       statusCode: 200,
       headers: {
         'content-type': 'application/json; charset=utf-8',
-        'cache-control': 'public, max-age=600',
+        'cache-control': 'no-store, max-age=0',
       },
       body: JSON.stringify({ repos }),
     };
