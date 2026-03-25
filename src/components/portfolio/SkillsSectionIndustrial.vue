@@ -15,7 +15,7 @@
         <div
           v-for="(cat, ci) in categories"
           :key="cat.titleKey"
-          class="p-6 border border-border/10 bg-card/20 hover:border-gold/20 transition-colors"
+          class="industrial-card p-6 border border-border/10 bg-card/20 hover:border-gold/20 transition-colors"
           :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
           :style="{ transitionDuration: '600ms', transitionDelay: `${160 + ci * 110}ms` }"
         >

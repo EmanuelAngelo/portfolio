@@ -66,7 +66,7 @@
           :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'"
           style="transition-delay: 260ms"
         >
-          <div class="p-6 border border-border/10 bg-card/10">
+          <div class="industrial-card p-6 border border-border/10 bg-card/10">
             <div class="font-mono text-xs text-foreground/30 mb-4 tracking-wider">{{ $t('industrial.contact.connect') }}</div>
             <div class="space-y-4">
               <a
@@ -109,7 +109,7 @@
             </div>
           </div>
 
-          <div class="p-4 border border-border/10 bg-obsidian font-mono text-xs">
+          <div class="industrial-card p-4 border border-border/10 bg-obsidian font-mono text-xs">
             <div class="flex items-center gap-2 mb-3 pb-2 border-b border-border/10">
               <div class="w-2.5 h-2.5 rounded-full bg-red-500/60" />
               <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />

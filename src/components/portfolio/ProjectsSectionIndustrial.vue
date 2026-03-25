@@ -17,19 +17,19 @@
         :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
         style="transition-delay: 140ms"
       >
-        <div v-if="isLoading" class="border border-border/10 bg-card/10 p-6">
+        <div v-if="isLoading" class="industrial-card border border-border/10 bg-card/10 p-6">
           <div class="flex items-center gap-3 text-foreground/50">
             <Github :size="18" class="text-gold/70" />
             <span class="font-mono text-xs tracking-widest">{{ $t('industrial.projects.loading') }}</span>
           </div>
         </div>
 
-        <div v-else-if="error" class="border border-border/10 bg-card/10 p-6">
+        <div v-else-if="error" class="industrial-card border border-border/10 bg-card/10 p-6">
           <div class="font-mono text-xs tracking-widest text-gold/70 mb-2">{{ $t('industrial.projects.error') }}</div>
           <div class="text-sm text-foreground/50 leading-relaxed">{{ error }}</div>
         </div>
 
-        <div v-else-if="repos.length === 0" class="border border-border/10 bg-card/10 p-6">
+        <div v-else-if="repos.length === 0" class="industrial-card border border-border/10 bg-card/10 p-6">
           <div class="font-mono text-xs tracking-widest text-foreground/50">{{ $t('industrial.projects.empty') }}</div>
         </div>
 
@@ -40,7 +40,7 @@
             :href="repo.html_url"
             target="_blank"
             rel="noopener noreferrer"
-            class="group relative p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
+            class="industrial-card group relative p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
           >
             <div class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
 

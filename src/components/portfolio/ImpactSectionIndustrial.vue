@@ -15,7 +15,7 @@
         <div
           v-for="(item, i) in impacts"
           :key="item.label"
-          class="group relative p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
+          class="industrial-card group relative p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
           :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
           :style="{ transitionDuration: '600ms', transitionDelay: `${160 + i * 110}ms` }"
         >
@@ -34,7 +34,7 @@
       </div>
 
       <div
-        class="mt-20 p-8 border border-border/10 bg-card/10 transition-all duration-700"
+        class="industrial-card mt-20 p-8 border border-border/10 bg-card/10 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
         style="transition-delay: 720ms"
       >

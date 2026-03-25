@@ -44,7 +44,7 @@
           <div
             v-for="(comp, i) in competencies"
             :key="comp.titleKey"
-            class="group flex gap-4 p-5 border border-border/10 bg-card/20 hover:border-gold/20 hover:bg-card/40 transition-all duration-300"
+            class="industrial-card group flex gap-4 p-5 border border-border/10 bg-card/20 hover:border-gold/20 hover:bg-card/40 transition-all duration-300"
             :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'"
             :style="{ transitionDuration: '700ms', transitionDelay: `${180 + i * 90}ms` }"
           >

@@ -17,7 +17,7 @@
       <button
         type="button"
         @click="$emit('toggle')"
-        class="w-full text-left p-5 border transition-all group"
+        class="industrial-card w-full text-left p-5 border transition-all group"
         :class="expanded ? 'border-gold/30 bg-card/50' : 'border-border/10 bg-card/20 hover:border-gold/20 hover:bg-card/40'"
       >
         <div class="flex items-start justify-between gap-3">
@@ -54,7 +54,7 @@
         class="overflow-hidden transition-[max-height,opacity] duration-300"
         :class="expanded ? 'max-h-[900px] opacity-100' : 'max-h-0 opacity-0'"
       >
-        <div class="p-5 border border-t-0 border-border/10 bg-card/30">
+        <div class="industrial-card p-5 border border-t-0 border-border/10 bg-card/30">
           <p class="text-sm text-foreground/60 leading-relaxed mb-4">{{ exp.description }}</p>
           <div class="flex flex-wrap gap-1.5">
             <span
