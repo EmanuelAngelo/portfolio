@@ -2,7 +2,9 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 export function useInViewOnce(options = {}) {
   const target = ref(null);
-  const inView = ref(false);
+  // Fail-open: if IntersectionObserver is flaky/unavailable (common in some mobile webviews),
+  // we prefer showing content over hiding sections.
+  const inView = ref(options.initialInView ?? true);
 
   const rootMargin = options.rootMargin ?? '-100px';
   const threshold = options.threshold ?? 0.15;
@@ -11,6 +13,8 @@ export function useInViewOnce(options = {}) {
   let safetyTimer;
 
   onMounted(() => {
+    if (inView.value) return;
+
     safetyTimer = window.setTimeout(() => {
       if (!inView.value) inView.value = true;
       observer?.disconnect();
