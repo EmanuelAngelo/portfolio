@@ -84,6 +84,21 @@
                 </div>
               </a>
 
+              <a
+                :href="whatsappUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 text-foreground/60 hover:text-gold transition-colors group"
+              >
+                <div class="w-10 h-10 flex items-center justify-center border border-border/10 group-hover:border-gold/30 transition-colors">
+                  <MessageCircleMore :size="16" />
+                </div>
+                <div>
+                  <div class="font-mono text-xs tracking-wider">WhatsApp</div>
+                  <div class="font-mono text-xs text-foreground/30">+55 98 98812-3003</div>
+                </div>
+              </a>
+
               <div class="flex items-center gap-3 text-foreground/60">
                 <div class="w-10 h-10 flex items-center justify-center border border-border/10">
                   <MapPin :size="16" />
@@ -131,30 +146,31 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue';
-import { Linkedin, Mail, MapPin, Send } from 'lucide-vue-next';
+import { reactive, ref } from 'vue';
+import { Linkedin, Mail, MapPin, MessageCircleMore, Send } from 'lucide-vue-next';
 import { useI18n } from 'vue-i18n';
 import { useInViewOnce } from '../../composables/useInViewOnce';
 
 const { target, inView } = useInViewOnce({ rootMargin: '-120px' });
 
 const linkedinUrl = 'https://www.linkedin.com/in/emanuelangelo/';
-const toEmail = 'emanuelangelo.dev@gmail.com';
+const whatsappNumber = '5598988123003';
+const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
-const { t, locale } = useI18n();
-
-const mailSubject = computed(() => {
-  void locale.value;
-  return t('industrial.contact.mailSubject', { name: form.name || '—' });
-});
+const { t } = useI18n();
 
 const sent = ref(false);
 const form = reactive({ name: '', email: '', message: '' });
 
 const handleSubmit = () => {
-  const subject = encodeURIComponent(mailSubject.value);
-  const body = encodeURIComponent(`${t('industrial.contact.mailName')}: ${form.name}\n${t('industrial.contact.mailEmail')}: ${form.email}\n\n${form.message}`);
-  window.open(`mailto:${toEmail}?subject=${subject}&body=${body}`, '_blank');
+  const body = [
+    t('industrial.contact.waIntro'),
+    `${t('industrial.contact.mailName')}: ${form.name}`,
+    `${t('industrial.contact.mailEmail')}: ${form.email}`,
+    `${t('industrial.contact.messageLabel')}: ${form.message}`,
+  ].join('\n');
+
+  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(body)}`, '_blank');
 
   sent.value = true;
   setTimeout(() => (sent.value = false), 2500);

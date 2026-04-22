@@ -7,6 +7,7 @@
     <ExperienceSectionIndustrial />
     <SkillsSectionIndustrial />
     <ImpactSectionIndustrial />
+    <CaseStudiesSectionIndustrial />
     <ProjectsSectionIndustrial />
     <ContactSectionIndustrial />
     <FooterIndustrial />
@@ -21,6 +22,7 @@ import AboutSectionIndustrial from './components/portfolio/AboutSectionIndustria
 import ExperienceSectionIndustrial from './components/portfolio/ExperienceSectionIndustrial.vue';
 import SkillsSectionIndustrial from './components/portfolio/SkillsSectionIndustrial.vue';
 import ImpactSectionIndustrial from './components/portfolio/ImpactSectionIndustrial.vue';
+import CaseStudiesSectionIndustrial from './components/portfolio/CaseStudiesSectionIndustrial.vue';
 import ProjectsSectionIndustrial from './components/portfolio/ProjectsSectionIndustrial.vue';
 import ContactSectionIndustrial from './components/portfolio/ContactSectionIndustrial.vue';
 import FooterIndustrial from './components/portfolio/FooterIndustrial.vue';
