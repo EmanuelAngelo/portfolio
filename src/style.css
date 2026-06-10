@@ -32,12 +32,36 @@
     --border: 0 0 0;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
 
 body {
     font-family: var(--font-inter);
     background: rgb(var(--background));
     color: rgb(var(--foreground));
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Consistent section spacing */
+.section-padding {
+    @apply py-16 sm:py-24 md:py-32 px-4 sm:px-6;
+}
+
+/* Prevent iOS zoom on form inputs */
+@media (max-width: 767px) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}
+
+/* Body scroll lock for mobile menu */
+body.menu-open {
+    overflow: hidden;
+    touch-action: none;
 }
 
 ::-webkit-scrollbar { width: 6px; }
@@ -46,6 +70,12 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: rgb(var(--gold)); }
 
 .theme-light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); }
+
+.theme-light .blueprint-grid {
+    background-image:
+        linear-gradient(rgba(255,184,0,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,184,0,0.06) 1px, transparent 1px);
+}
 
 .blueprint-grid {
     background-image:

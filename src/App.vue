@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-obsidian text-foreground overflow-x-hidden">
+  <div class="min-h-screen bg-obsidian text-foreground overflow-x-hidden" style="padding-bottom: env(safe-area-inset-bottom)">
     <HUDNav />
     <LanguageToggleFlag />
     <HeroSectionIndustrial />

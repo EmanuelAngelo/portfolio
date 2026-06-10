@@ -1,6 +1,6 @@
 <template>
-  <footer class="py-12 px-6 border-t border-border/10">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+  <footer class="py-8 sm:py-12 px-4 sm:px-6 border-t border-border/10" style="padding-bottom: calc(2rem + env(safe-area-inset-bottom))">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
       <div class="font-mono text-xs text-foreground/30 tracking-wider">
         &copy; {{ year }} EMANUEL ANGELO. {{ $t('industrial.footer.operational') }}
       </div>

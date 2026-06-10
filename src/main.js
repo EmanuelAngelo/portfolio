@@ -4,6 +4,21 @@ import './style.css';
 import App from './App.vue';
 import i18n from './i18n';
 
+function applyInitialTheme() {
+  const STORAGE_KEY = 'portfolio_theme';
+  const saved = (localStorage.getItem(STORAGE_KEY) || '').toLowerCase();
+  const preferred =
+    saved === 'light' || saved === 'dark'
+      ? saved
+      : window.matchMedia?.('(prefers-color-scheme: light)')?.matches
+        ? 'light'
+        : 'dark';
+  document.documentElement.classList.toggle('theme-light', preferred === 'light');
+  document.documentElement.classList.toggle('theme-dark', preferred === 'dark');
+}
+
+applyInitialTheme();
+
 function installFatalErrorOverlay() {
 	const show = (title, details) => {
 		try {

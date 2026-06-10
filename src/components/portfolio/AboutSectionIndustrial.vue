@@ -1,31 +1,31 @@
 <template>
-  <section id="about" ref="target" class="relative py-32 px-6">
+  <section id="about" ref="target" class="relative section-padding">
     <div class="max-w-7xl mx-auto">
       <div
-        class="mb-20 transition-all duration-700"
+        class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
         <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.about.label') }}</span>
-        <h2 class="mt-4 text-4xl md:text-6xl font-inter font-black tracking-tight">
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
           {{ $t('industrial.about.headingA') }} <span class="text-gold">{{ $t('industrial.about.headingB') }}</span>
         </h2>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-16">
+      <div class="grid lg:grid-cols-2 gap-10 sm:gap-16">
         <div
           class="space-y-6 transition-all duration-700"
           :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
           style="transition-delay: 120ms"
         >
-          <p class="text-lg leading-relaxed text-foreground/70">
+          <p class="text-base sm:text-lg leading-relaxed text-foreground/70">
             {{ $t('industrial.about.p1a') }}
             <span class="text-gold font-semibold"> {{ $t('industrial.about.p1b') }}</span>
             {{ ' ' + $t('industrial.about.p1c') }}
           </p>
-          <p class="text-lg leading-relaxed text-foreground/70">
+          <p class="text-base sm:text-lg leading-relaxed text-foreground/70">
             {{ $t('industrial.about.p2') }}
           </p>
-          <p class="text-lg leading-relaxed text-foreground/70">
+          <p class="text-base sm:text-lg leading-relaxed text-foreground/70">
             {{ $t('industrial.about.p3') }}
           </p>
 

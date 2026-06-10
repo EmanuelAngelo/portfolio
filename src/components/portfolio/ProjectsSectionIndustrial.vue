@@ -1,15 +1,15 @@
 <template>
-  <section id="projects" ref="target" class="relative py-32 px-6 blueprint-grid">
+  <section id="projects" ref="target" class="relative section-padding blueprint-grid">
     <div class="max-w-7xl mx-auto">
       <div
-        class="mb-20 transition-all duration-700"
+        class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
         <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.projects.label') }}</span>
-        <h2 class="mt-4 text-4xl md:text-6xl font-inter font-black tracking-tight">
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
           {{ $t('industrial.projects.headingA') }} <span class="text-gold">{{ $t('industrial.projects.headingB') }}</span>
         </h2>
-        <p class="mt-4 text-lg text-foreground/40">{{ $t('industrial.projects.headingC') }}</p>
+        <p class="mt-4 text-base sm:text-lg text-foreground/40">{{ $t('industrial.projects.headingC') }}</p>
       </div>
 
       <div
@@ -33,14 +33,14 @@
           <div class="font-mono text-xs tracking-widest text-foreground/50">{{ $t('industrial.projects.empty') }}</div>
         </div>
 
-        <div v-else class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <a
             v-for="repo in repos"
             :key="repo.id"
             :href="repo.html_url"
             target="_blank"
             rel="noopener noreferrer"
-            class="industrial-card group relative p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
+            class="industrial-card group relative p-5 sm:p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
           >
             <div class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
@@ -71,11 +71,11 @@
               </span>
             </div>
 
-            <div class="mt-5 pt-4 border-t border-border/10 flex items-center justify-between gap-3">
-              <span class="font-mono text-xs text-foreground/30 tracking-wider">
+            <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-border/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <span class="font-mono text-[10px] sm:text-xs text-foreground/30 tracking-wider">
                 {{ $t('industrial.projects.updated') }}: {{ formatDate(repo.pushed_at || repo.updated_at) }}
               </span>
-              <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.projects.viewRepo') }}</span>
+              <span class="font-mono text-[10px] sm:text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.projects.viewRepo') }}</span>
             </div>
           </a>
         </div>

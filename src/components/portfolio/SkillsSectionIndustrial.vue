@@ -1,17 +1,17 @@
 <template>
-  <section id="skills" ref="target" class="relative py-32 px-6 blueprint-grid">
+  <section id="skills" ref="target" class="relative section-padding blueprint-grid">
     <div class="max-w-7xl mx-auto">
       <div
-        class="mb-20 transition-all duration-700"
+        class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
         <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.skills.label') }}</span>
-        <h2 class="mt-4 text-4xl md:text-6xl font-inter font-black tracking-tight">
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
           {{ $t('industrial.skills.headingA') }} <span class="text-gold">{{ $t('industrial.skills.headingB') }}</span>
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid sm:grid-cols-2 gap-5 sm:gap-8">
         <div
           v-for="(cat, ci) in categories"
           :key="cat.titleKey"

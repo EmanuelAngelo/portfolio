@@ -1,18 +1,18 @@
 <template>
-  <section id="contact" ref="target" class="relative py-32 px-6 blueprint-grid">
+  <section id="contact" ref="target" class="relative section-padding blueprint-grid">
     <div class="max-w-5xl mx-auto">
       <div
-        class="mb-20 transition-all duration-700"
+        class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
         <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.contact.label') }}</span>
-        <h2 class="mt-4 text-4xl md:text-6xl font-inter font-black tracking-tight">
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
           {{ $t('industrial.contact.headingA') }} <span class="text-gold">{{ $t('industrial.contact.headingB') }}</span>
         </h2>
-        <p class="mt-4 text-lg text-foreground/40">{{ $t('industrial.contact.headingC') }}</p>
+        <p class="mt-4 text-base sm:text-lg text-foreground/40">{{ $t('industrial.contact.headingC') }}</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
         <form
           @submit.prevent="handleSubmit"
           class="space-y-4 transition-all duration-700"

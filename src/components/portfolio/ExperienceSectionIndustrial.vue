@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" ref="target" class="relative py-32 px-6 overflow-hidden">
+  <section id="experience" ref="target" class="relative section-padding overflow-hidden">
     <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
       <img :src="bgImageUrl" alt="" class="w-full h-full object-cover opacity-10" />
       <div class="absolute inset-0 bg-obsidian/90" />
@@ -7,11 +7,11 @@
 
     <div class="relative max-w-5xl mx-auto">
       <div
-        class="mb-20 transition-all duration-700"
+        class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
         <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.experience.label') }}</span>
-        <h2 class="mt-4 text-4xl md:text-6xl font-inter font-black tracking-tight">
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
           {{ $t('industrial.experience.headingA') }} <span class="text-gold">{{ $t('industrial.experience.headingB') }}</span>
         </h2>
       </div>

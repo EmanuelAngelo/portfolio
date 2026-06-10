@@ -1,11 +1,15 @@
 <template>
-  <div ref="root" class="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-4 sm:bottom-6 sm:left-6 z-50">
+  <div
+    ref="root"
+    class="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] right-4 sm:bottom-6 sm:right-6 z-40"
+  >
     <button
       type="button"
-      class="group inline-flex items-center gap-2 rounded-full border border-gold/20 bg-obsidian/80 backdrop-blur-xl px-3 py-2 text-foreground/70 hover:text-gold hover:border-gold/40 transition-colors"
+      class="group inline-flex items-center gap-2 rounded-full border border-gold/20 bg-obsidian/80 backdrop-blur-xl px-3 py-2 text-foreground/70 hover:text-gold hover:border-gold/40 transition-colors shadow-lg"
       @click="toggleOpen"
       :aria-label="$t('industrial.language.label')"
       :title="$t('industrial.language.label')"
+      :aria-expanded="isOpen"
     >
       <span class="w-2 h-2 rounded-full" :class="isOpen ? 'bg-lime pulse-glow' : 'bg-foreground/20'" />
       <span class="font-mono text-xs tracking-widest uppercase">{{ currentShort }}</span>
@@ -13,14 +17,14 @@
 
     <div
       v-if="isOpen"
-      class="mt-2 flex flex-col gap-1 rounded-2xl border border-gold/15 bg-obsidian/85 backdrop-blur-xl p-2"
+      class="absolute bottom-full right-0 mb-2 flex flex-col gap-1 rounded-2xl border border-gold/15 bg-obsidian/95 backdrop-blur-xl p-2 min-w-[140px] shadow-xl"
       role="menu"
     >
       <button
         v-for="opt in otherOptions"
         :key="opt.locale"
         type="button"
-        class="flex items-center justify-between gap-4 rounded-xl px-3 py-2 hover:bg-card/30 transition"
+        class="flex items-center justify-between gap-4 rounded-xl px-3 py-2 hover:bg-card/30 transition whitespace-nowrap"
         @click="selectLocale(opt.locale)"
         role="menuitem"
       >

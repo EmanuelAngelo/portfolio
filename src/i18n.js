@@ -51,6 +51,12 @@ const messages = {
         headingA: 'Metrics of',
         headingB: 'Success',
         sectors: 'Industries',
+        sectorList: {
+          finance: 'Finance',
+          education: 'Education',
+          health: 'Healthcare',
+          energy: 'Energy',
+        },
         cards: {
           onboarding: { metric: '-30%', label: 'Onboarding', desc: 'Reduced onboarding time through implementation flow and automations.', company: 'PVT Software' },
           analysis: { metric: '-40%', label: 'Analysis', desc: 'Less analysis time with dashboards and data pipeline improvements.', company: 'UNDB' },
@@ -261,6 +267,12 @@ const messages = {
         headingA: 'Métricas de',
         headingB: 'Éxito',
         sectors: 'Sectores',
+        sectorList: {
+          finance: 'Finanzas',
+          education: 'Educación',
+          health: 'Salud',
+          energy: 'Energía',
+        },
         cards: {
           onboarding: { metric: '-30%', label: 'Onboarding', desc: 'Reducción del tiempo de onboarding con flujo de implementación y automatizaciones.', company: 'PVT Software' },
           analysis: { metric: '-40%', label: 'Análisis', desc: 'Menos tiempo de análisis con dashboards y mejoras en el pipeline de datos.', company: 'UNDB' },
@@ -471,6 +483,12 @@ const messages = {
         headingA: 'Métricas de',
         headingB: 'Impacto',
         sectors: 'Setores de Atuação',
+        sectorList: {
+          finance: 'Finanças',
+          education: 'Educação',
+          health: 'Saúde',
+          energy: 'Energia',
+        },
         cards: {
           onboarding: { metric: '-30%', label: 'Onboarding', desc: 'Redução do tempo de onboarding com fluxo de implantação e automações.', company: 'PVT Software' },
           analysis: { metric: '-40%', label: 'Análise', desc: 'Menos tempo de análise com dashboards e melhorias no pipeline de dados.', company: 'UNDB' },
