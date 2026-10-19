@@ -12,7 +12,10 @@
         class="w-3 h-3 rounded-full border-2"
         :style="{ borderColor: exp.color, boxShadow: `0 0 12px ${exp.color}40` }"
       >
-        <div class="w-full h-full rounded-full" :style="{ backgroundColor: exp.color, opacity: 0.4 }" />
+        <div
+          class="w-full h-full rounded-full"
+          :style="{ backgroundColor: exp.color, opacity: 0.4 }"
+        />
       </div>
     </div>
 
@@ -24,17 +27,30 @@
         type="button"
         @click="$emit('toggle')"
         class="industrial-card w-full text-left p-4 sm:p-5 border transition-all group"
-        :class="expanded ? 'border-gold/30 bg-card/50' : 'border-border/10 bg-card/20 hover:border-gold/20 hover:bg-card/40'"
+        :class="
+          expanded
+            ? 'border-gold/30 bg-card/50'
+            : 'border-border/10 bg-card/20 hover:border-gold/20 hover:bg-card/40'
+        "
       >
         <div class="flex items-start justify-between gap-3">
           <div class="flex-1 min-w-0">
             <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
-              <div class="w-2 h-2 rounded-full flex-shrink-0" :style="{ backgroundColor: exp.color }" />
-              <span class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground/40">{{ exp.period }}</span>
+              <div
+                class="w-2 h-2 rounded-full flex-shrink-0"
+                :style="{ backgroundColor: exp.color }"
+              />
+              <span class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground/40">{{
+                exp.period
+              }}</span>
             </div>
-            <h3 class="font-inter font-semibold text-foreground text-sm sm:text-base mb-0.5">{{ exp.role }}</h3>
+            <h3 class="font-inter font-semibold text-foreground text-sm sm:text-base mb-0.5">
+              {{ exp.role }}
+            </h3>
             <p class="font-mono text-xs text-gold/70 tracking-wider">{{ exp.company }}</p>
-            <p class="font-mono text-[10px] sm:text-xs text-foreground/30 mt-1">{{ exp.location }}</p>
+            <p class="font-mono text-[10px] sm:text-xs text-foreground/30 mt-1">
+              {{ exp.location }}
+            </p>
           </div>
 
           <ChevronRight
@@ -61,7 +77,9 @@
         :class="expanded ? 'max-h-[1200px] opacity-100' : 'max-h-0 opacity-0'"
       >
         <div class="industrial-card p-4 sm:p-5 border border-t-0 border-border/10 bg-card/30">
-          <p class="text-xs sm:text-sm text-foreground/60 leading-relaxed mb-4">{{ exp.description }}</p>
+          <p class="text-xs sm:text-sm text-foreground/60 leading-relaxed mb-4">
+            {{ exp.description }}
+          </p>
           <div class="flex flex-wrap gap-1.5">
             <span
               v-for="s in exp.skills"

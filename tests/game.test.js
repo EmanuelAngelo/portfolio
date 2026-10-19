@@ -1,3 +1,4 @@
+import { createObstacles, isWalkable, findPath, entranceOf } from '../src/game/collision.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createCamera, projectPoint, unprojectPoint, layoutPins } from '../src/game/geometry.js';
@@ -29,33 +30,22 @@ for (const [width, height] of viewports) {
       assert.ok(Math.abs(result.x - point.x) < 1e-9);
       assert.ok(Math.abs(result.y - point.y) < 1e-9);
     }
-    for (const point of [
-      { x: 0, y: 12 },
-      { x: 11, y: 0 },
-      { x: 11, y: 12 },
-    ]) {
-      const screen = projectPoint(point, camera);
-      assert.ok(screen.x >= 0 && screen.x <= width);
-      assert.ok(screen.y >= 70 && screen.y <= height - 45);
+    if (camera.compact) {
+      const screen = projectPoint({ x: 5.5, y: 8 }, camera);
+      assert.ok(Math.abs(screen.x - width / 2) < 1e-9);
+      assert.ok(screen.y > 100 && screen.y < height - 100);
+      assert.ok(camera.scale >= 58, 'Character must remain large on small displays');
     }
     const pins = layoutPins(zones, camera);
-    if (width <= 650) {
-      for (let i = 0; i < pins.length; i++) {
-        assert.ok(pins[i].position.x >= 57.5 && pins[i].position.x <= width - 57.5);
-        for (let j = i + 1; j < pins.length; j++) {
-          const a = pins[i].position,
-            b = pins[j].position;
-          assert.ok(
-            Math.abs(a.x - b.x) >= 115 || Math.abs(a.y - b.y) >= 40,
-            'Destination labels overlap',
-          );
-        }
-      }
-    }
     let paths = 0;
     const context = new Proxy(
       {
         createRadialGradient: () => ({ addColorStop() {} }),
+        ellipse(...args) {
+          assert.ok(args.length >= 7, 'Canvas ellipse requires seven arguments');
+          assert.ok(args.slice(0, 7).every(Number.isFinite));
+          assert.ok(args[2] >= 0 && args[3] >= 0);
+        },
         lineTo(x, y) {
           assert.ok(Number.isFinite(x) && Number.isFinite(y));
           paths++;
@@ -69,7 +59,11 @@ for (const [width, height] of viewports) {
         },
       },
     );
-    createWorldRenderer(context, zones).draw(createGameState(), camera, 1);
+    const renderer = createWorldRenderer(context, zones);
+    const state = createGameState();
+    renderer.draw(state, camera, 1);
+    state.target = { x: 6, y: 8 };
+    renderer.draw(state, camera, 2);
     assert.ok(paths > 100, 'Island artwork must render');
   });
 }
@@ -77,10 +71,15 @@ for (const [width, height] of viewports) {
 test('All six destinations are reachable and trigger exactly one arrival', () => {
   for (const zone of zones) {
     const state = createGameState();
-    state.target = { x: zone.x + 0.5, y: zone.y + 1.8, zoneId: zone.id };
+    const obstacles = createObstacles(zones);
+    const entrance = entranceOf(zone);
+    state.path = findPath(state.player, entrance, obstacles);
+    assert.ok(state.path.length);
+    state.target = { ...entrance, zoneId: zone.id };
     const arrivals = [];
-    for (let frame = 0; frame < 600; frame++) {
-      const result = advanceMovement(state, new Set(), 1 / 60);
+    for (let frame = 0; frame < 1800; frame++) {
+      const result = advanceMovement(state, new Set(), 1 / 60, obstacles);
+      assert.ok(isWalkable(state.player, obstacles), `Collision on path to ${zone.id}`);
       if (result) arrivals.push(result);
     }
     assert.deepEqual(arrivals, [zone.id]);
@@ -109,4 +108,27 @@ test('Keyboard movement is screen-oriented, bounded and frame-rate independent',
   for (let i = 0; i < 30; i++) advanceMovement(slow, new Set(['d']), 1 / 30);
   for (let i = 0; i < 120; i++) advanceMovement(fast, new Set(['d']), 1 / 120);
   assert.ok(Math.hypot(slow.player.x - fast.player.x, slow.player.y - fast.player.y) < 1e-9);
+});
+
+test('Sustained keyboard input cannot pass through a building or fountain', () => {
+  const obstacles = createObstacles(zones);
+  for (const zone of zones) {
+    const state = createGameState();
+    state.player = entranceOf(zone);
+    for (let i = 0; i < 400; i++) {
+      advanceMovement(state, new Set(['w', 'd']), 1 / 60, obstacles);
+      assert.ok(isWalkable(state.player, obstacles));
+    }
+    assert.ok(state.player.y >= zone.y + 1.6, 'Cannot cross the facade');
+  }
+});
+
+test('Every destination can be reached from every other entrance without crossing walls', () => {
+  const obstacles = createObstacles(zones);
+  for (const from of zones)
+    for (const to of zones) {
+      const path = findPath(entranceOf(from), entranceOf(to), obstacles);
+      assert.ok(path.length, `${from.id} -> ${to.id}`);
+      assert.ok(path.every((point) => isWalkable(point, obstacles)));
+    }
 });

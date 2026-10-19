@@ -12,26 +12,27 @@ export function unprojectPoint({ x, y }, camera) {
   return { x: (horizontal + vertical) / 2, y: (vertical - horizontal) / 2 };
 }
 
-export function createCamera(width, height) {
-  if (width > 1100 && height > 600) {
+export function createCamera(width, height, player = { x: 5.5, y: 8 }) {
+  const compact = width <= 1100 || height <= 600;
+  if (!compact)
     return {
       width,
       height,
+      compact,
       scale: Math.min(width * 0.035, height * 0.057),
       originX: width * 0.61,
       originY: height * 0.22,
     };
-  }
   const landscape = width > height;
-  const top = landscape ? 100 : Math.min(310, height * 0.37);
-  const bottom = height - (landscape ? 95 : 150);
-  const scale = Math.max(5, Math.min((width - 36) / 23, (bottom - top) / 11.27));
+  const scale = Math.max(58, Math.min(84, width * 0.17));
+  const focusY = landscape ? height * 0.53 : Math.max(280, height * 0.53);
   return {
     width,
     height,
+    compact,
     scale,
-    originX: width / 2 + scale / 2,
-    originY: top + Math.max(0, (bottom - top - scale * 11.27) / 2),
+    originX: width / 2 - (player.x - player.y) * scale,
+    originY: focusY - (player.x + player.y) * scale * 0.49,
   };
 }
 
@@ -42,28 +43,13 @@ export function miniMapPoint(player) {
   };
 }
 
-/** Avoid overlapping destination labels on compact screens. */
+/** Only the nearby entrance receives a label; the directory lists all destinations. */
 export function layoutPins(zones, camera) {
-  const pins = zones.map((zone) => ({
+  return zones.map((zone) => ({
     ...zone,
     position: projectPoint(
       { x: zone.x + 0.5, y: zone.y + 0.4, z: zone.id === 'erp' ? 2.65 : 2.2 },
       camera,
     ),
   }));
-  if (camera.width > 650) return pins;
-  const placed = [];
-  for (const pin of [...pins].sort((a, b) => a.position.y - b.position.y)) {
-    pin.position.x = Math.max(63, Math.min(camera.width - 63, pin.position.x));
-    for (const previous of placed) {
-      if (
-        Math.abs(pin.position.x - previous.position.x) < 119 &&
-        Math.abs(pin.position.y - previous.position.y) < 44
-      ) {
-        pin.position.y = previous.position.y + 44;
-      }
-    }
-    placed.push(pin);
-  }
-  return pins;
 }

@@ -5,11 +5,16 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.showcase.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.showcase.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.showcase.headingA') }} <span class="text-gold">{{ $t('industrial.showcase.headingB') }}</span>
+          {{ $t('industrial.showcase.headingA') }}
+          <span class="text-gold">{{ $t('industrial.showcase.headingB') }}</span>
         </h2>
-        <p class="mt-4 max-w-3xl text-base sm:text-lg text-foreground/40">{{ $t('industrial.showcase.headingC') }}</p>
+        <p class="mt-4 max-w-3xl text-base sm:text-lg text-foreground/40">
+          {{ $t('industrial.showcase.headingC') }}
+        </p>
       </div>
 
       <div class="space-y-8 sm:space-y-10">
@@ -21,7 +26,9 @@
           :style="{ transitionDelay: `${160 + index * 90}ms` }"
         >
           <div class="grid xl:grid-cols-[1.15fr,0.85fr] gap-0">
-            <div class="relative min-h-[220px] sm:min-h-[280px] md:min-h-[320px] border-b xl:border-b-0 xl:border-r border-border/10 bg-obsidian/50">
+            <div
+              class="relative min-h-[220px] sm:min-h-[280px] md:min-h-[320px] border-b xl:border-b-0 xl:border-r border-border/10 bg-obsidian/50"
+            >
               <img
                 :src="slideSrc(item)"
                 :alt="item.slides[activeSlide[item.key]].alt"
@@ -30,10 +37,18 @@
                 @error="onImageError(item.key, activeSlide[item.key])"
               />
 
-              <div class="absolute inset-x-0 top-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gradient-to-b from-obsidian/90 to-transparent">
+              <div
+                class="absolute inset-x-0 top-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 sm:p-4 bg-gradient-to-b from-obsidian/90 to-transparent"
+              >
                 <div class="min-w-0">
-                  <div class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] text-gold/70 uppercase truncate">{{ item.badge }}</div>
-                  <div class="mt-1 text-xs sm:text-sm text-foreground/55 line-clamp-2">{{ item.slides[activeSlide[item.key]].caption }}</div>
+                  <div
+                    class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] text-gold/70 uppercase truncate"
+                  >
+                    {{ item.badge }}
+                  </div>
+                  <div class="mt-1 text-xs sm:text-sm text-foreground/55 line-clamp-2">
+                    {{ item.slides[activeSlide[item.key]].caption }}
+                  </div>
                 </div>
 
                 <div class="flex items-center gap-2 flex-shrink-0 self-end sm:self-auto">
@@ -56,14 +71,20 @@
                 </div>
               </div>
 
-              <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent">
+              <div
+                class="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent"
+              >
                 <div class="flex items-center gap-2 mb-3">
                   <button
                     v-for="(slide, slideIndex) in item.slides"
                     :key="slide.src"
                     type="button"
                     class="h-1.5 rounded-full transition-all"
-                    :class="slideIndex === activeSlide[item.key] ? 'w-8 sm:w-10 bg-gold' : 'w-3 sm:w-4 bg-white/25 hover:bg-white/45'"
+                    :class="
+                      slideIndex === activeSlide[item.key]
+                        ? 'w-8 sm:w-10 bg-gold'
+                        : 'w-3 sm:w-4 bg-white/25 hover:bg-white/45'
+                    "
                     :aria-label="`${$t('industrial.showcase.goTo')} ${slideIndex + 1}`"
                     @click="setSlide(item.key, slideIndex)"
                   />
@@ -84,42 +105,89 @@
             <div class="p-5 sm:p-6 md:p-8">
               <div class="flex flex-wrap items-start justify-between gap-3 sm:gap-4">
                 <div class="min-w-0 flex-1">
-                  <h3 class="text-xl sm:text-2xl md:text-3xl font-inter font-bold tracking-tight">{{ item.title }}</h3>
-                  <p class="mt-1 font-mono text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.22em] text-foreground/40 uppercase">{{ item.category }}</p>
+                  <h3 class="text-xl sm:text-2xl md:text-3xl font-inter font-bold tracking-tight">
+                    {{ item.title }}
+                  </h3>
+                  <p
+                    class="mt-1 font-mono text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.22em] text-foreground/40 uppercase"
+                  >
+                    {{ item.category }}
+                  </p>
                 </div>
 
                 <div class="flex items-center gap-0.5 sm:gap-1 text-gold flex-shrink-0">
-                  <Star v-for="starIndex in 5" :key="starIndex" :size="14" class="sm:w-4 sm:h-4 fill-current" />
+                  <Star
+                    v-for="starIndex in 5"
+                    :key="starIndex"
+                    :size="14"
+                    class="sm:w-4 sm:h-4 fill-current"
+                  />
                 </div>
               </div>
 
-              <p class="mt-4 sm:mt-5 text-sm sm:text-base text-foreground/65 leading-relaxed">{{ item.summary }}</p>
+              <p class="mt-4 sm:mt-5 text-sm sm:text-base text-foreground/65 leading-relaxed">
+                {{ item.summary }}
+              </p>
 
               <div class="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4">
-                  <div class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase">{{ $t('industrial.showcase.problem') }}</div>
-                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">{{ item.problem }}</div>
+                <div
+                  class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4"
+                >
+                  <div
+                    class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase"
+                  >
+                    {{ $t('industrial.showcase.problem') }}
+                  </div>
+                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">
+                    {{ item.problem }}
+                  </div>
                 </div>
-                <div class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4">
-                  <div class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase">{{ $t('industrial.showcase.solution') }}</div>
-                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">{{ item.solution }}</div>
+                <div
+                  class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4"
+                >
+                  <div
+                    class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase"
+                  >
+                    {{ $t('industrial.showcase.solution') }}
+                  </div>
+                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">
+                    {{ item.solution }}
+                  </div>
                 </div>
-                <div class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4">
-                  <div class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase">{{ $t('industrial.showcase.result') }}</div>
-                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">{{ item.result }}</div>
+                <div
+                  class="rounded-xl sm:rounded-2xl border border-border/10 bg-card/35 p-3 sm:p-4"
+                >
+                  <div
+                    class="font-mono text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.22em] text-foreground/35 uppercase"
+                  >
+                    {{ $t('industrial.showcase.result') }}
+                  </div>
+                  <div class="mt-2 text-xs sm:text-sm text-foreground/70 leading-relaxed">
+                    {{ item.result }}
+                  </div>
                 </div>
               </div>
 
-              <div class="mt-5 sm:mt-6 rounded-xl sm:rounded-2xl border border-gold/15 bg-gold/5 p-4 sm:p-5">
-                <div class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.24em] text-gold/65 uppercase">{{ $t('industrial.showcase.clientFeedback') }}</div>
-                <p class="mt-3 text-sm sm:text-base md:text-lg leading-relaxed text-foreground/80">"{{ item.review }}"</p>
+              <div
+                class="mt-5 sm:mt-6 rounded-xl sm:rounded-2xl border border-gold/15 bg-gold/5 p-4 sm:p-5"
+              >
+                <div
+                  class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.24em] text-gold/65 uppercase"
+                >
+                  {{ $t('industrial.showcase.clientFeedback') }}
+                </div>
+                <p class="mt-3 text-sm sm:text-base md:text-lg leading-relaxed text-foreground/80">
+                  "{{ item.review }}"
+                </p>
                 <div class="mt-3 sm:mt-4 text-xs sm:text-sm text-foreground/45">
                   <span class="font-semibold text-foreground/70">{{ item.author }}</span>
                   <span> · {{ item.role }}</span>
                 </div>
               </div>
 
-              <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
+              <div
+                class="mt-5 sm:mt-6 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
+              >
                 <button
                   type="button"
                   class="inline-flex items-center justify-center gap-2 bg-gold px-4 sm:px-5 py-2.5 sm:py-3 font-mono text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.2em] text-obsidian uppercase hover:bg-gold/90 transition-colors"
@@ -128,7 +196,10 @@
                   {{ $t('industrial.showcase.cta') }}
                   <ArrowUpRight :size="15" />
                 </button>
-                <span class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground/35 text-center sm:text-left">{{ $t('industrial.showcase.ctaHint') }}</span>
+                <span
+                  class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground/35 text-center sm:text-left"
+                  >{{ $t('industrial.showcase.ctaHint') }}</span
+                >
               </div>
             </div>
           </div>
@@ -165,7 +236,11 @@ function slideSrc(item) {
   const idx = activeSlide[item.key];
   const slide = item.slides[idx];
   if (failedImages[`${item.key}-${idx}`]) {
-    return slide.fallback || FALLBACK_IMAGES[item.key]?.[idx % (FALLBACK_IMAGES[item.key]?.length || 1)] || '/showcase-operations-1.svg';
+    return (
+      slide.fallback ||
+      FALLBACK_IMAGES[item.key]?.[idx % (FALLBACK_IMAGES[item.key]?.length || 1)] ||
+      '/showcase-operations-1.svg'
+    );
   }
   return slide.src;
 }

@@ -2,7 +2,11 @@
 const emit = defineEmits(['press', 'release']);
 function press(event, key) {
   event.preventDefault();
-  event.currentTarget.setPointerCapture(event.pointerId);
+  try {
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  } catch {
+    /* Global release still clears the key. */
+  }
   emit('press', key);
 }
 </script>

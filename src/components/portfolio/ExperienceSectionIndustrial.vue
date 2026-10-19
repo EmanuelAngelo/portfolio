@@ -10,14 +10,19 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.experience.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.experience.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.experience.headingA') }} <span class="text-gold">{{ $t('industrial.experience.headingB') }}</span>
+          {{ $t('industrial.experience.headingA') }}
+          <span class="text-gold">{{ $t('industrial.experience.headingB') }}</span>
         </h2>
       </div>
 
       <div class="relative">
-        <div class="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-gold/40 via-border/10 to-transparent" />
+        <div
+          class="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-gold/40 via-border/10 to-transparent"
+        />
         <div class="space-y-8">
           <ExperienceNodeIndustrial
             v-for="(exp, i) in experiences"

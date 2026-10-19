@@ -11,7 +11,10 @@
       :title="$t('industrial.language.label')"
       :aria-expanded="isOpen"
     >
-      <span class="w-2 h-2 rounded-full" :class="isOpen ? 'bg-lime pulse-glow' : 'bg-foreground/20'" />
+      <span
+        class="w-2 h-2 rounded-full"
+        :class="isOpen ? 'bg-lime pulse-glow' : 'bg-foreground/20'"
+      />
       <span class="font-mono text-xs tracking-widest uppercase">{{ currentShort }}</span>
     </button>
 
@@ -28,7 +31,9 @@
         @click="selectLocale(opt.locale)"
         role="menuitem"
       >
-        <span class="font-mono text-xs tracking-widest uppercase text-foreground/70">{{ opt.short }}</span>
+        <span class="font-mono text-xs tracking-widest uppercase text-foreground/70">{{
+          opt.short
+        }}</span>
         <span class="font-mono text-xs tracking-wider text-foreground/40">{{ opt.label }}</span>
       </button>
     </div>
@@ -69,12 +74,12 @@ const options = computed(() => [
   { locale: 'es', short: 'ES', label: t('industrial.language.es') },
 ]);
 
-const currentOption = computed(() =>
-  options.value.find((o) => o.locale === currentLocale.value) || options.value[0]
+const currentOption = computed(
+  () => options.value.find((o) => o.locale === currentLocale.value) || options.value[0],
 );
 
 const otherOptions = computed(() =>
-  options.value.filter((o) => o.locale !== currentOption.value.locale)
+  options.value.filter((o) => o.locale !== currentOption.value.locale),
 );
 
 const currentShort = computed(() => currentOption.value.short);

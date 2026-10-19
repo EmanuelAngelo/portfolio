@@ -5,9 +5,12 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.impact.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.impact.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.impact.headingA') }} <span class="text-gold">{{ $t('industrial.impact.headingB') }}</span>
+          {{ $t('industrial.impact.headingA') }}
+          <span class="text-gold">{{ $t('industrial.impact.headingB') }}</span>
         </h2>
       </div>
 
@@ -19,16 +22,28 @@
           :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'"
           :style="{ transitionDuration: '600ms', transitionDelay: `${160 + i * 110}ms` }"
         >
-          <div class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div
+            class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+          />
           <component :is="item.icon" :size="20" class="text-gold/60 mb-4" />
 
-          <div class="text-3xl sm:text-4xl md:text-5xl font-inter font-black text-gold text-gold-glow mb-2">
+          <div
+            class="text-3xl sm:text-4xl md:text-5xl font-inter font-black text-gold text-gold-glow mb-2"
+          >
             {{ item.metric }}
           </div>
-          <h3 class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground uppercase mb-2 sm:mb-3">{{ item.label }}</h3>
-          <p class="text-xs sm:text-sm text-foreground/40 leading-relaxed">{{ item.description }}</p>
+          <h3
+            class="font-mono text-[10px] sm:text-xs tracking-wider text-foreground uppercase mb-2 sm:mb-3"
+          >
+            {{ item.label }}
+          </h3>
+          <p class="text-xs sm:text-sm text-foreground/40 leading-relaxed">
+            {{ item.description }}
+          </p>
           <div class="mt-3 sm:mt-4 pt-3 border-t border-border/10">
-            <span class="font-mono text-[10px] sm:text-xs text-gold/40 tracking-wider">{{ item.company }}</span>
+            <span class="font-mono text-[10px] sm:text-xs text-gold/40 tracking-wider">{{
+              item.company
+            }}</span>
           </div>
         </div>
       </div>
@@ -38,11 +53,15 @@
         :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
         style="transition-delay: 720ms"
       >
-        <h3 class="font-mono text-xs tracking-widest text-gold/60 uppercase mb-6 sm:mb-8">{{ $t('industrial.impact.sectors') }}</h3>
+        <h3 class="font-mono text-xs tracking-widest text-gold/60 uppercase mb-6 sm:mb-8">
+          {{ $t('industrial.impact.sectors') }}
+        </h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           <div v-for="s in sectors" :key="s.name" class="flex items-center gap-2 sm:gap-3">
             <span class="text-sm flex-shrink-0" :style="{ color: s.color }">▸</span>
-            <span class="font-mono text-xs sm:text-sm tracking-wider" :style="{ color: s.color }">{{ s.name }}</span>
+            <span class="font-mono text-xs sm:text-sm tracking-wider" :style="{ color: s.color }">{{
+              s.name
+            }}</span>
           </div>
         </div>
       </div>

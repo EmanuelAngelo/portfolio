@@ -1,3 +1,4 @@
+import { createObstacles, findPath, entranceOf } from '../game/collision.js';
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import { createCamera, miniMapPoint, layoutPins, unprojectPoint } from '../game/geometry.js';
 import {
@@ -13,13 +14,21 @@ import { createWorldRenderer } from '../game/renderer.js';
 export function useWorld(canvas, zones, paused, onArrive) {
   const state = createGameState();
   const keys = new Set();
+  const obstacles = createObstacles(zones);
   const camera = shallowRef(createCamera(1440, 900));
   const player = shallowRef({ ...state.player });
   const nearbyZone = shallowRef(null);
   const exploring = ref(false);
   const available = ref(true);
   const miniPlayer = computed(() => miniMapPoint(player.value));
-  const pins = computed(() => layoutPins(zones, camera.value));
+  const pins = computed(() =>
+    layoutPins(
+      zones.filter((zone) => zone.id === nearbyZone.value?.id),
+      camera.value,
+    ),
+  );
+  const compact = computed(() => camera.value.compact);
+  const walking = ref(false);
 
   let renderer;
   let frameId;
@@ -41,7 +50,9 @@ export function useWorld(canvas, zones, paused, onArrive) {
   }
   function navigate(zone) {
     keys.clear();
-    state.target = { x: zone.x + 0.5, y: zone.y + 1.8, zoneId: zone.id };
+    const destination = entranceOf(zone);
+    state.path = findPath(state.player, destination, obstacles);
+    state.target = state.path.length ? { ...state.path.at(-1), zoneId: zone.id } : null;
     exploring.value = true;
     focus();
   }
@@ -53,7 +64,8 @@ export function useWorld(canvas, zones, paused, onArrive) {
       camera.value,
     );
     keys.clear();
-    state.target = clampDestination(point);
+    state.path = findPath(state.player, clampDestination(point), obstacles);
+    state.target = state.path.length ? { ...state.path.at(-1) } : null;
     exploring.value = true;
     focus();
   }
@@ -61,6 +73,7 @@ export function useWorld(canvas, zones, paused, onArrive) {
     if (paused.value) return;
     keys.add(key);
     state.target = null;
+    state.path = [];
     exploring.value = true;
   }
   function releaseDirection(key) {
@@ -76,7 +89,7 @@ export function useWorld(canvas, zones, paused, onArrive) {
   function resize() {
     const width = window.innerWidth;
     const height = window.visualViewport?.height ?? window.innerHeight;
-    camera.value = createCamera(width, height);
+    camera.value = createCamera(width, height, state.player);
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
     canvas.value.width = Math.round(width * ratio);
     canvas.value.height = Math.round(height * ratio);
@@ -87,17 +100,29 @@ export function useWorld(canvas, zones, paused, onArrive) {
     const elapsed = previousTime ? (time - previousTime) / 1000 : 0;
     previousTime = time;
     if (!paused.value && !document.hidden) {
-      const arrivedId = advanceMovement(state, keys, elapsed);
+      advanceMovement(state, keys, elapsed, obstacles);
+      walking.value = state.moving;
       player.value = { ...state.player };
       nearbyZone.value = findNearbyZone(state.player, zones);
-      if (arrivedId) onArrive(zones.find((zone) => zone.id === arrivedId));
+      if (camera.value.compact) {
+        const desired = createCamera(camera.value.width, camera.value.height, state.player);
+        const blend = reducedMotion?.matches ? 1 : 1 - Math.exp(-8 * Math.min(elapsed, 0.04));
+        camera.value = {
+          ...desired,
+          originX: camera.value.originX + (desired.originX - camera.value.originX) * blend,
+          originY: camera.value.originY + (desired.originY - camera.value.originY) * blend,
+        };
+      }
     }
     renderer?.draw(state, camera.value, reducedMotion?.matches ? 0 : time / 1000);
     frameId = requestAnimationFrame(frame);
   }
   watch(paused, (value) => {
     stop();
-    if (value) state.target = null;
+    if (value) {
+      state.target = null;
+      state.path = [];
+    }
   });
   onMounted(() => {
     const context = canvas.value?.getContext('2d');
@@ -111,10 +136,15 @@ export function useWorld(canvas, zones, paused, onArrive) {
     listen(window, 'resize', resize);
     if (window.visualViewport) listen(window.visualViewport, 'resize', resize);
     listen(window, 'blur', stop);
+    listen(window, 'pointerup', () => keys.clear());
+    listen(window, 'pointercancel', () => keys.clear());
     listen(document, 'visibilitychange', stop);
     listen(window, 'keydown', (event) => {
       if (paused.value || event.ctrlKey || event.metaKey || event.altKey) return;
-      const key = event.key.toLowerCase();
+      const target = event.target;
+      if (target?.matches?.('input, textarea, select, [contenteditable=true]')) return;
+      const key =
+        { KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd' }[event.code] ?? event.key.toLowerCase();
       if (MOVEMENT_KEYS.has(key)) {
         event.preventDefault();
         pressDirection(key);
@@ -124,7 +154,11 @@ export function useWorld(canvas, zones, paused, onArrive) {
         onArrive(nearbyZone.value);
       }
     });
-    listen(window, 'keyup', (event) => releaseDirection(event.key.toLowerCase()));
+    listen(window, 'keyup', (event) =>
+      releaseDirection(
+        { KeyW: 'w', KeyA: 'a', KeyS: 's', KeyD: 'd' }[event.code] ?? event.key.toLowerCase(),
+      ),
+    );
     frameId = requestAnimationFrame(frame);
   });
   onBeforeUnmount(() => {
@@ -134,6 +168,8 @@ export function useWorld(canvas, zones, paused, onArrive) {
   });
   return {
     pins,
+    compact,
+    walking,
     miniPlayer,
     nearbyZone,
     exploring,

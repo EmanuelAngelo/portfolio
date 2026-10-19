@@ -5,11 +5,16 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.contact.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.contact.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.contact.headingA') }} <span class="text-gold">{{ $t('industrial.contact.headingB') }}</span>
+          {{ $t('industrial.contact.headingA') }}
+          <span class="text-gold">{{ $t('industrial.contact.headingB') }}</span>
         </h2>
-        <p class="mt-4 text-base sm:text-lg text-foreground/40">{{ $t('industrial.contact.headingC') }}</p>
+        <p class="mt-4 text-base sm:text-lg text-foreground/40">
+          {{ $t('industrial.contact.headingC') }}
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
@@ -20,7 +25,10 @@
           style="transition-delay: 160ms"
         >
           <div>
-            <label class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block">{{ $t('industrial.contact.name') }}</label>
+            <label
+              class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block"
+              >{{ $t('industrial.contact.name') }}</label
+            >
             <input
               v-model.trim="form.name"
               type="text"
@@ -31,7 +39,10 @@
           </div>
 
           <div>
-            <label class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block">{{ $t('industrial.contact.email') }}</label>
+            <label
+              class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block"
+              >{{ $t('industrial.contact.email') }}</label
+            >
             <input
               v-model.trim="form.email"
               type="email"
@@ -42,7 +53,10 @@
           </div>
 
           <div>
-            <label class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block">{{ $t('industrial.contact.message') }}</label>
+            <label
+              class="font-mono text-xs tracking-widest text-foreground/40 uppercase mb-2 block"
+              >{{ $t('industrial.contact.message') }}</label
+            >
             <textarea
               v-model.trim="form.message"
               required
@@ -67,7 +81,9 @@
           style="transition-delay: 260ms"
         >
           <div class="industrial-card p-6 border border-border/10 bg-card/10">
-            <div class="font-mono text-xs text-foreground/30 mb-4 tracking-wider">{{ $t('industrial.contact.connect') }}</div>
+            <div class="font-mono text-xs text-foreground/30 mb-4 tracking-wider">
+              {{ $t('industrial.contact.connect') }}
+            </div>
             <div class="space-y-4">
               <a
                 :href="linkedinUrl"
@@ -75,7 +91,9 @@
                 rel="noopener noreferrer"
                 class="flex items-center gap-3 text-foreground/60 hover:text-gold transition-colors group"
               >
-                <div class="w-10 h-10 flex items-center justify-center border border-border/10 group-hover:border-gold/30 transition-colors">
+                <div
+                  class="w-10 h-10 flex items-center justify-center border border-border/10 group-hover:border-gold/30 transition-colors"
+                >
                   <Linkedin :size="16" />
                 </div>
                 <div>
@@ -90,7 +108,9 @@
                 rel="noopener noreferrer"
                 class="flex items-center gap-3 text-foreground/60 hover:text-gold transition-colors group"
               >
-                <div class="w-10 h-10 flex items-center justify-center border border-border/10 group-hover:border-gold/30 transition-colors">
+                <div
+                  class="w-10 h-10 flex items-center justify-center border border-border/10 group-hover:border-gold/30 transition-colors"
+                >
                   <MessageCircleMore :size="16" />
                 </div>
                 <div>
@@ -104,7 +124,9 @@
                   <MapPin :size="16" />
                 </div>
                 <div>
-                  <div class="font-mono text-xs tracking-wider">{{ $t('industrial.contact.location') }}</div>
+                  <div class="font-mono text-xs tracking-wider">
+                    {{ $t('industrial.contact.location') }}
+                  </div>
                   <div class="font-mono text-xs text-foreground/30">São Luís, MA - Brasil</div>
                 </div>
               </div>
@@ -114,10 +136,14 @@
                   <Mail :size="16" />
                 </div>
                 <div>
-                  <div class="font-mono text-xs tracking-wider">{{ $t('industrial.contact.status') }}</div>
+                  <div class="font-mono text-xs tracking-wider">
+                    {{ $t('industrial.contact.status') }}
+                  </div>
                   <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-lime pulse-glow" />
-                    <span class="font-mono text-xs text-lime">{{ $t('industrial.contact.open') }}</span>
+                    <span class="font-mono text-xs text-lime">{{
+                      $t('industrial.contact.open')
+                    }}</span>
                   </div>
                 </div>
               </div>
@@ -136,7 +162,10 @@
               <div class="text-lime">System check identified no issues.</div>
               <div><span class="text-gold">$</span> npm run build</div>
               <div class="text-lime">Build successful. Ready to deploy.</div>
-              <div><span class="text-gold">$</span> <span class="text-foreground/60 animate-pulse">_</span></div>
+              <div>
+                <span class="text-gold">$</span>
+                <span class="text-foreground/60 animate-pulse">_</span>
+              </div>
             </div>
           </div>
         </div>

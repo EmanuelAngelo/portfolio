@@ -5,9 +5,12 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.about.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.about.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.about.headingA') }} <span class="text-gold">{{ $t('industrial.about.headingB') }}</span>
+          {{ $t('industrial.about.headingA') }}
+          <span class="text-gold">{{ $t('industrial.about.headingB') }}</span>
         </h2>
       </div>
 
@@ -48,11 +51,15 @@
             :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'"
             :style="{ transitionDuration: '700ms', transitionDelay: `${180 + i * 90}ms` }"
           >
-            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center border border-gold/20 bg-gold/5 text-gold group-hover:bg-gold/10 transition-colors">
+            <div
+              class="flex-shrink-0 w-10 h-10 flex items-center justify-center border border-gold/20 bg-gold/5 text-gold group-hover:bg-gold/10 transition-colors"
+            >
               <component :is="comp.icon" :size="18" />
             </div>
             <div>
-              <h3 class="font-mono text-sm tracking-wider text-foreground mb-1">{{ $t(comp.titleKey) }}</h3>
+              <h3 class="font-mono text-sm tracking-wider text-foreground mb-1">
+                {{ $t(comp.titleKey) }}
+              </h3>
               <p class="text-sm text-foreground/50 leading-relaxed">{{ $t(comp.descKey) }}</p>
             </div>
           </div>

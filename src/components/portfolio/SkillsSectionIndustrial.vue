@@ -5,9 +5,12 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.skills.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.skills.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.skills.headingA') }} <span class="text-gold">{{ $t('industrial.skills.headingB') }}</span>
+          {{ $t('industrial.skills.headingA') }}
+          <span class="text-gold">{{ $t('industrial.skills.headingB') }}</span>
         </h2>
       </div>
 
@@ -19,12 +22,16 @@
           :class="inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'"
           :style="{ transitionDuration: '600ms', transitionDelay: `${160 + ci * 110}ms` }"
         >
-          <h3 class="font-mono text-sm tracking-widest text-gold mb-6 uppercase">{{ $t(cat.titleKey) }}</h3>
+          <h3 class="font-mono text-sm tracking-widest text-gold mb-6 uppercase">
+            {{ $t(cat.titleKey) }}
+          </h3>
 
           <div class="space-y-4">
             <div v-for="(skill, si) in cat.skills" :key="skill.name">
               <div class="flex justify-between mb-1.5">
-                <span class="font-mono text-xs tracking-wider text-foreground/70">{{ skill.name }}</span>
+                <span class="font-mono text-xs tracking-wider text-foreground/70">{{
+                  skill.name
+                }}</span>
                 <span class="font-mono text-xs text-foreground/30">{{ skill.level }}%</span>
               </div>
 

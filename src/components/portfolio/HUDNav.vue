@@ -4,7 +4,9 @@
     :class="scrolled ? 'bg-obsidian/80 backdrop-blur-xl border-b border-gold/10' : 'bg-transparent'"
     style="padding-top: env(safe-area-inset-top)"
   >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4"
+    >
       <button
         type="button"
         @click="scrollTo('hero')"
@@ -76,7 +78,10 @@
     <div
       v-if="mobileOpen"
       class="fixed inset-0 z-40 bg-obsidian/95 backdrop-blur-xl overflow-y-auto overscroll-contain"
-      style="padding-top: calc(4.5rem + env(safe-area-inset-top)); padding-bottom: env(safe-area-inset-bottom)"
+      style="
+        padding-top: calc(4.5rem + env(safe-area-inset-top));
+        padding-bottom: env(safe-area-inset-bottom);
+      "
       @click.self="mobileOpen = false"
     >
       <nav class="flex flex-col gap-1 px-4 sm:px-6 max-w-lg mx-auto">

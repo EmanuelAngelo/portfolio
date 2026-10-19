@@ -40,7 +40,7 @@ export function useInViewOnce(options = {}) {
             observer?.disconnect();
           }
         },
-        { root: null, rootMargin, threshold }
+        { root: null, rootMargin, threshold },
       );
 
       if (target.value) observer.observe(target.value);

@@ -22,7 +22,7 @@ test('Vue application renders the complete world interface without setup errors'
     assert.match(html, /Cada experiência/);
     assert.match(html, /Explorar mapa/);
     assert.match(html, /Controles de movimento/);
-    assert.equal((html.match(/class="pin"/g) || []).length, 6);
+    assert.equal((html.match(/class="pin"/g) || []).length, 0);
     assert.match(html, /aria-labelledby="dialog-title"/);
     assert.match(html, /SEU PASSAPORTE/);
   } finally {

@@ -26,14 +26,11 @@ export function useTheme() {
     applyThemeClass(theme.value);
   }
 
-  watch(
-    theme,
-    (t) => {
-      if (typeof window === 'undefined') return;
-      localStorage.setItem(STORAGE_KEY, t);
-      applyThemeClass(t);
-    }
-  );
+  watch(theme, (t) => {
+    if (typeof window === 'undefined') return;
+    localStorage.setItem(STORAGE_KEY, t);
+    applyThemeClass(t);
+  });
 
   const isLight = computed(() => theme.value === 'light');
   const toggleTheme = () => {

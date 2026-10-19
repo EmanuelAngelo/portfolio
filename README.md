@@ -47,17 +47,17 @@ Não há injeção de conteúdo por `innerHTML`: os painéis utilizam templates 
 
 - **WASD ou setas:** movimentar o personagem na direção da tela.
 - **Clique/toque no chão:** caminhar até o ponto escolhido.
-- **Clique/toque no nome de um distrito:** caminhar até a entrada e abrir o conteúdo.
+- **Explorar mapa:** escolher um distrito e caminhar até sua entrada. O conteúdo só abre por E, Entrar ou pelo rótulo da entrada próxima.
 - **E ou botão Explorar:** abrir a experiência próxima.
 - **Esc ou ×:** fechar a janela.
-- **Explorar mapa:** acessar todas as experiências diretamente, além de perfil e contato.
+- **Explorar mapa:** selecionar destinos, além de acessar perfil e contato.
 - **Marca no cabeçalho:** reposicionar o personagem e voltar à apresentação.
 
-O movimento reproduz o protótipo: o personagem caminha livremente pela ilha, sem colisões físicas com os edifícios.
+O personagem respeita os limites da ilha, os prédios e a fonte central. Destinos por toque usam busca de caminho para contornar obstáculos e parar diante da entrada. Nenhum painel abre automaticamente ao chegar: pressione E ou toque em Entrar.
 
 ## Celular e tablet
 
-O desktop mantém a composição do modelo aprovado. Em telas compactas, a câmera enquadra toda a ilha e reorganiza os rótulos para reduzir sobreposição. Controles direcionais aparecem em celulares, tablets e dispositivos com ponteiro de toque. Há regras específicas para orientação horizontal, áreas seguras e janelas com rolagem.
+O desktop mantém a composição do modelo aprovado. Em telas compactas, o cenário mantém uma escala maior e a câmera acompanha o personagem suavemente. A ilha não é reduzida para caber inteira. A apresentação permanece visível e apenas a entrada próxima exibe um rótulo. Controles direcionais aparecem em celulares, tablets e dispositivos com ponteiro de toque. Há regras específicas para orientação horizontal, áreas seguras e janelas com rolagem.
 
 O menu de distritos oferece acesso alternativo ao conteúdo sem depender do Canvas ou do controle do personagem. A preferência de movimento reduzido desativa as animações decorativas. O passaporte continua funcionando em memória caso o navegador bloqueie o armazenamento local.
 
@@ -80,7 +80,7 @@ npm run check         # Formatação + testes + build de produção
 
 O projeto inclui Prettier e EditorConfig. O lockfile foi atualizado para as dependências utilizadas; Tailwind, ícones Lucide e vue-i18n foram removidos por não serem necessários à nova composição.
 
-A suíte verifica projeção e enquadramento em nove dimensões, posicionamento de rótulos no celular, desenho do cenário com contexto de teste, deslocamento, chegada aos seis distritos, persistência, falhas de API e renderização dos componentes via SSR.
+A suíte verifica projeção e enquadramento em nove dimensões, escala e enquadramento do personagem no celular, desenho do cenário com contexto de teste, deslocamento, chegada aos seis distritos, persistência, falhas de API e renderização dos componentes via SSR.
 
 **Limite da verificação:** os testes de geometria e SSR não substituem testes visuais e de toque em navegadores reais. Não houve inspeção visual em navegador neste ambiente. Antes de substituir o site público, confira o build em um celular e em um tablet, especialmente rotação de tela, teclado virtual e zoom.
 
@@ -89,3 +89,17 @@ A suíte verifica projeção e enquadramento em nove dimensões, posicionamento 
 Edite `src/data/zones.js` para atualizar experiências e projetos e `src/data/profile.js` para contato, currículo e habilidades. As cores e o layout ficam em `src/styles/`. Para mudar o desenho dos edifícios, edite `src/game/renderer.js`.
 
 O ZIP contém código-fonte e recursos, sem `node_modules`, histórico Git ou credenciais. Instale as dependências com `npm ci`.
+
+## Correção da experiência de jogo — 19/10/2026
+
+- Personagem nasce em uma passagem livre, com anel de identificação e animação de braços e pernas.
+- Câmera aproximada no mobile e tablet, com acompanhamento suave.
+- Cabeçalho e apresentação não desaparecem ao tocar no cenário.
+- Rótulos aparecem apenas perto das entradas; toque no mapa geral para selecionar um destino.
+- Colisões com casas e fonte; o caminho por clique contorna os obstáculos.
+- WASD, setas e direcional por toque compartilham o mesmo motor de movimento.
+- Soltar o toque, perder o foco ou abrir uma janela interrompe o movimento.
+- A captura de ponteiro tem tratamento para navegadores que não a suportam.
+- Teste de integração com DOM simulado verifica movimento real do estado da interface, chegada sem abrir painel, tecla E e retomada após fechar.
+
+A validação automatizada usa DOM e Canvas simulados, além do build de produção. Ela não representa uma inspeção visual nem um teste em aparelho físico.

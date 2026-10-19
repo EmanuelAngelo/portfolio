@@ -5,11 +5,16 @@
         class="mb-12 sm:mb-16 md:mb-20 transition-all duration-700"
         :class="inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'"
       >
-        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.projects.label') }}</span>
+        <span class="font-mono text-xs tracking-widest text-gold/60 uppercase">{{
+          $t('industrial.projects.label')
+        }}</span>
         <h2 class="mt-4 text-3xl sm:text-4xl md:text-6xl font-inter font-black tracking-tight">
-          {{ $t('industrial.projects.headingA') }} <span class="text-gold">{{ $t('industrial.projects.headingB') }}</span>
+          {{ $t('industrial.projects.headingA') }}
+          <span class="text-gold">{{ $t('industrial.projects.headingB') }}</span>
         </h2>
-        <p class="mt-4 text-base sm:text-lg text-foreground/40">{{ $t('industrial.projects.headingC') }}</p>
+        <p class="mt-4 text-base sm:text-lg text-foreground/40">
+          {{ $t('industrial.projects.headingC') }}
+        </p>
       </div>
 
       <div
@@ -20,17 +25,26 @@
         <div v-if="isLoading" class="industrial-card border border-border/10 bg-card/10 p-6">
           <div class="flex items-center gap-3 text-foreground/50">
             <Github :size="18" class="text-gold/70" />
-            <span class="font-mono text-xs tracking-widest">{{ $t('industrial.projects.loading') }}</span>
+            <span class="font-mono text-xs tracking-widest">{{
+              $t('industrial.projects.loading')
+            }}</span>
           </div>
         </div>
 
         <div v-else-if="error" class="industrial-card border border-border/10 bg-card/10 p-6">
-          <div class="font-mono text-xs tracking-widest text-gold/70 mb-2">{{ $t('industrial.projects.error') }}</div>
+          <div class="font-mono text-xs tracking-widest text-gold/70 mb-2">
+            {{ $t('industrial.projects.error') }}
+          </div>
           <div class="text-sm text-foreground/50 leading-relaxed">{{ error }}</div>
         </div>
 
-        <div v-else-if="repos.length === 0" class="industrial-card border border-border/10 bg-card/10 p-6">
-          <div class="font-mono text-xs tracking-widest text-foreground/50">{{ $t('industrial.projects.empty') }}</div>
+        <div
+          v-else-if="repos.length === 0"
+          class="industrial-card border border-border/10 bg-card/10 p-6"
+        >
+          <div class="font-mono text-xs tracking-widest text-foreground/50">
+            {{ $t('industrial.projects.empty') }}
+          </div>
         </div>
 
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -42,13 +56,20 @@
             rel="noopener noreferrer"
             class="industrial-card group relative p-5 sm:p-6 border border-border/10 bg-card/20 hover:border-gold/30 hover:bg-card/40 transition-all overflow-hidden"
           >
-            <div class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div
+              class="absolute -top-12 -right-12 w-24 h-24 bg-gold/5 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+            />
 
             <div class="flex items-start justify-between gap-4">
-              <h3 class="font-inter font-semibold text-foreground text-lg tracking-tight min-w-0 truncate">
+              <h3
+                class="font-inter font-semibold text-foreground text-lg tracking-tight min-w-0 truncate"
+              >
                 {{ repo.name }}
               </h3>
-              <ExternalLink :size="16" class="flex-shrink-0 text-foreground/30 group-hover:text-gold transition-colors" />
+              <ExternalLink
+                :size="16"
+                class="flex-shrink-0 text-foreground/30 group-hover:text-gold transition-colors"
+              />
             </div>
 
             <p class="mt-2 text-sm text-foreground/40 leading-relaxed line-clamp-3">
@@ -71,11 +92,17 @@
               </span>
             </div>
 
-            <div class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-border/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <div
+              class="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-border/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2"
+            >
               <span class="font-mono text-[10px] sm:text-xs text-foreground/30 tracking-wider">
-                {{ $t('industrial.projects.updated') }}: {{ formatDate(repo.pushed_at || repo.updated_at) }}
+                {{ $t('industrial.projects.updated') }}:
+                {{ formatDate(repo.pushed_at || repo.updated_at) }}
               </span>
-              <span class="font-mono text-[10px] sm:text-xs tracking-widest text-gold/60 uppercase">{{ $t('industrial.projects.viewRepo') }}</span>
+              <span
+                class="font-mono text-[10px] sm:text-xs tracking-widest text-gold/60 uppercase"
+                >{{ $t('industrial.projects.viewRepo') }}</span
+              >
             </div>
           </a>
         </div>
@@ -126,7 +153,7 @@ async function loadRepos() {
     try {
       const pinnedRes = await fetch(
         `/.netlify/functions/pinned-repos?username=${encodeURIComponent(username)}&t=${Date.now()}`,
-        { cache: 'no-store' }
+        { cache: 'no-store' },
       );
       if (pinnedRes.ok) pinnedData = await pinnedRes.json();
     } catch {
@@ -140,9 +167,12 @@ async function loadRepos() {
     }
 
     // 2) Fallback: latest updated repos (works everywhere)
-    const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=50&sort=updated`, {
-      headers: { Accept: 'application/vnd.github+json' },
-    });
+    const res = await fetch(
+      `https://api.github.com/users/${username}/repos?per_page=50&sort=updated`,
+      {
+        headers: { Accept: 'application/vnd.github+json' },
+      },
+    );
 
     if (!res.ok) throw new Error(`GitHub API error (${res.status})`);
 

@@ -1,181 +1,264 @@
-@media (max-width: 1100px) {
-  .intro {
-    top: 112px;
-  }
-  h1 {
-    font-size: 34px;
-  }
-  .worldCaption,
-  .mission,
-  .map,
-  .location {
-    display: none;
-  }
-  .touchpad {
-    position: fixed;
-    bottom: calc(65px + env(safe-area-inset-bottom));
-    left: 22px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    z-index: 4;
-  }
-  .touchpad div {
-    display: flex;
-    gap: 5px;
-  }
-  .touchpad button {
-    width: 44px;
-    height: 44px;
-    border: 1px solid #698080;
-    background: #1a313bdd;
-    border-radius: 7px;
-    touch-action: none;
-    user-select: none;
-  }
-  .interact {
-    bottom: calc(85px + env(safe-area-inset-bottom));
-    left: auto;
-    right: 22px;
-    transform: none;
-    max-width: calc(100% - 195px);
-  }
-  .interact button {
-    min-height: 44px;
-    font-size: 11px;
-  }
-  .controls {
-    display: none;
-  }
-  footer {
-    height: calc(49px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .footerRight > span {
-    display: none;
-  }
-  .footerRight button {
-    width: 35px;
-    height: 35px;
-  }
-  .mobile-passport {
-    display: block;
-    font-size: 10px;
-    color: #b9d7c9;
-    min-height: 44px;
-  }
-  .pin {
-    min-height: 40px;
-  }
-  .pin small {
-    display: none;
-  }
-  .pin b {
-    font-size: 9px;
-  }
-  .intro.exploring {
-    opacity: 0;
-    pointer-events: none;
-  }
-  .intro.exploring button {
-    pointer-events: none;
-  }
+.game-status {
+  display: none;
 }
-@media (max-width: 650px) {
-  .intro {
-    top: 96px;
+.interact small {
+  display: block;
+  font-size: 9px;
+  margin-top: 4px;
+}
+@media (max-width: 1100px), (max-height: 600px) {
+  header {
+    height: calc(66px + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 18px 0;
+    background: #101b22ed;
   }
-  h1 {
-    font-size: 30px;
+  .brand {
+    gap: 10px;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .brand small {
+    font-size: 6px;
+  }
+  .logo {
+    font-size: 32px;
   }
   nav {
-    gap: 7px;
+    gap: 8px;
+  }
+  nav button {
+    min-height: 44px;
+    font-size: 11px;
   }
   nav .profile-button,
   nav .contact {
     display: none;
   }
-  nav button {
-    min-height: 44px;
-    padding: 5px;
+  .intro,
+  .intro.exploring {
+    top: calc(83px + env(safe-area-inset-top));
+    left: 20px;
+    right: 20px;
+    opacity: 1;
+    pointer-events: none;
   }
-  .pin {
-    min-height: 34px;
-    padding: 6px;
-    gap: 4px;
+  .intro .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.6px;
   }
-  .pin b {
-    max-width: 86px;
-    white-space: normal;
-    font-size: 8px;
+  .intro h1 {
+    font-size: 25px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 12px 0 9px;
   }
-  .pin-arrow {
+  .intro h1 br {
     display: none;
   }
+  .intro p {
+    max-width: 300px;
+    font-size: 10px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .intro .primary {
+    display: none;
+  }
+  .worldCaption,
+  .mission,
+  .map,
+  .location,
+  .controls {
+    display: none;
+  }
+  .game-status {
+    display: flex;
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: calc(173px + env(safe-area-inset-bottom));
+    gap: 9px;
+    align-items: center;
+    pointer-events: none;
+    font-size: 11px;
+    color: #d6e7de;
+    text-shadow: 0 1px 5px #061319;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a4e7bd;
+    box-shadow: 0 0 9px #96e6bb;
+  }
+  .game-status small {
+    display: block;
+    font-size: 9px;
+    color: #abc2bd;
+    margin-top: 4px;
+  }
+  .touchpad {
+    display: flex;
+    position: fixed;
+    bottom: calc(61px + env(safe-area-inset-bottom));
+    left: 20px;
+    z-index: 4;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 22px;
+    background: #101f27bc;
+  }
+  .touchpad div {
+    display: flex;
+    gap: 4px;
+  }
+  .touchpad button {
+    width: 45px;
+    height: 45px;
+    background: #233e46;
+    border: 1px solid #678e8b;
+    border-radius: 12px;
+    font-size: 20px;
+    color: #e0eee4;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .touchpad button:active {
+    background: #b1ddc6;
+    color: #17302e;
+    transform: translateY(1px);
+  }
   .interact {
-    right: 12px;
-    max-width: calc(100% - 180px);
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    left: auto;
+    right: 20px;
+    transform: none;
+    width: min(150px, calc(100% - 193px));
   }
   .interact button {
-    font-size: 10px;
-    padding: 8px 10px;
+    width: 100%;
+    min-height: 68px;
+    padding: 12px 8px;
+    background: #f3b787;
+    border: 1px solid #f5c69c;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 13px;
   }
   .interact kbd {
     display: none;
   }
+  .interact small {
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  footer {
+    height: calc(48px + env(safe-area-inset-bottom));
+    left: 0;
+    right: 0;
+    padding: 0 20px env(safe-area-inset-bottom);
+    background: #101b22ed;
+  }
+  .footerRight > span {
+    display: none;
+  }
+  .footerRight button {
+    width: 34px;
+    height: 34px;
+  }
+  .mobile-passport {
+    display: block;
+    min-height: 44px;
+    color: #c2dfce;
+    font-size: 11px;
+  }
+  .pin {
+    padding: 10px 12px;
+    max-width: 200px;
+    min-height: 42px;
+  }
+  .pin b {
+    font-size: 10px;
+  }
+  .pin small {
+    display: none;
+  }
   dialog {
-    width: calc(100vw - 24px);
+    width: min(620px, calc(100vw - 24px));
     max-height: calc(100dvh - 32px);
-    padding: 38px 22px 24px;
-    border-radius: 12px;
+    padding: 42px 24px 24px;
+    border-radius: 18px;
   }
   .panelTitle {
-    font-size: 27px;
+    font-size: 28px;
+  }
+  .zoneList {
+    grid-template-columns: 1fr;
   }
   .zoneList button {
     min-height: 65px;
   }
-}
-@media (max-width: 1100px) and (orientation: landscape) {
-  header {
-    height: 72px;
+  #toast {
+    top: 72px;
+    width: calc(100% - 30px);
+    text-align: center;
   }
-  .intro {
-    top: 92px;
-    left: 3%;
-    max-width: 190px;
+}
+@media (max-width: 1100px) and (orientation: landscape),
+  (max-height: 600px) and (orientation: landscape) {
+  header {
+    height: 58px;
+  }
+  .intro,
+  .intro.exploring {
+    top: 70px;
+    left: 18px;
+    right: auto;
+    max-width: 230px;
   }
   .intro h1 {
-    font-size: 24px;
+    font-size: 19px;
   }
-  .intro p,
   .intro .eyebrow,
-  .intro .location {
+  .intro p {
     display: none;
   }
-  .intro .primary {
-    font-size: 10px;
-    padding: 10px;
-  }
-  .intro .primary span {
-    margin-left: 6px;
+  .game-status {
+    left: auto;
+    right: 18px;
+    top: 75px;
+    bottom: auto;
+    max-width: 240px;
   }
   .touchpad {
-    bottom: 50px;
-  }
-  .pin {
-    padding: 4px 6px;
-    min-height: 28px;
-  }
-  .pin b {
-    font-size: 8px;
+    bottom: 53px;
   }
   .interact {
-    bottom: 55px;
+    bottom: 68px;
   }
 }
-@media (pointer: coarse) and (min-width: 1101px) {
+@media (min-width: 651px) and (max-width: 1100px) and (orientation: portrait) {
+  .intro h1 {
+    font-size: 34px;
+  }
+  .intro p {
+    font-size: 13px;
+    max-width: 410px;
+  }
+  .touchpad button {
+    width: 54px;
+    height: 54px;
+  }
+  .game-status {
+    bottom: calc(192px + env(safe-area-inset-bottom));
+    font-size: 13px;
+  }
+}
+@media (pointer: coarse) and (min-width: 1101px) and (min-height: 601px) {
   .touchpad {
     display: flex;
     position: fixed;
@@ -209,13 +292,16 @@
     animation: none !important;
   }
 }
-@media (max-width: 650px) {
-  .pin {
-    width: 115px;
-    height: 40px;
-  }
-  .pin b {
-    max-width: 86px;
-    white-space: normal;
+@media (max-width: 1100px), (max-height: 600px) {
+  .compact-game::before {
+    content: '';
+    position: fixed;
+    z-index: 1;
+    top: 66px;
+    left: 0;
+    right: 0;
+    height: 165px;
+    background: linear-gradient(#101b22f5, #101b22bf 55%, transparent);
+    pointer-events: none;
   }
 }

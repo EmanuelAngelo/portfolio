@@ -12,7 +12,7 @@ export function createWorldRenderer(ctx, zones) {
     moving = false,
     clock = 0;
   function project(x, y, z = 0) {
-    return projectPoint({ x, y, z }, { scale, originX, originY: originY });
+    return projectPoint({ x, y, z }, { scale, originX, originY });
   }
   function drawPolygon(p, fill, stroke) {
     ctx.beginPath();
@@ -168,11 +168,16 @@ export function createWorldRenderer(ctx, zones) {
   }
   function drawAvatar() {
     let p = project(player.x, player.y, 0.01);
+    ctx.strokeStyle = '#a5f5d2';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y + 3, scale * 0.29, scale * 0.14, 0, 0, Math.PI * 2);
+    ctx.stroke();
     ctx.fillStyle = '#07171966';
     ctx.beginPath();
     ctx.ellipse(p.x, p.y + 2, scale * 0.25, scale * 0.12, 0, 0, Math.PI * 2);
     ctx.fill();
-    let bounce = moving ? Math.sin(clock * 13) * 0.035 : 0;
+    let bounce = moving ? Math.sin(clock * 13) * 0.09 : 0;
     drawBox(player.x - 0.1, player.y - 0.07, 0.08, 0.12, 0.22 + bounce, [
       '#303b43',
       '#1c3037',
@@ -209,6 +214,24 @@ export function createWorldRenderer(ctx, zones) {
       0.08,
       ['#33403e', '#253532', '#1c2e2c'],
       0.72,
+    );
+    drawBox(
+      player.x - 0.21,
+      player.y - 0.06,
+      0.08,
+      0.13,
+      0.23,
+      ['#f1c39d', '#d4a078', '#ae7857'],
+      0.28 + bounce,
+    );
+    drawBox(
+      player.x + 0.14,
+      player.y - 0.06,
+      0.08,
+      0.13,
+      0.23,
+      ['#f1c39d', '#d4a078', '#ae7857'],
+      0.28 - bounce,
     );
     let q = project(player.x, player.y, 1.1);
     ctx.fillStyle = '#dbf2dd';
@@ -313,7 +336,15 @@ export function createWorldRenderer(ctx, zones) {
       ctx.strokeStyle = '#efc394';
       ctx.lineWidth = 1.4;
       ctx.beginPath();
-      ctx.ellipse(p.x, p.y, scale * (0.18 + Math.sin(clock * 4) * 0.03), scale * 0.1, 0, 7);
+      ctx.ellipse(
+        p.x,
+        p.y,
+        scale * (0.18 + Math.sin(clock * 4) * 0.03),
+        scale * 0.1,
+        0,
+        0,
+        Math.PI * 2,
+      );
       ctx.stroke();
     }
   }

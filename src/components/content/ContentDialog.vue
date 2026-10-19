@@ -62,7 +62,9 @@ function clickBackdrop(event) {
     <template v-else-if="mode === 'map'">
       <span class="tag">Selecione seu próximo destino</span>
       <h2 id="dialog-title" class="panelTitle">Um mapa. Muitas histórias.</h2>
-      <p class="panelIntro">Acesse cada distrito diretamente, no seu ritmo.</p>
+      <p class="panelIntro">
+        Escolha um destino. O personagem caminha até a entrada; use E ou Entrar para conhecer.
+      </p>
       <div class="zoneList">
         <button v-for="(item, index) in zones" :key="item.id" @click="emit('select', item)">
           <small>{{
@@ -144,9 +146,9 @@ function clickBackdrop(event) {
       <article class="entry">
         <h3>03 · Escolha seu ritmo</h3>
         <p>
-          “Explorar mapa” abre todas as seções diretamente. Seu passaporte é salvo neste navegador
-          quando o armazenamento está disponível. Use Esc ou o botão de fechar para sair de uma
-          janela.
+          “Explorar mapa” permite escolher um destino. Ao chegar, use E ou Entrar. Seu passaporte é
+          salvo neste navegador quando o armazenamento está disponível. Use Esc ou o botão de fechar
+          para sair de uma janela.
         </p>
       </article>
     </template>

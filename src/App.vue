@@ -18,6 +18,8 @@ const paused = computed(() => panel.value !== null);
 const { visitedIds, progress, visit } = usePassport(zones);
 const {
   pins,
+  compact,
+  walking,
   miniPlayer,
   nearbyZone,
   exploring,
@@ -39,9 +41,13 @@ function closePanel() {
   panel.value = null;
   focus();
 }
+function travelTo(zone) {
+  panel.value = null;
+  requestAnimationFrame(() => navigate(zone));
+}
 function start() {
-  navigate(zones[0]);
-  toast.value = 'Use WASD ou clique no cenário. Sua jornada começa!';
+  panel.value = 'map';
+  toast.value = 'Escolha um destino. Na entrada, use E ou Entrar.';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.value = '';
@@ -50,7 +56,7 @@ function start() {
 onBeforeUnmount(() => clearTimeout(toastTimer));
 </script>
 <template>
-  <main>
+  <main :class="{ 'compact-game': compact }">
     <canvas
       ref="canvas"
       id="world"
@@ -65,17 +71,33 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       @contact="panel = 'contact'"
     />
     <WorldIntro :exploring="exploring" @start="start" />
+    <div class="game-status" aria-live="polite">
+      <span class="status-dot"></span>
+      <span
+        >{{
+          nearbyZone
+            ? nearbyZone.name
+            : walking
+              ? 'Explorando a ilha'
+              : 'Sua próxima experiência está logo ali'
+        }}<small>{{
+          nearbyZone
+            ? 'Você chegou. Toque em Entrar para conhecer.'
+            : 'Segure o direcional ou toque no caminho.'
+        }}</small></span
+      >
+    </div>
     <div id="labels" aria-label="Destinos do mundo">
       <button
-        v-for="(zone, index) in pins"
+        v-for="zone in pins"
         :key="zone.id"
         class="pin"
         :class="{ visited: visitedIds.includes(zone.id) }"
         :style="{ left: `${zone.position.x}px`, top: `${zone.position.y}px` }"
-        :aria-label="`Ir para ${zone.name}`"
-        @click="navigate(zone)"
+        :aria-label="`Entrar em ${zone.name}`"
+        @click="openZone(zone)"
       >
-        <span class="num">0{{ index + 1 }}</span
+        <span class="num">0{{ zones.findIndex((item) => item.id === zone.id) + 1 }}</span
         ><span
           ><b>{{ zone.name }}</b
           ><small>{{ zone.sub }}</small></span
@@ -92,7 +114,11 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
     />
     <div v-if="nearbyZone && !paused" class="interact">
       <button @click="openZone(nearbyZone)">
-        <kbd>E</kbd><span>Explorar {{ nearbyZone.name }}</span> ↗
+        <kbd>E</kbd
+        ><span
+          >Entrar <small>{{ nearbyZone.name }}</small></span
+        >
+        ↗
       </button>
     </div>
     <TouchControls @press="pressDirection" @release="releaseDirection" />
@@ -102,7 +128,7 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       :zones="zones"
       :visited-ids="visitedIds"
       @close="closePanel"
-      @select="openZone"
+      @select="travelTo"
       @navigate="panel = $event"
     />
     <div id="toast" role="status" :class="{ show: toast }">{{ toast }}</div>
