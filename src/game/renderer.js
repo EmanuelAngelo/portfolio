@@ -61,13 +61,87 @@ export function createWorldRenderer(ctx, zones) {
     ctx.stroke();
   }
   function drawTree(x, y, k = 1) {
-    drawBox(x, y, 0.12, 0.12, 0.42 * k, ['#8c6e4c', '#6a5340', '#574431']);
+    drawBox(x, y, 0.12, 0.12, 0.42 * k, ['#665444', '#4b4036', '#37352f']);
     let p = project(x + 0.06, y + 0.06, 1.3 * k);
     let a = project(x - 0.28 * k, y + 0.3 * k, 0.35 * k),
       b = project(x + 0.4 * k, y + 0.3 * k, 0.35 * k),
       c = project(x + 0.4 * k, y - 0.3 * k, 0.35 * k);
-    drawPolygon([p, a, b], '#578179');
-    drawPolygon([p, b, c], '#345f5c');
+    drawPolygon([p, a, b], '#596553');
+    drawPolygon([p, b, c], '#3f4d40');
+  }
+  function drawGrass(x, y, k = 1) {
+    const p = project(x, y, 0.1);
+    ctx.strokeStyle = '#87907080';
+    ctx.lineWidth = Math.max(0.7, scale * 0.018);
+    for (let i = 0; i < 3; i++) {
+      const offset = (i - 1) * scale * 0.08 * k;
+      ctx.beginPath();
+      ctx.moveTo(p.x + offset, p.y);
+      ctx.lineTo(p.x + offset - scale * 0.06 * k, p.y - scale * (0.14 + i * 0.03) * k);
+      ctx.stroke();
+    }
+  }
+  function drawWreck(x, y, rotation = 0) {
+    const p = project(x, y, 0.12);
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(rotation);
+    ctx.fillStyle = '#4a514c';
+    ctx.strokeStyle = '#252b29';
+    ctx.lineWidth = Math.max(1, scale * 0.035);
+    ctx.beginPath();
+    ctx.roundRect(-scale * 0.38, -scale * 0.16, scale * 0.76, scale * 0.32, scale * 0.06);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#1c2829';
+    ctx.fillRect(-scale * 0.2, -scale * 0.11, scale * 0.18, scale * 0.1);
+    ctx.fillRect(scale * 0.03, -scale * 0.11, scale * 0.18, scale * 0.1);
+    ctx.fillStyle = '#171c1b';
+    ctx.beginPath();
+    ctx.arc(-scale * 0.24, scale * 0.16, scale * 0.07, 0, Math.PI * 2);
+    ctx.arc(scale * 0.24, scale * 0.16, scale * 0.07, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+  function drawFence(x, y, length = 1.2) {
+    for (let i = 0; i <= length; i += 0.3) {
+      drawBox(x + i, y, 0.045, 0.045, 0.55, ['#77776a', '#56574f', '#3b403b']);
+      if (i < length) {
+        drawLine(
+          [project(x + i, y, 0.35), project(x + i + 0.3, y, 0.35)],
+          '#6e7468',
+          Math.max(0.7, scale * 0.025),
+        );
+      }
+    }
+  }
+  function drawDebris(x, y, k = 1) {
+    const p = project(x, y, 0.11);
+    ctx.fillStyle = '#2d3330';
+    ctx.strokeStyle = '#8b8062';
+    ctx.lineWidth = Math.max(0.6, scale * 0.018);
+    for (let i = 0; i < 4; i++) {
+      const size = scale * (0.035 + (i % 2) * 0.025) * k;
+      ctx.save();
+      ctx.translate(p.x + (i - 1.5) * scale * 0.09 * k, p.y - (i % 2) * scale * 0.04);
+      ctx.rotate((i - 1) * 0.35);
+      ctx.fillRect(-size, -size, size * 2, size);
+      ctx.strokeRect(-size, -size, size * 2, size);
+      ctx.restore();
+    }
+  }
+  function drawStreetLamp(x, y) {
+    drawLine([project(x, y, 0.1), project(x, y, 1.25)], '#303633', Math.max(1, scale * 0.035));
+    drawLine(
+      [project(x, y, 1.25), project(x + 0.2, y, 1.25)],
+      '#303633',
+      Math.max(1, scale * 0.035),
+    );
+    const light = project(x + 0.2, y, 1.2);
+    ctx.fillStyle = '#d7c68c99';
+    ctx.beginPath();
+    ctx.arc(light.x, light.y, scale * 0.055, 0, Math.PI * 2);
+    ctx.fill();
   }
   function drawWindow(x, y, z, w = 0.22, h = 0.22, c = '#a7ccbe') {
     drawPolygon(
@@ -178,15 +252,16 @@ export function createWorldRenderer(ctx, zones) {
     ctx.ellipse(p.x, p.y + 2, scale * 0.25, scale * 0.12, 0, 0, Math.PI * 2);
     ctx.fill();
     let bounce = moving ? Math.sin(clock * 13) * 0.09 : 0;
+    // Original survivor silhouette: dark cargo pants, black shirt and a field pack.
     drawBox(player.x - 0.1, player.y - 0.07, 0.08, 0.12, 0.22 + bounce, [
-      '#303b43',
-      '#1c3037',
-      '#192931',
+      '#353a36',
+      '#242a27',
+      '#181d1b',
     ]);
     drawBox(player.x + 0.035, player.y - 0.07, 0.08, 0.12, 0.22 - bounce, [
-      '#303b43',
-      '#1c3037',
-      '#192931',
+      '#353a36',
+      '#242a27',
+      '#181d1b',
     ]);
     drawBox(
       player.x - 0.13,
@@ -194,7 +269,7 @@ export function createWorldRenderer(ctx, zones) {
       0.27,
       0.2,
       0.3,
-      ['#efc18e', '#dba26f', '#b48259'],
+      ['#e0c0a0', '#bd987d', '#8e6f5e'],
       0.22,
     );
     drawBox(
@@ -203,7 +278,7 @@ export function createWorldRenderer(ctx, zones) {
       0.22,
       0.18,
       0.21,
-      ['#e7c3a3', '#ce9e7c', '#b68b70'],
+      ['#171b19', '#101311', '#0b0d0c'],
       0.52,
     );
     drawBox(
@@ -212,8 +287,17 @@ export function createWorldRenderer(ctx, zones) {
       0.25,
       0.2,
       0.08,
-      ['#33403e', '#253532', '#1c2e2c'],
+      ['#56604b', '#3c493b', '#28342c'],
       0.72,
+    );
+    drawBox(
+      player.x + 0.13,
+      player.y - 0.12,
+      0.11,
+      0.16,
+      0.32,
+      ['#55634c', '#39483a', '#27342b'],
+      0.42,
     );
     drawBox(
       player.x - 0.21,
@@ -221,7 +305,7 @@ export function createWorldRenderer(ctx, zones) {
       0.08,
       0.13,
       0.23,
-      ['#f1c39d', '#d4a078', '#ae7857'],
+      ['#e5c5a5', '#c09c80', '#8d6f5d'],
       0.28 + bounce,
     );
     drawBox(
@@ -230,11 +314,21 @@ export function createWorldRenderer(ctx, zones) {
       0.08,
       0.13,
       0.23,
-      ['#f1c39d', '#d4a078', '#ae7857'],
+      ['#e5c5a5', '#c09c80', '#8d6f5d'],
       0.28 - bounce,
     );
+    // Black hair cap and a small profile highlight.
+    drawBox(
+      player.x - 0.105,
+      player.y - 0.075,
+      0.23,
+      0.19,
+      0.12,
+      ['#151817', '#0d100f', '#080a09'],
+      0.83,
+    );
     let q = project(player.x, player.y, 1.1);
-    ctx.fillStyle = '#dbf2dd';
+    ctx.fillStyle = '#d7d2bd';
     ctx.font = '600 8px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('VOCÊ', q.x, q.y);
@@ -263,6 +357,7 @@ export function createWorldRenderer(ctx, zones) {
   ];
   function renderScene() {
     ctx.clearRect(0, 0, viewportWidth, viewportHeight);
+    ctx.imageSmoothingEnabled = false;
     let g = ctx.createRadialGradient(
       viewportWidth * 0.63,
       viewportHeight * 0.52,
@@ -271,15 +366,18 @@ export function createWorldRenderer(ctx, zones) {
       viewportHeight * 0.52,
       viewportWidth * 0.58,
     );
-    g.addColorStop(0, '#24404a');
-    g.addColorStop(0.65, '#14272f');
-    g.addColorStop(1, '#101b22');
+    g.addColorStop(0, '#5a5b4e');
+    g.addColorStop(0.42, '#343832');
+    g.addColorStop(1, '#151918');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, viewportWidth, viewportHeight);
-    // distant dotted chart
-    ctx.fillStyle = '#9ccbc00d';
-    for (let x = 15; x < viewportWidth; x += 32)
-      for (let y = 115; y < viewportHeight - 85; y += 32) ctx.fillRect(x, y, 1, 1);
+    // Dust, scanlines and a restrained pixel-grid sell the hand-built survival map.
+    ctx.fillStyle = '#d8cda31a';
+    for (let x = 12; x < viewportWidth; x += 23)
+      for (let y = 108; y < viewportHeight - 72; y += 19)
+        if ((x * 7 + y * 3) % 11 < 4) ctx.fillRect(x, y, 1, 1);
+    ctx.fillStyle = '#0b100e12';
+    for (let y = 0; y < viewportHeight; y += 4) ctx.fillRect(0, y, viewportWidth, 1);
     let center = project(5.5, 6, -0.5);
     ctx.save();
     ctx.translate(center.x, center.y + scale);
@@ -291,24 +389,24 @@ export function createWorldRenderer(ctx, zones) {
     ctx.ellipse(0, 0, scale * 8, scale * 6, 0, 0, 7);
     ctx.fill();
     ctx.restore();
-    drawBox(0, 0, 11, 12, 0.7, ['#52746c', '#2a4b49', '#1d3b3e'], -0.7);
-    drawBox(0.1, 0.1, 10.8, 11.8, 0.09, ['#638176', '#41635b', '#345951'], -0.02);
+    drawBox(0, 0, 11, 12, 0.7, ['#5b6556', '#3b463d', '#28312d'], -0.7);
+    drawBox(0.1, 0.1, 10.8, 11.8, 0.09, ['#68715e', '#4d584b', '#39453d'], -0.02);
     for (let x = 0; x < 11; x++)
       for (let y = 0; y < 12; y++) {
-        if ((x + y) % 3 === 0) drawTile(x + 0.08, y + 0.08, 0.85, 0.85, 0.08, '#6d8b792a');
+        if ((x + y) % 3 === 0) drawTile(x + 0.08, y + 0.08, 0.85, 0.85, 0.08, '#8a8c6d22');
       }
-    drawTile(4.85, 0, 1.3, 12, 0.085, '#a8b09a');
-    drawTile(0, 4.1, 11, 1.15, 0.086, '#a8b09a');
-    drawTile(0, 8.3, 11, 1.1, 0.086, '#a8b09a');
-    drawTile(5.04, 0, 0.9, 12, 0.09, '#788b7d');
-    drawTile(0, 4.28, 11, 0.78, 0.09, '#788b7d');
-    drawTile(0, 8.47, 11, 0.76, 0.09, '#788b7d');
+    drawTile(4.85, 0, 1.3, 12, 0.085, '#98927b');
+    drawTile(0, 4.1, 11, 1.15, 0.086, '#98927b');
+    drawTile(0, 8.3, 11, 1.1, 0.086, '#98927b');
+    drawTile(5.04, 0, 0.9, 12, 0.09, '#66685d');
+    drawTile(0, 4.28, 11, 0.78, 0.09, '#66685d');
+    drawTile(0, 8.47, 11, 0.76, 0.09, '#66685d');
     for (let i = 0; i < 12; i++) {
-      drawTile(5.46, i + 0.25, 0.04, 0.3, 0.1, '#b8c2a66b');
+      drawTile(5.46, i + 0.25, 0.04, 0.3, 0.1, '#d0c6a06b');
     }
     for (let x = 1; x < 11; x++) {
-      drawTile(x, 4.65, 0.3, 0.035, 0.1, '#c9c9af77');
-      drawTile(x, 8.83, 0.3, 0.035, 0.1, '#c9c9af77');
+      drawTile(x, 4.65, 0.3, 0.035, 0.1, '#d3c79a66');
+      drawTile(x, 8.83, 0.3, 0.035, 0.1, '#d3c79a66');
     }
     // plaza fountain
     drawBox(4.65, 5.8, 1.75, 1.65, 0.13, ['#b7c3ac', '#8a9e8e', '#6c897d']);
@@ -319,9 +417,23 @@ export function createWorldRenderer(ctx, zones) {
     ctx.beginPath();
     ctx.arc(fp.x, fp.y, scale * 0.12, 0, 7);
     ctx.fill();
+    drawWreck(2.1, 4.8, -0.12);
+    drawWreck(8.6, 8.95, 0.18);
+    drawFence(1.2, 7.45, 1.5);
+    drawFence(8.5, 3.65, 1.2);
+    drawStreetLamp(4.35, 3.45);
+    drawStreetLamp(6.3, 9.7);
+    drawDebris(3.4, 4.8, 1.2);
+    drawDebris(7.55, 8.95, 1);
     const items = zones.map((z) => ({ sort: z.x + z.y + 1, draw: () => drawBuilding(z) }));
     vegetation.forEach(([x, y], i) =>
-      items.push({ sort: x + y, draw: () => drawTree(x, y, 0.7 + (i % 3) * 0.2) }),
+      items.push({
+        sort: x + y,
+        draw: () =>
+          i % 2
+            ? drawGrass(x, y, 0.8 + (i % 3) * 0.2)
+            : drawTree(x, y, 0.7 + (i % 3) * 0.2),
+      }),
     );
     items.push({ sort: player.x + player.y, draw: drawAvatar });
     items.sort((a, b) => a.sort - b.sort).forEach((a) => a.draw());
@@ -347,6 +459,18 @@ export function createWorldRenderer(ctx, zones) {
       );
       ctx.stroke();
     }
+    const vignette = ctx.createRadialGradient(
+      viewportWidth / 2,
+      viewportHeight / 2,
+      Math.min(viewportWidth, viewportHeight) * 0.22,
+      viewportWidth / 2,
+      viewportHeight / 2,
+      Math.max(viewportWidth, viewportHeight) * 0.76,
+    );
+    vignette.addColorStop(0, '#00000000');
+    vignette.addColorStop(1, '#070a09aa');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, viewportWidth, viewportHeight);
   }
 
   return {

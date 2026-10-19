@@ -9,13 +9,13 @@ defineEmits(['help', 'map']);
 </script>
 <template>
   <div class="worldCaption">
-    <span>01 — THE LOGIC ISLAND</span><small>Um universo de soluções conectadas.</small>
+    <span>SECTOR 01 — OPERATIONS</span><small>Registro de uma cidade em reconstrução.</small>
   </div>
   <aside class="mission" aria-label="Progresso da exploração">
     <div class="missionHead">
-      <span>SEU PASSAPORTE</span><span>{{ visited }} / {{ total }}</span>
+      <span>FIELD LOG / EXPLORATION</span><span>{{ visited }} / {{ total }}</span>
     </div>
-    <p>Conheça minha jornada</p>
+    <p>Rastreie minha jornada</p>
     <div
       class="progress"
       role="progressbar"
@@ -28,12 +28,12 @@ defineEmits(['help', 'map']);
     </div>
     <small>{{
       visited === total
-        ? 'Jornada completa. Vamos construir o próximo capítulo?'
-        : 'Visite os distritos e descubra cada capítulo.'
+        ? 'Mapa completo. Pronto para o próximo capítulo.'
+        : 'Explore os setores e recupere cada capítulo.'
     }}</small>
   </aside>
   <button class="map" aria-label="Abrir mapa do mundo" @click="$emit('map')">
-    <span class="mapTitle">MAPA DO MUNDO <span>↗</span></span>
+    <span class="mapTitle">MAPA DE CAMPO <span>↗</span></span>
     <svg viewBox="0 0 170 100" aria-hidden="true">
       <path d="M85 4 166 49 85 94 4 49Z" fill="#263f43" stroke="#526265" />
       <path d="M45 26 126 71M44 71 126 26" stroke="#526265" stroke-width="6" />
@@ -45,7 +45,7 @@ defineEmits(['help', 'map']);
       </g>
       <circle :cx="miniPlayer.x" :cy="miniPlayer.y" r="4" fill="#9fe7cd" stroke="white" />
     </svg>
-    <small>● <span>Você está aqui</span></small>
+    <small>● <span>Posição do sobrevivente</span></small>
   </button>
   <footer>
     <div class="controls">

@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 :root {
-  --bg: #101b22;
-  --fg: #edf0e9;
-  --muted: #9ba9aa;
-  --accent: #f5af7f;
-  --line: #ffffff17;
+  --bg: #171c1b;
+  --fg: #e5e1d2;
+  --muted: #a6a694;
+  --accent: #d2b77b;
+  --line: #e8dfc21c;
 }
 * {
   box-sizing: border-box;
@@ -57,7 +57,7 @@ header {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--line);
-  background: #101b228c;
+  background: #171c1bcc;
   z-index: 3;
 }
 .brand {
@@ -145,7 +145,7 @@ h1 em {
 }
 .primary {
   background: var(--accent);
-  color: #263033;
+  color: #242722;
   border-radius: 5px;
   padding: 14px 19px;
   font-size: 12px;
@@ -589,4 +589,239 @@ dialog .close {
 }
 .mobile-passport {
   display: none;
+}
+
+/* Survival HUD skin: the world uses a compact, field-report visual language. */
+:root {
+  --bg: #111513;
+  --fg: #dfddc9;
+  --muted: #91978a;
+  --accent: #c6a867;
+  --line: #d9d0a51f;
+}
+body {
+  background: #111513;
+}
+canvas {
+  image-rendering: pixelated;
+}
+header {
+  height: 76px;
+  padding: 0 3%;
+  border-bottom: 2px solid #d9d0a515;
+  background: #111513e8;
+}
+.brand {
+  gap: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.logo {
+  font-size: 27px;
+  letter-spacing: -4px;
+  font-weight: 700;
+  color: #d9d0a5;
+}
+.logo i {
+  color: #7f9470;
+}
+nav {
+  gap: 10px;
+}
+nav button {
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  color: #afb4a4;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 9px;
+}
+nav button:hover {
+  border-color: #d9d0a533;
+  background: #d9d0a50d;
+  color: var(--fg);
+}
+.contact {
+  border: 1px solid #c6a86799;
+  border-radius: 2px;
+  padding: 10px 13px;
+  color: #dfddc9;
+}
+.contact span {
+  margin-left: 14px;
+}
+.intro {
+  left: 3%;
+  top: 119px;
+  padding: 15px 18px;
+  border-left: 2px solid #c6a867;
+  background: #101512b8;
+  box-shadow: 10px 10px 0 #0c100e66;
+}
+.eyebrow {
+  color: #aaa990;
+  font-family: monospace;
+}
+.eyebrow i {
+  border-radius: 0;
+  background: #c65d4a;
+  box-shadow: 0 0 10px #c65d4a;
+}
+h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: 3px 3px #0b0e0c;
+}
+h1 em {
+  color: #c6a867;
+}
+.intro p {
+  color: #a2a798;
+}
+.primary {
+  background: #c6a867;
+  color: #171a16;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 3px 3px 0 #69593d;
+}
+.location {
+  color: #7f897d;
+}
+.location b {
+  color: #c65d4a;
+}
+.pin {
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #d9d0a538;
+  background: #111714ed;
+  box-shadow: 4px 4px 0 #080b09aa;
+  border-radius: 2px;
+}
+.pin:hover {
+  background: #303b32;
+}
+.pin .num {
+  color: #c6a867;
+}
+.pin b {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pin small {
+  color: #829080;
+}
+.worldCaption {
+  right: 3%;
+  top: 103px;
+  padding: 8px 10px;
+  border: 1px solid #d9d0a522;
+  background: #111714c9;
+  color: #c6a867;
+  font-family: monospace;
+}
+.worldCaption small {
+  color: #829080;
+}
+.mission {
+  left: 3%;
+  bottom: 99px;
+  width: 275px;
+  border: 1px solid #d9d0a52b;
+  border-top: 2px solid #c6a867;
+  padding: 13px 15px;
+  background: #111714e8;
+  box-shadow: 5px 5px 0 #080b09aa;
+}
+.missionHead {
+  color: #9ba18f;
+  font-family: monospace;
+}
+.mission p {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #dfddc9;
+}
+.progress,
+.progress i {
+  height: 5px;
+}
+.progress {
+  background: #2a3129;
+}
+.progress i {
+  background: #c6a867;
+}
+.mission small {
+  color: #899483;
+}
+.map {
+  right: 3%;
+  bottom: 98px;
+  width: 190px;
+  border: 1px solid #d9d0a52b;
+  padding: 11px;
+  background: #111714ed;
+  border-radius: 2px;
+  box-shadow: 5px 5px 0 #080b09aa;
+}
+.mapTitle {
+  color: #c6a867;
+  font-family: monospace;
+}
+.map svg path:first-child {
+  fill: #263129;
+  stroke: #71806e;
+}
+.map svg path:nth-child(2) {
+  stroke: #6d765f;
+}
+.map small {
+  color: #c6a867;
+}
+footer {
+  height: 67px;
+  left: 3%;
+  right: 3%;
+  border-top: 2px solid #d9d0a51f;
+  background: #111513d9;
+}
+.controls {
+  color: #9ba18f;
+  text-transform: uppercase;
+  font-size: 9px;
+}
+kbd {
+  border: 1px solid #7f8068;
+  background: #252d26;
+  border-radius: 1px;
+  color: #d9d0a5;
+}
+.muted,
+.footerRight {
+  color: #7e897c;
+}
+.footerRight button {
+  border-radius: 2px;
+  border-color: #9c8350;
+}
+.live {
+  color: #9eae7a;
+}
+.interact button {
+  padding: 10px 14px;
+  background: #c6a867;
+  color: #171a16;
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 #080b09aa;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.touchpad button {
+  border-radius: 1px;
+  border-color: #b5a26f66;
+  background: #111714e8;
+  color: #d9d0a5;
 }

@@ -4,13 +4,13 @@ defineEmits(['start']);
 </script>
 <template>
   <section class="intro" :class="{ exploring }">
-    <div class="eyebrow"><i></i> PORTFÓLIO INTERATIVO · V.01</div>
-    <h1>Cada experiência,<br />um novo <em>mundo.</em></h1>
+    <div class="eyebrow"><i></i> SURVIVOR LOG · SECTOR 01</div>
+    <h1>Reconstrua a rota.<br />Descubra meu <em>percurso.</em></h1>
     <p>
-      Sou Emanuel. Conecto código, dados e pessoas.<br />Explore os lugares que construíram minha
-      história.
+      Sou Emanuel. Código, dados e pessoas são minhas ferramentas.<br />Explore os setores que
+      registram minha história.
     </p>
-    <button class="primary" @click="$emit('start')">Escolher destino <span>↗</span></button>
+    <button class="primary" @click="$emit('start')">Selecionar setor <span>↗</span></button>
     <div class="location"><span>◎</span> SÃO LUÍS, BRASIL <b>·</b> FULL STACK DEVELOPER</div>
   </section>
 </template>
