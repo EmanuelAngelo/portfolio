@@ -1,5 +1,5 @@
 import { createObstacles, findPath, entranceOf } from '../game/collision.js';
-import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
+import { computed, inject, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue';
 import { createCamera, miniMapPoint, layoutPins, unprojectPoint } from '../game/geometry.js';
 import {
   advanceMovement,
@@ -12,6 +12,7 @@ import { createWorldRenderer } from '../game/renderer.js';
 
 /** Owns animation and browser input; releases every resource when the view unmounts. */
 export function useWorld(canvas, zones, paused, onArrive) {
+  const rendererFactory = inject('worldRendererFactory', createWorldRenderer);
   const state = createGameState();
   const keys = new Set();
   const obstacles = createObstacles(zones);
@@ -63,6 +64,7 @@ export function useWorld(canvas, zones, paused, onArrive) {
       { x: event.clientX - rect.left, y: event.clientY - rect.top },
       camera.value,
     );
+    if (!point) return;
     keys.clear();
     state.path = findPath(state.player, clampDestination(point), obstacles);
     state.target = state.path.length ? { ...state.path.at(-1) } : null;
@@ -90,11 +92,7 @@ export function useWorld(canvas, zones, paused, onArrive) {
     const width = window.innerWidth;
     const height = window.visualViewport?.height ?? window.innerHeight;
     camera.value = createCamera(width, height, state.player);
-    const ratio = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.value.width = Math.round(width * ratio);
-    canvas.value.height = Math.round(height * ratio);
     canvas.value.style.height = `${height}px`;
-    canvas.value.getContext('2d')?.setTransform(ratio, 0, 0, ratio, 0, 0);
   }
   function frame(time) {
     const elapsed = previousTime ? (time - previousTime) / 1000 : 0;
@@ -104,13 +102,13 @@ export function useWorld(canvas, zones, paused, onArrive) {
       walking.value = state.moving;
       player.value = { ...state.player };
       nearbyZone.value = findNearbyZone(state.player, zones);
-      if (camera.value.compact) {
+      {
         const desired = createCamera(camera.value.width, camera.value.height, state.player);
         const blend = reducedMotion?.matches ? 1 : 1 - Math.exp(-8 * Math.min(elapsed, 0.04));
         camera.value = {
           ...desired,
-          originX: camera.value.originX + (desired.originX - camera.value.originX) * blend,
-          originY: camera.value.originY + (desired.originY - camera.value.originY) * blend,
+          focusX: camera.value.focusX + (desired.focusX - camera.value.focusX) * blend,
+          focusY: camera.value.focusY + (desired.focusY - camera.value.focusY) * blend,
         };
       }
     }
@@ -125,12 +123,24 @@ export function useWorld(canvas, zones, paused, onArrive) {
     }
   });
   onMounted(() => {
-    const context = canvas.value?.getContext('2d');
-    if (!context) {
+    try {
+      renderer = rendererFactory(canvas.value, zones);
+    } catch (error) {
+      console.warn('WebGL indisponível; o conteúdo continua acessível pelo mapa.', error);
       available.value = false;
       return;
     }
-    renderer = createWorldRenderer(context, zones);
+    listen(canvas.value, 'webglcontextlost', (event) => {
+      event.preventDefault();
+      cancelAnimationFrame(frameId);
+      stop();
+      available.value = false;
+    });
+    listen(canvas.value, 'webglcontextrestored', () => {
+      available.value = true;
+      resize();
+      frameId = requestAnimationFrame(frame);
+    });
     reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     resize();
     listen(window, 'resize', resize);
@@ -165,6 +175,7 @@ export function useWorld(canvas, zones, paused, onArrive) {
     cancelAnimationFrame(frameId);
     cleanup.forEach((dispose) => dispose());
     stop();
+    renderer?.dispose();
   });
   return {
     pins,

@@ -4,6 +4,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { Window } from 'happy-dom';
+import { createWorldRenderer } from '../src/game/renderer.js';
 
 test('Mounted application responds to keyboard, touch, click navigation and explicit interaction', async () => {
   const window = new Window({ width: 390, height: 844 });
@@ -28,23 +29,6 @@ test('Mounted application responds to keyboard, touch, click navigation and expl
     return sequence;
   };
   globalThis.cancelAnimationFrame = (id) => callbacks.delete(id);
-  const context = new Proxy(
-    {
-      createRadialGradient: () => ({ addColorStop() {} }),
-      ellipse(...args) {
-        assert.ok(args.length >= 7, 'Canvas ellipse requires seven arguments');
-        assert.ok(args.slice(0, 7).every(Number.isFinite));
-      },
-    },
-    {
-      get: (object, key) => object[key] ?? (() => {}),
-      set: (object, key, value) => {
-        object[key] = value;
-        return true;
-      },
-    },
-  );
-  window.HTMLCanvasElement.prototype.getContext = () => context;
   window.HTMLElement.prototype.setPointerCapture = () => {};
   const errors = [];
   const directory = await mkdtemp(resolve('.qa-controls-'));
@@ -67,6 +51,16 @@ test('Mounted application responds to keyboard, touch, click navigation and expl
     const root = document.createElement('div');
     document.body.append(root);
     app = createApp(App);
+    // DOM input is real; only the GPU adapter is substituted in this Node environment.
+    app.provide('worldRendererFactory', (canvas, zones) =>
+      createWorldRenderer(canvas, zones, () => ({
+        shadowMap: {},
+        setPixelRatio() {},
+        setSize() {},
+        render() {},
+        dispose() {},
+      })),
+    );
     app.config.errorHandler = (error) => errors.push(error);
     app.mount(root);
     async function tick(count = 1) {
@@ -150,6 +144,29 @@ test('Mounted application responds to keyboard, touch, click navigation and expl
     window.dispatchEvent(new window.KeyboardEvent('keyup', { key: 'ArrowLeft' }));
     assert.notDeepEqual(position(), desktopPosition, 'Desktop keyboard must move the player');
     assert.equal(document.querySelector('main').classList.contains('compact-game'), false);
+    const canvas = document.querySelector('canvas');
+    canvas.dispatchEvent(new window.Event('webglcontextlost', { cancelable: true }));
+    await nextTick();
+    assert.ok(
+      document.querySelector('.canvas-fallback'),
+      'GPU loss must expose accessible content',
+    );
+    assert.equal(callbacks.size, 0, 'GPU loss must stop animation');
+    document.querySelector('nav button').click();
+    await nextTick();
+    document.querySelector('.zoneList button').click();
+    await nextTick();
+    assert.match(
+      document.querySelector('#dialog-title').textContent,
+      /energia/i,
+      'Fallback opens content without walking',
+    );
+    document.querySelector('.close').click();
+    await nextTick();
+    canvas.dispatchEvent(new window.Event('webglcontextrestored'));
+    await tick(2);
+    assert.equal(document.querySelector('.canvas-fallback'), null);
+    assert.ok(callbacks.size > 0, 'Restoring WebGL must resume animation');
     assert.deepEqual(errors, []);
     app.unmount();
     app = null;

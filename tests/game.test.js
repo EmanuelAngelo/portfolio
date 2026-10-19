@@ -4,7 +4,6 @@ import assert from 'node:assert/strict';
 import { createCamera, projectPoint, unprojectPoint, layoutPins } from '../src/game/geometry.js';
 import { advanceMovement, createGameState, findNearbyZone } from '../src/game/movement.js';
 import { zones } from '../src/data/zones.js';
-import { createWorldRenderer } from '../src/game/renderer.js';
 
 const viewports = [
   [320, 568],
@@ -18,7 +17,7 @@ const viewports = [
   [1920, 1080],
 ];
 for (const [width, height] of viewports) {
-  test(`Projection, map bounds and rendering at ${width}x${height}`, () => {
+  test(`Perspective projection and map bounds at ${width}x${height}`, () => {
     const camera = createCamera(width, height);
     for (const point of [
       { x: 0, y: 0 },
@@ -34,37 +33,11 @@ for (const [width, height] of viewports) {
       const screen = projectPoint({ x: 5.5, y: 8 }, camera);
       assert.ok(Math.abs(screen.x - width / 2) < 1e-9);
       assert.ok(screen.y > 100 && screen.y < height - 100);
-      assert.ok(camera.scale >= 58, 'Character must remain large on small displays');
     }
     const pins = layoutPins(zones, camera);
-    let paths = 0;
-    const context = new Proxy(
-      {
-        createRadialGradient: () => ({ addColorStop() {} }),
-        ellipse(...args) {
-          assert.ok(args.length >= 7, 'Canvas ellipse requires seven arguments');
-          assert.ok(args.slice(0, 7).every(Number.isFinite));
-          assert.ok(args[2] >= 0 && args[3] >= 0);
-        },
-        lineTo(x, y) {
-          assert.ok(Number.isFinite(x) && Number.isFinite(y));
-          paths++;
-        },
-      },
-      {
-        get: (object, key) => object[key] ?? (() => {}),
-        set: (object, key, value) => {
-          object[key] = value;
-          return true;
-        },
-      },
+    assert.ok(
+      pins.every((pin) => Number.isFinite(pin.position.x) && Number.isFinite(pin.position.y)),
     );
-    const renderer = createWorldRenderer(context, zones);
-    const state = createGameState();
-    renderer.draw(state, camera, 1);
-    state.target = { x: 6, y: 8 };
-    renderer.draw(state, camera, 2);
-    assert.ok(paths > 100, 'Island artwork must render');
   });
 }
 

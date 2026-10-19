@@ -42,6 +42,10 @@ function closePanel() {
   focus();
 }
 function travelTo(zone) {
+  if (!available.value) {
+    openZone(zone);
+    return;
+  }
   panel.value = null;
   requestAnimationFrame(() => navigate(zone));
 }
@@ -61,7 +65,7 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       ref="canvas"
       id="world"
       tabindex="0"
-      aria-label="Mundo isométrico. Use WASD ou setas para andar, E para explorar. O menu Explorar mapa permite acessar todo o conteúdo."
+      aria-label="Distrito em 3D. Use WASD ou setas para andar, E para explorar. O menu Explorar mapa permite acessar todo o conteúdo."
       @pointerdown="moveTo"
     ></canvas>
     <WorldHeader
@@ -133,7 +137,7 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
     />
     <div id="toast" role="status" :class="{ show: toast }">{{ toast }}</div>
     <div v-if="!available" class="canvas-fallback">
-      <p>Este navegador não disponibilizou o cenário.</p>
+      <p>O cenário 3D precisa de WebGL 2. Você pode acessar todas as experiências pelo mapa.</p>
       <button class="primary" @click="panel = 'map'">Explorar todas as experiências ↗</button>
     </div>
   </main>

@@ -14,7 +14,13 @@ export function clampDestination(point) {
   return { x: clamp(point.x, 0.2, 10.8), y: clamp(point.y, 0.2, 11.8) };
 }
 export function createGameState() {
-  return { player: { x: 5.5, y: 8 }, target: null, path: [], moving: false };
+  return {
+    player: { x: 5.5, y: 8 },
+    target: null,
+    path: [],
+    moving: false,
+    facing: { x: 1, y: 1 },
+  };
 }
 export function advanceMovement(state, keys, elapsedSeconds, obstacles = []) {
   const horizontal =
@@ -59,6 +65,12 @@ export function advanceMovement(state, keys, elapsedSeconds, obstacles = []) {
     state.target = null;
   }
   state.moving = Math.hypot(state.player.x - before.x, state.player.y - before.y) > 0.0001;
+  if (state.moving) {
+    const dx = state.player.x - before.x;
+    const dy = state.player.y - before.y;
+    const length = Math.hypot(dx, dy);
+    state.facing = { x: dx / length, y: dy / length };
+  }
   return null;
 }
 export function findNearbyZone(player, zones) {
