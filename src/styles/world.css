@@ -825,3 +825,67 @@ kbd {
   background: #111714e8;
   color: #d9d0a5;
 }
+
+.language-picker select {
+  min-height: 40px;
+  padding: 8px 24px 8px 10px;
+  border: 1px solid #c8bb8266;
+  border-radius: 4px;
+  background: #252f28;
+  color: #f0ead5;
+  font:
+    600 11px 'DM Sans',
+    sans-serif;
+  cursor: pointer;
+}
+.language-picker select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+@media (max-width: 430px) {
+  header {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  header .brand {
+    gap: 5px;
+    font-size: 9px;
+    letter-spacing: 0.4px;
+  }
+  header .brand small {
+    font-size: 5px;
+  }
+  header .logo {
+    font-size: 26px;
+  }
+  header nav {
+    gap: 5px;
+  }
+  header nav button {
+    font-size: 10px;
+  }
+  .language-picker select {
+    min-height: 44px;
+    padding: 6px 2px;
+    font-size: 10px;
+  }
+}
+.dialog-language {
+  position: absolute;
+  top: 19px;
+  right: 66px;
+}
+dialog > .tag {
+  display: block;
+  padding-right: 110px;
+  min-height: 24px;
+}

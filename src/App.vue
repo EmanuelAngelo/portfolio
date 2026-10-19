@@ -1,5 +1,8 @@
 <script setup>
-import { computed, onBeforeUnmount, ref } from 'vue';
+import { initializeLocale, useLocale } from './i18n/index.js';
+const { t } = useLocale();
+onMounted(initializeLocale);
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import WorldHeader from './components/layout/WorldHeader.vue';
 import WorldIntro from './components/layout/WorldIntro.vue';
 import WorldHud from './components/world/WorldHud.vue';
@@ -65,7 +68,11 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       ref="canvas"
       id="world"
       tabindex="0"
-      aria-label="Distrito em 3D. Use WASD ou setas para andar, E para explorar. O menu Explorar mapa permite acessar todo o conteúdo."
+      :aria-label="
+        t(
+          'Distrito em 3D. Use WASD ou setas para andar, E para explorar. O menu Explorar mapa permite acessar todo o conteúdo.',
+        )
+      "
       @pointerdown="moveTo"
     ></canvas>
     <WorldHeader
@@ -79,32 +86,36 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       <span class="status-dot"></span>
       <span
         >{{
-          nearbyZone
-            ? nearbyZone.name
-            : walking
-              ? 'Explorando a ilha'
-              : 'Sua próxima experiência está logo ali'
+          t(
+            nearbyZone
+              ? nearbyZone.name
+              : walking
+                ? 'Explorando a ilha'
+                : 'Sua próxima experiência está logo ali',
+          )
         }}<small>{{
-          nearbyZone
-            ? 'Você chegou. Toque em Entrar para conhecer.'
-            : 'Segure o direcional ou toque no caminho.'
+          t(
+            nearbyZone
+              ? 'Você chegou. Toque em Entrar para conhecer.'
+              : 'Segure o direcional ou toque no caminho.',
+          )
         }}</small></span
       >
     </div>
-    <div id="labels" aria-label="Destinos do mundo">
+    <div id="labels" :aria-label="t('Destinos do mundo')">
       <button
         v-for="zone in pins"
         :key="zone.id"
         class="pin"
         :class="{ visited: visitedIds.includes(zone.id) }"
         :style="{ left: `${zone.position.x}px`, top: `${zone.position.y}px` }"
-        :aria-label="`Entrar em ${zone.name}`"
+        :aria-label="`${t('Entrar em')} ${t(zone.name)}`"
         @click="openZone(zone)"
       >
         <span class="num">0{{ zones.findIndex((item) => item.id === zone.id) + 1 }}</span
         ><span
-          ><b>{{ zone.name }}</b
-          ><small>{{ zone.sub }}</small></span
+          ><b>{{ t(zone.name) }}</b
+          ><small>{{ t(zone.sub) }}</small></span
         ><span class="pin-arrow">↗</span>
       </button>
     </div>
@@ -120,7 +131,7 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       <button @click="openZone(nearbyZone)">
         <kbd>E</kbd
         ><span
-          >Entrar <small>{{ nearbyZone.name }}</small></span
+          >{{ t('Entrar') }}<small>{{ t(nearbyZone.name) }}</small></span
         >
         ↗
       </button>
@@ -135,10 +146,16 @@ onBeforeUnmount(() => clearTimeout(toastTimer));
       @select="travelTo"
       @navigate="panel = $event"
     />
-    <div id="toast" role="status" :class="{ show: toast }">{{ toast }}</div>
+    <div id="toast" role="status" :class="{ show: toast }">{{ t(toast) }}</div>
     <div v-if="!available" class="canvas-fallback">
-      <p>O cenário 3D precisa de WebGL 2. Você pode acessar todas as experiências pelo mapa.</p>
-      <button class="primary" @click="panel = 'map'">Explorar todas as experiências ↗</button>
+      <p>
+        {{
+          t('O cenário 3D precisa de WebGL 2. Você pode acessar todas as experiências pelo mapa.')
+        }}
+      </p>
+      <button class="primary" @click="panel = 'map'">
+        {{ t('Explorar todas as experiências ↗') }}
+      </button>
     </div>
   </main>
 </template>

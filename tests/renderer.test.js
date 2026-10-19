@@ -65,3 +65,25 @@ test('WebGL adapter resizes once per viewport, renders after clicks and disposes
   renderer.dispose();
   assert.equal(disposed, true);
 });
+
+test('Six landmarks have distinct architecture and stay inside their collision boundaries', () => {
+  const world = createWorldScene(zones);
+  const identities = new Set(world.buildings.map(({ group }) => group.userData.landmark));
+  assert.equal(identities.size, 6);
+  for (const { group, bounds } of world.buildings) {
+    const zone = zones.find((item) => group.name === `building-${item.id}`);
+    // Ground slabs and details stay within the solid plot, avoiding invisible obstacles in streets.
+    assert.ok(bounds.min.x >= zone.x - 0.75, group.name);
+    assert.ok(bounds.max.x <= zone.x + 2.25, group.name);
+    assert.ok(bounds.min.z >= zone.y - 0.65, group.name);
+    assert.ok(bounds.max.z <= zone.y + 1.6, group.name);
+  }
+  world.update(createGameState(), createCamera(1440, 900), 1);
+  for (const { group } of world.buildings)
+    for (const mesh of group.children) {
+      assert.ok(Number.isFinite(mesh.material.opacity));
+      if (mesh.material.opacity > 0.22)
+        assert.equal(mesh.material.opacity, mesh.userData.baseOpacity);
+    }
+  world.dispose();
+});

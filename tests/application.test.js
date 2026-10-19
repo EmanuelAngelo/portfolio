@@ -24,7 +24,7 @@ test('Vue application renders the complete world interface without setup errors'
     assert.match(html, /Controles de movimento/);
     assert.equal((html.match(/class="pin"/g) || []).length, 0);
     assert.match(html, /aria-labelledby="dialog-title"/);
-    assert.match(html, /FIELD LOG \/ EXPLORATION/);
+    assert.match(html, /DIÁRIO DE CAMPO \/ EXPLORAÇÃO/);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

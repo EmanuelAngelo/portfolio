@@ -1,4 +1,6 @@
 <script setup>
+import { useLocale } from '../../i18n/index.js';
+const { t } = useLocale();
 const emit = defineEmits(['press', 'release']);
 function press(event, key) {
   event.preventDefault();
@@ -11,9 +13,9 @@ function press(event, key) {
 }
 </script>
 <template>
-  <div class="touchpad" aria-label="Controles de movimento">
+  <div class="touchpad" :aria-label="t('Controles de movimento')">
     <button
-      aria-label="Mover para cima"
+      :aria-label="t('Mover para cima')"
       @pointerdown="press($event, 'w')"
       @pointerup="emit('release', 'w')"
       @pointercancel="emit('release', 'w')"
@@ -29,7 +31,7 @@ function press(event, key) {
           { key: 'd', label: 'direita', icon: '→' },
         ]"
         :key="direction.key"
-        :aria-label="`Mover para ${direction.label}`"
+        :aria-label="t(`Mover para ${direction.label}`)"
         @pointerdown="press($event, direction.key)"
         @pointerup="emit('release', direction.key)"
         @pointercancel="emit('release', direction.key)"

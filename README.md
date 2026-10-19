@@ -121,3 +121,22 @@ Testes automatizados verificam projeção em nove tamanhos, geometria 3D finita,
 ## Atualizar na Vercel
 
 Use o projeto completo deste ZIP, incluindo `package.json`, `package-lock.json` e a nova pasta `src/game/three`. Execute `npm ci` e `npm run build`. Configure o comando de build como `npm run build` e a saída como `dist`. Three.js é incluído no bundle; a cena não depende de CDN nem de downloads de modelos externos.
+
+## Setores com arquiteturas próprias e idiomas
+
+Os modelos mantêm o mundo 3D aprovado e usam as referências visuais enviadas:
+
+- **Exército:** quartel em U, telhados cerâmicos, pátio, bandeira brasileira e identificação da base.
+- **Energia:** subestação aberta, pórticos treliçados, transformadores, isoladores, cabos e fechamento frontal.
+- **Integrações:** centro corporativo envidraçado em volumes escalonados, identificação PVT / TOTVS RM e totem.
+- **Educação:** campus com alas, acesso coberto, marquise de vidro e detalhes inspirados na referência da UNDB.
+- **Saúde:** torre hospitalar, ala de atendimento, cobertura de acesso, ambulância e heliponto.
+- **Projetos:** laboratório com torre cilíndrica, cúpula, bancada com frascos visível pela fachada, exaustores e escultura molecular.
+
+Os modelos e suas placas são construídos em `src/game/three/buildings.js`. As marcas citadas identificam a experiência profissional do portfólio. As fotografias de referência não foram incorporadas como texturas.
+
+O seletor **PT-BR / EN** aparece no cabeçalho e dentro das janelas. Traduz menus, instruções, acessibilidade, experiências, datas, cargos e descrições dos projetos cadastrados. A preferência é lembrada no navegador; a troca não recria o cenário nem reinicia o personagem ou o passaporte. A camada está em `src/i18n/` e o componente reutilizável em `LanguageSwitch.vue`.
+
+Nomes de empresas, tecnologias e placas institucionais permanecem próprios. O PDF do currículo continua em português, indicado no link em inglês. Descrições novas obtidas diretamente do GitHub permanecem no idioma do autor quando não constam no catálogo de tradução.
+
+Validação: 25 testes automatizados, incluindo os seis modelos dentro dos limites de colisão, traduções, persistência de idioma e troca de idioma com janela aberta. Testes WebGL usam adaptador de GPU simulado; aparência e desempenho não foram inspecionados em navegador real neste ambiente.

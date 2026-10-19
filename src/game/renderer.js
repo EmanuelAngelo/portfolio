@@ -58,9 +58,11 @@ export function createWorldScene(zones) {
       const hit = ray.intersectBox(bounds, new THREE.Vector3());
       const blocked = Boolean(hit && hit.distanceTo(camera.position) < distance);
       group.children.forEach((part) => {
-        part.material.transparent = blocked;
-        part.material.opacity = blocked ? 0.22 : 1;
-        part.material.depthWrite = !blocked;
+        part.material.transparent = blocked || part.userData.baseTransparent;
+        part.material.opacity = blocked
+          ? Math.min(0.22, part.userData.baseOpacity)
+          : part.userData.baseOpacity;
+        part.material.depthWrite = !blocked && part.userData.baseDepthWrite;
         part.castShadow = !blocked;
       });
     }

@@ -1,4 +1,6 @@
 <script setup>
+import { useLocale } from '../../i18n/index.js';
+const { t } = useLocale();
 import { onBeforeUnmount, ref } from 'vue';
 import { loadRepositories } from '../../services/repositories.js';
 const props = defineProps({ projects: { type: Array, required: true } });
@@ -25,15 +27,15 @@ onBeforeUnmount(() => controller?.abort());
 </script>
 <template>
   <article v-for="project in items" :key="project.url" class="entry">
-    <small>{{ project.language }} · GITHUB</small>
+    <small>{{ t(project.language) }}{{ t('· GITHUB') }}</small>
     <h3>{{ project.name }}</h3>
-    <p>{{ project.description }}</p>
-    <a class="panelLink" :href="project.url" target="_blank" rel="noopener noreferrer"
-      >Explorar repositório ↗</a
-    >
+    <p>{{ t(project.description) }}</p>
+    <a class="panelLink" :href="project.url" target="_blank" rel="noopener noreferrer">{{
+      t('Explorar repositório ↗')
+    }}</a>
   </article>
   <button class="refresh-projects" :disabled="loading" @click="refresh">
-    {{ loading ? 'Atualizando…' : 'Atualizar projetos do GitHub ↻' }}
+    {{ t(loading ? 'Atualizando…' : 'Atualizar projetos do GitHub ↻') }}
   </button>
-  <p v-if="message" class="note" role="status">{{ message }}</p>
+  <p v-if="message" class="note" role="status">{{ t(message) }}</p>
 </template>
