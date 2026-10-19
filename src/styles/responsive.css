@@ -1,0 +1,221 @@
+@media (max-width: 1100px) {
+  .intro {
+    top: 112px;
+  }
+  h1 {
+    font-size: 34px;
+  }
+  .worldCaption,
+  .mission,
+  .map,
+  .location {
+    display: none;
+  }
+  .touchpad {
+    position: fixed;
+    bottom: calc(65px + env(safe-area-inset-bottom));
+    left: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    z-index: 4;
+  }
+  .touchpad div {
+    display: flex;
+    gap: 5px;
+  }
+  .touchpad button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #698080;
+    background: #1a313bdd;
+    border-radius: 7px;
+    touch-action: none;
+    user-select: none;
+  }
+  .interact {
+    bottom: calc(85px + env(safe-area-inset-bottom));
+    left: auto;
+    right: 22px;
+    transform: none;
+    max-width: calc(100% - 195px);
+  }
+  .interact button {
+    min-height: 44px;
+    font-size: 11px;
+  }
+  .controls {
+    display: none;
+  }
+  footer {
+    height: calc(49px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .footerRight > span {
+    display: none;
+  }
+  .footerRight button {
+    width: 35px;
+    height: 35px;
+  }
+  .mobile-passport {
+    display: block;
+    font-size: 10px;
+    color: #b9d7c9;
+    min-height: 44px;
+  }
+  .pin {
+    min-height: 40px;
+  }
+  .pin small {
+    display: none;
+  }
+  .pin b {
+    font-size: 9px;
+  }
+  .intro.exploring {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .intro.exploring button {
+    pointer-events: none;
+  }
+}
+@media (max-width: 650px) {
+  .intro {
+    top: 96px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+  nav {
+    gap: 7px;
+  }
+  nav .profile-button,
+  nav .contact {
+    display: none;
+  }
+  nav button {
+    min-height: 44px;
+    padding: 5px;
+  }
+  .pin {
+    min-height: 34px;
+    padding: 6px;
+    gap: 4px;
+  }
+  .pin b {
+    max-width: 86px;
+    white-space: normal;
+    font-size: 8px;
+  }
+  .pin-arrow {
+    display: none;
+  }
+  .interact {
+    right: 12px;
+    max-width: calc(100% - 180px);
+  }
+  .interact button {
+    font-size: 10px;
+    padding: 8px 10px;
+  }
+  .interact kbd {
+    display: none;
+  }
+  dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 32px);
+    padding: 38px 22px 24px;
+    border-radius: 12px;
+  }
+  .panelTitle {
+    font-size: 27px;
+  }
+  .zoneList button {
+    min-height: 65px;
+  }
+}
+@media (max-width: 1100px) and (orientation: landscape) {
+  header {
+    height: 72px;
+  }
+  .intro {
+    top: 92px;
+    left: 3%;
+    max-width: 190px;
+  }
+  .intro h1 {
+    font-size: 24px;
+  }
+  .intro p,
+  .intro .eyebrow,
+  .intro .location {
+    display: none;
+  }
+  .intro .primary {
+    font-size: 10px;
+    padding: 10px;
+  }
+  .intro .primary span {
+    margin-left: 6px;
+  }
+  .touchpad {
+    bottom: 50px;
+  }
+  .pin {
+    padding: 4px 6px;
+    min-height: 28px;
+  }
+  .pin b {
+    font-size: 8px;
+  }
+  .interact {
+    bottom: 55px;
+  }
+}
+@media (pointer: coarse) and (min-width: 1101px) {
+  .touchpad {
+    display: flex;
+    position: fixed;
+    bottom: 104px;
+    left: 4%;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .touchpad div {
+    display: flex;
+    gap: 4px;
+  }
+  .touchpad button {
+    width: 44px;
+    height: 44px;
+    background: #1a313bdd;
+    border: 1px solid #698080;
+    border-radius: 6px;
+    touch-action: none;
+  }
+  .mission {
+    bottom: 220px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+@media (max-width: 650px) {
+  .pin {
+    width: 115px;
+    height: 40px;
+  }
+  .pin b {
+    max-width: 86px;
+    white-space: normal;
+  }
+}

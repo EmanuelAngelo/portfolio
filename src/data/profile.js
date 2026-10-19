@@ -1,0 +1,22 @@
+export const profile = {
+  name: 'Emanuel Angelo',
+  email: 'emanuelangelo@outlook.com.br',
+  location: 'São Luís, Maranhão · Brasil',
+  github: 'https://github.com/EmanuelAngelo',
+  linkedin: 'https://www.linkedin.com/in/emanuelangelo',
+  whatsapp: 'https://wa.me/5598988123003',
+  resume: '/resume.pdf',
+  skills: [
+    'Python',
+    'Django / DRF',
+    'Vue.js',
+    'SQL Server',
+    'PostgreSQL',
+    'Power BI',
+    'Snowflake',
+    'Docker',
+    'Git',
+    'KNIME',
+    'TOTVS RM',
+  ],
+};

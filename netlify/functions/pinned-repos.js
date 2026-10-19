@@ -2,13 +2,16 @@ export const handler = async (event) => {
   const username = event?.queryStringParameters?.username || 'EmanuelAngelo';
 
   try {
-    const profileRes = await fetch(`https://github.com/${encodeURIComponent(username)}?t=${Date.now()}`, {
-      headers: {
-        'User-Agent': 'portfolio-netlify-function',
-        Accept: 'text/html,application/xhtml+xml',
+    const profileRes = await fetch(
+      `https://github.com/${encodeURIComponent(username)}?t=${Date.now()}`,
+      {
+        headers: {
+          'User-Agent': 'portfolio-netlify-function',
+          Accept: 'text/html,application/xhtml+xml',
+        },
+        cache: 'no-store',
       },
-      cache: 'no-store',
-    });
+    );
 
     if (!profileRes.ok) {
       return {
@@ -42,23 +45,24 @@ export const handler = async (event) => {
 
     const pinned = unique.slice(0, 6);
 
-    const repos = (await Promise.all(
-      pinned.map(async (r) => {
-        const apiRes = await fetch(
-          `https://api.github.com/repos/${encodeURIComponent(r.owner)}/${encodeURIComponent(r.name)}?t=${Date.now()}`,
-          {
-            headers: {
-              Accept: 'application/vnd.github+json',
-              'User-Agent': 'portfolio-netlify-function',
+    const repos = (
+      await Promise.all(
+        pinned.map(async (r) => {
+          const apiRes = await fetch(
+            `https://api.github.com/repos/${encodeURIComponent(r.owner)}/${encodeURIComponent(r.name)}?t=${Date.now()}`,
+            {
+              headers: {
+                Accept: 'application/vnd.github+json',
+                'User-Agent': 'portfolio-netlify-function',
+              },
+              cache: 'no-store',
             },
-            cache: 'no-store',
-          }
-        );
-        if (!apiRes.ok) return null;
-        return apiRes.json();
-      })
-    ))
-      .filter(Boolean);
+          );
+          if (!apiRes.ok) return null;
+          return apiRes.json();
+        }),
+      )
+    ).filter(Boolean);
 
     return {
       statusCode: 200,
